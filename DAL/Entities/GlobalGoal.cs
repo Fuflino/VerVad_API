@@ -20,7 +20,8 @@ namespace DAL.Entities
         public List<Artwork> Artworks { get; set; }
         public List<Sculpture> Sculptures { get; set; }
         public Translation Title { get; set; }
-        public Translation Description { get; set; } 
+        public Translation Description { get; set; }
+        public List<ChildrensText> ChildrensTexts { get; set; }     
 
     }
 }

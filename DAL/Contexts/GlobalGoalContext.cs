@@ -20,11 +20,14 @@ namespace DAL.Contexts
         public virtual DbSet<GlobalGoal> Global_Goals { get; set; }
         public virtual DbSet<Language> Languages { get; set; }
         public virtual DbSet<FrontPage> FrontPage { get; set; }
+        public virtual DbSet<Text> Texts { get; set; }
+        public virtual DbSet<Translation> Translations { get; set; }
+        public virtual DbSet<ChildrensText> ChildrensTexts { get; set; }
 
 
         //All properties are required in order to create a Global Goal       
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
+        {         
             //Front Page
             modelBuilder.Entity<FrontPage>().ToTable("FrontPage");
             modelBuilder.Entity<FrontPage>().Property(x => x.ImgURL).IsRequired();
@@ -36,7 +39,8 @@ namespace DAL.Contexts
             modelBuilder.Entity<GlobalGoal>().Property(x => x.Latitude).IsRequired();
             modelBuilder.Entity<GlobalGoal>().Property(x => x.ImgURL).IsRequired();
             modelBuilder.Entity<GlobalGoal>().Property(x => x.VideoURL).IsRequired();
-            modelBuilder.Entity<GlobalGoal>().Property(x => x.AudioURL).IsRequired();
+            modelBuilder.Entity<GlobalGoal>().Property(x => x.AudioURL).IsRequired();            
+            modelBuilder.Entity<GlobalGoal>().HasMany(x => x.ChildrensTexts).WithRequired();            
 
             modelBuilder.Entity<GlobalGoal>().HasRequired(x => x.Title).WithMany().WillCascadeOnDelete(false);
             modelBuilder.Entity<GlobalGoal>().HasRequired(x => x.Description).WithMany().WillCascadeOnDelete(false);
@@ -44,6 +48,10 @@ namespace DAL.Contexts
             modelBuilder.Entity<GlobalGoal>().HasMany(x => x.Sculptures).WithRequired();
             modelBuilder.Entity<GlobalGoal>().HasMany(x => x.LandArts).WithRequired();
             modelBuilder.Entity<GlobalGoal>().HasMany(x => x.Artworks).WithRequired();
+
+            //Childrens Text
+            modelBuilder.Entity<ChildrensText>().HasRequired(x => x.Title).WithMany().WillCascadeOnDelete(false);
+            modelBuilder.Entity<ChildrensText>().HasRequired(x => x.Text).WithMany().WillCascadeOnDelete(false);
 
             //Global Goal Image
             modelBuilder.Entity<Sculpture>().Property(x => x.ImageUrl).IsRequired();
