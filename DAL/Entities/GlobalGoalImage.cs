@@ -10,6 +10,7 @@ namespace DAL.Entities
     {
         public int Id { get; set; }
         public string ImageUrl { get; set; }
+        public Translation Translation { get; set; }
     }
 
     public class LandArt : GlobalGoalImage

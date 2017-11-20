@@ -72,16 +72,17 @@
     <Compile Include="Entities\GlobalGoal.cs" />
     <Compile Include="Entities\GlobalGoalImage.cs" />
     <Compile Include="Entities\Language.cs" />
-    <Compile Include="Entities\Text.cs" />
     <Compile Include="Entities\Translation.cs" />
+    <Compile Include="Entities\TranslationLanguage.cs" />
+    <Compile Include="Facade\Facade.cs" />
+    <Compile Include="Interfaces\IFrontPageRepository.cs" />
+    <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\FrontPageRepository.cs" />
+    <Compile Include="Repositories\GlobalGoalRepository.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Factory\" />
-    <Folder Include="Interfaces\" />
-    <Folder Include="Repositories\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />

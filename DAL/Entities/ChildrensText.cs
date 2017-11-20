@@ -9,8 +9,7 @@ namespace DAL.Entities
     public class ChildrensText
     {
         public int Id { get; set; }
-        public Translation Title { get; set; }
-
-        public Translation Text { get; set; } 
+        public int TranslationId { get; set; }
+        public Translation Translation { get; set; }
     }
 }

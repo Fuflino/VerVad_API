@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace DAL.Entities
 {
-    public class Translation 
+    public class Translation
     {
         public int Id { get; set; }
-        public List<Text> Texts { get; set; }
+        public ICollection<TranslationLanguage> TranslatedTexts { get; set; }
     }
-} 
+}

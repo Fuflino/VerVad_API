@@ -11,110 +11,103 @@ namespace DAL.Contexts
     public class DbInit : DropCreateDatabaseAlways<GlobalGoalContext>
     {
         protected override void Seed(GlobalGoalContext context)
-        {            
-            ////Frontpage
-            //FrontPage fp = new FrontPage()
-            //{
-            //    Id = 1,
-            //    ImgURL = "http://res.cloudinary.com/bjoernebanden/image/upload/v1509645764/1920-x-1080-nationalpark-vadehavet-kort_arxf8u.jpg",
-            //    Title_Da = "VerVad Titel Dansk",
-            //    Description_Da = "Projekt Beskrivelse",
-            //    Title_En = "VerVad Title English",
-            //    Description_En = "Project Description English"
-            //};
+        {
+            //Frontpage
+            var LanguageDA = new Language()
+            {
+                Country = "Danmark",
+                ISO = "da-dk",
 
-            ////Global Goal
-            //GlobalGoal gg = new GlobalGoal()
-            //{
-            //    Id = 1,
-            //    ImgURL = "https://placeimg.com/500/300/nature",
-            //    Description_Da = "Beskrivelse Dansk",
-            //    Description_En = "Description English",
-            //    //Coordinates
-            //    Coordinates = new Coordinates()
-            //    {
-            //        Id = 1,
-            //        Longitude = "1.1",
-            //        Latitude = "1.1"
-            //    },
-            //    //Video and Audio
-            //    MusicVideo = new MusicVideo
-            //    {
-            //        Id = 1,
-            //        AudioURL = "https://www.dropbox.com/s/ewkmod3sbhw71ia/listener%20-%20Wooden%20Heart%20-%2001%20You%20have%20never%20lived%20because%20you%20have%20never%20died.mp3?dl=1",
-            //        VideoURL = "https://www.youtube.com/embed/3BMgV8jj9IU"
-            //    },
-            //    //Land Art
-            //    LandArt = new List<LandArt>()
-            //    {
-            //        new LandArt()
-            //        {
-            //            Id = 1,
-            //            ImgURL = "https://placeimg.com/500/300/nature"
-            //        },
-            //        new LandArt()
-            //        {
-            //            Id = 2,
-            //            ImgURL = "https://placeimg.com/500/300/nature"
-            //        }
-            //    },
-            //    //Childrens Expressions
-            //    ChildrensExpressions = new ChildrensExpressions()
-            //    {
-            //        //Artwork
-            //        Id = 1,
-            //        Artworks = new List<Artwork>()
-            //        {
-            //            new Artwork()
-            //            {
-            //                Id = 1,
-            //                ImgURL = "https://placeimg.com/500/300/nature"
-            //            },
-            //             new Artwork()
-            //            {
-            //                Id = 2,
-            //                ImgURL = "https://placeimg.com/500/300/nature"
-            //            }
-            //        },
-            //        //Sculptures
-            //        Sculptures = new List<Sculptures>()
-            //        {
-            //            new Sculptures()
-            //            {
-            //                Id = 1,
-            //                ImgURL = "https://placeimg.com/500/300/nature"
-            //            },
-            //            new Sculptures()
-            //            {
-            //                Id = 2,
-            //                ImgURL = "https://placeimg.com/500/300/nature"
-            //            }
-            //        },
-            //        //Texts
-            //        Texts = new List<Texts>()
-            //        {
-            //            new Texts()
-            //            {
-            //                Id = 1,
-            //                Title_Da = "Titel til tekst Dansk",
-            //                Text_Da = "Tekst Dansk",
-            //                Title_En = "Title for text English",
-            //                Text_En = "Text English"
-            //            },
-            //            new Texts()
-            //            {
-            //                Id = 2,
-            //                Title_Da = "Titel til tekst Dansk",
-            //                Text_Da = "Tekst Dansk",
-            //                Title_En = "Title for text English",
-            //                Text_En = "Text English"
-            //            }
-            //        }
-            //    }
-            //};
+            };
+            var LanguageEN = new Language()
+            {
+                Country = "England",
+                ISO = "en-gb",
+            };
 
-            //context.Global_Goal.Add(gg);
-            //context.Front_Page.Add(fp);
+            context.Languages.Add(LanguageDA);
+            context.Languages.Add(LanguageEN);
+
+
+            var frontPageTransEN = new TranslationLanguage()
+            {
+                Description = "This is a description",
+                Title = "This is a Title",
+                Language = LanguageEN,
+            };
+            var frontPageTransDK = new TranslationLanguage()
+            {
+                Description = "Dette er en beskrivelse",
+                Title = "Dette er en titel",
+                Language = LanguageDA,
+            };
+
+            var TranslatedTexts = new Translation()
+            {
+                TranslatedTexts = new List<TranslationLanguage> { frontPageTransDK, frontPageTransEN }
+            };
+            context.Texts.Add(TranslatedTexts);
+
+            FrontPage fp = new FrontPage()
+            {
+                ImgURL = "http://res.cloudinary.com/bjoernebanden/image/upload/v1509645764/1920-x-1080-nationalpark-vadehavet-kort_arxf8u.jpg",
+                Translation = TranslatedTexts,
+                
+                
+            };
+
+            //Artwork
+
+            var Artwork = new Artwork()
+            {
+                Translation = TranslatedTexts,
+                ImageUrl = "http://res.cloudinary.com/bjoernebanden/image/upload/v1509645764/1920-x-1080-nationalpark-vadehavet-kort_arxf8u.jpg"
+
+            };
+
+            //Sculptures
+
+            var Sculptures = new Sculpture()
+            {
+                Translation = TranslatedTexts,
+                ImageUrl = "http://res.cloudinary.com/bjoernebanden/image/upload/v1509645764/1920-x-1080-nationalpark-vadehavet-kort_arxf8u.jpg"
+
+            };
+
+            //Landart
+
+            var Landart = new LandArt()
+            {
+                Translation = TranslatedTexts,
+                ImageUrl = "http://res.cloudinary.com/bjoernebanden/image/upload/v1509645764/1920-x-1080-nationalpark-vadehavet-kort_arxf8u.jpg"
+
+            };
+
+            //Childrens Texts
+
+            var ChildrensTexts = new ChildrensText()
+            {
+                Translation = TranslatedTexts,
+
+            };
+
+            //Global Goal
+
+            var GG = new GlobalGoal()
+            {
+                ImgURL = "http://res.cloudinary.com/bjoernebanden/image/upload/v1509645764/1920-x-1080-nationalpark-vadehavet-kort_arxf8u.jpg",
+                LandArts = new List<LandArt> { Landart },
+                Artworks = new List<Artwork> { Artwork },
+                Sculptures = new List<Sculpture> { Sculptures },
+                AudioURL = "http://res.cloudinary.com/bjoernebanden/image/upload/v1509645764/1920-x-1080-nationalpark-vadehavet-kort_arxf8u.jpg",
+                Latitude = "12.3045",
+                Longitude = "34.5566",
+                Translation = TranslatedTexts,
+                VideoURL = "http://res.cloudinary.com/bjoernebanden/image/upload/v1509645764/1920-x-1080-nationalpark-vadehavet-kort_arxf8u.jpg",
+                ChildrensTexts = new List<ChildrensText> { ChildrensTexts }
+
+            };
+            context.Global_Goals.Add(GG);
 
             base.Seed(context);
         }

@@ -8,8 +8,8 @@ namespace DAL.Entities
 {
     public class Language
     {
-        public int Id { get; set; }
-        public string Lang { get; set; }
-        public string Name { get; set; }
+        public string ISO { get; set; }
+        public string Country { get; set; }
+        public virtual List<TranslationLanguage> Translations { get; set;}
     }
 }
