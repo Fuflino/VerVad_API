@@ -19,13 +19,13 @@ namespace DAL.Migrations
             var LanguageDA = new Language()
             {
                 Country = "Danmark",
-                ISO = "da-dk",
+                ISO = "da",
 
             };
             var LanguageEN = new Language()
             {
                 Country = "England",
-                ISO = "en-gb",
+                ISO = "en",
             };
 
             context.Languages.Add(LanguageDA);

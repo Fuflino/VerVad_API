@@ -48,10 +48,20 @@ namespace DAL.Repositories
         {
             using (var db = GetContext())
             {
-                var titlesWithLang = new List<Translation>();
-                var descWithLang = new List<Translation>();
-                var frontPage = db.FrontPage.Where(x => x.Translation.Id == id).FirstOrDefault();
-                return frontPage;
+                try
+                {
+                    var frontPage = db.FrontPage.Include("Translation").FirstOrDefault(x => x.Id == id);
+
+                    frontPage.Translation.TranslatedTexts = db.Translations.Include("Language")
+                        .Where(x => x.TranslationId == frontPage.TranslationId && x.LanguageISO == language).ToList();
+
+                    return frontPage;
+                }
+                catch
+                {
+                    throw;
+                }
+
             }
 
         }
@@ -69,7 +79,7 @@ namespace DAL.Repositories
 
                 //db.ObjectCurrentStateModified(FrontPageToUpdate.Title, t.Title);
                 db.SaveChanges();
-                    
+
                 //db.ObjectCurrentStateModified(FrontPageToUpdate.Description, t.Description);
                 db.SaveChanges();
 

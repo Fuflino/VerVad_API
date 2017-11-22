@@ -9,23 +9,37 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using VerVad_API.Models;
+using VerVad_API.Helpers;
 
 namespace VerVad_API.Controllers
 {
     public class FrontPageController : ApiController
     {
         private IFrontPageRepository<FrontPage, int, string> frontPageRepository = new Facade().GetFrontPageRepository();
+        private FrontPageHelper helper = new FrontPageHelper();
 
         [HttpGet]
         [ResponseType(typeof(FrontPage))]
         public IHttpActionResult GetFrontPage(int id, string language)
         {
             var frontPage = frontPageRepository.Read(id, language);
+
             if (!FrontPageExists(id, language))
             {
                 return NotFound();
             }
-            return Ok(frontPage);
+            
+
+            var dTO = new DTOFrontPage()
+            {
+                Id = frontPage.Id,
+                Title = helper.GetTitle(language, frontPage),
+                Description = helper.GetDescription(language, frontPage),
+                ImgUrl = frontPage.ImgURL
+            };
+
+            return Ok(dTO);
         }
 
         [HttpPut]
