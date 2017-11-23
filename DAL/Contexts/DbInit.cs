@@ -36,7 +36,7 @@ namespace DAL.Contexts
                 "Duis a vehicula nunc, a sagittis leo. Etiam tempor faucibus orci ac cursus. Vestibulum ante ipsum primis in faucibus" +
                 "orci luctus et ultrices posuere cubilia Curae; Sed vestibulum neque vitae nisi blandit commodo.Maecenas varius," +
                 " dolor at commodo.",
-                Title = "This is a Title",
+                Title = "The Global Goals - Wadden Sea",
                 Language = LanguageEN,
             };
             var transDK = new TranslationLanguage()
@@ -47,7 +47,7 @@ namespace DAL.Contexts
                 "Duis a vehicula nunc, a sagittis leo. Etiam tempor faucibus orci ac cursus. Vestibulum ante ipsum primis in faucibus" +
                 "orci luctus et ultrices posuere cubilia Curae; Sed vestibulum neque vitae nisi blandit commodo.Maecenas varius," +
                 " dolor at commodo.",
-                Title = "Dette er en titel",
+                Title = "Verdensmål ved Vadehavet",
                 Language = LanguageDA,
             };
 
