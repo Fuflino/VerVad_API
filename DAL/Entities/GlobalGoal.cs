@@ -13,15 +13,20 @@ namespace DAL.Entities
         public string Latitude { get; set; }
         public string Longitude { get; set; }
         public string ImgURL { get; set; }
+
         public string AudioURL { get; set; }
-        public string VideoURL { get; set; }        
+        public string VideoURL { get; set; }
+        public string SongArtist { get; set; }
+        public string SongTitle { get; set; }
+        public string AudioDescription { get; set; }
+        public string AudioTitle { get; set; }
 
         public List<LandArt> LandArts { get; set; }
         public List<Artwork> Artworks { get; set; }
         public List<Sculpture> Sculptures { get; set; }
         public int TranslationId { get; set; }
         public Translation Translation { get; set; }
-        public List<ChildrensText> ChildrensTexts { get; set; }     
+        public List<ChildrensText> ChildrensTexts { get; set; }
 
     }
 }

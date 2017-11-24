@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace DAL.Interfaces
 {
-    public interface IRepository<T, K>
+    public interface IRepository<T, I, L>
     {
-        T Create(T t);
-        T Read(K id);
+        T Create(T t, L lang);
+        T Read(I id, L language);
         List<T> ReadAll();
         T Update(T t);
-        bool Delete(K id);
+        bool Delete(I id);
     }
 }

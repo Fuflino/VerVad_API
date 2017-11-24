@@ -13,17 +13,17 @@ namespace DAL.Facade
     public class Facade
     {
         private IFrontPageRepository<FrontPage, int, string> frontPageRepository;
-        //private IRepository<GlobalGoal, int> globalGoalRepository;
+        private IRepository<GlobalGoal, int, string> globalGoalRepository;
 
         public IFrontPageRepository<FrontPage, int, string> GetFrontPageRepository()
         {
             return frontPageRepository ?? (frontPageRepository = new FrontPageRepository(new GlobalGoalContext()));
         }
 
-        //public IRepository<GlobalGoal, int> GetGlobalGoalRepository()
-        //{
-        //    return globalGoalRepository ?? (globalGoalRepository = new GlobalGoalRepository(new GlobalGoalContext()));
-        //}
+        public IRepository<GlobalGoal, int, string> GetGlobalGoalRepository()
+        {
+            return globalGoalRepository ?? (globalGoalRepository = new GlobalGoalRepository(new GlobalGoalContext()));
+        }
 
 
     }

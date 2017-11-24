@@ -11,35 +11,39 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using VerVad_API.Models;
 using VerVad_API.Helpers;
+using System.Web.Http.Cors;
 
 namespace VerVad_API.Controllers
 {
+    //[EnableCors(origins: "http://localhost:59535", headers: "*", methods: "*")]
     public class FrontPageController : ApiController
     {
-        private IFrontPageRepository<FrontPage, int, string> frontPageRepository = new Facade().GetFrontPageRepository();
-        private FrontPageHelper helper = new FrontPageHelper();
+        private IFrontPageRepository<FrontPage, int, string> _repo = new Facade().GetFrontPageRepository();
+        private FrontPageHelper _helper = new FrontPageHelper();
 
         [HttpGet]
         [ResponseType(typeof(FrontPage))]
         public IHttpActionResult GetFrontPage(int id, string language)
         {
-            var frontPage = frontPageRepository.Read(id, language);
+            var frontPage = _repo.Read(id, language);
 
             if (!FrontPageExists(id, language))
             {
                 return NotFound();
             }
-            
 
-            var dTO = new DTOFrontPage()
+            var DTO = new DTOFrontPage()
             {
                 Id = frontPage.Id,
-                Title = helper.GetTitle(language, frontPage),
-                Description = helper.GetDescription(language, frontPage),
                 ImgUrl = frontPage.ImgURL
             };
+            foreach (var item in frontPage.Translation.TranslatedTexts)
+            {
+                DTO.Title = item.Title;
+                DTO.Description = item.Description;
+            }
 
-            return Ok(dTO);
+            return Ok(DTO);
         }
 
         [HttpPut]
@@ -51,7 +55,7 @@ namespace VerVad_API.Controllers
                 return BadRequest(ModelState);
             }
 
-            frontPageRepository.Update(frontPage);
+            _repo.Update(frontPage);
 
             return StatusCode(HttpStatusCode.NoContent);
         }
@@ -65,7 +69,7 @@ namespace VerVad_API.Controllers
                 return BadRequest(ModelState);
             }
 
-            frontPageRepository.Create(frontPage);
+            _repo.Create(frontPage);
 
             return CreatedAtRoute("DefaultApi", new { id = frontPage.Id }, frontPage);
         }
@@ -79,14 +83,14 @@ namespace VerVad_API.Controllers
                 return NotFound();
             }
 
-            frontPageRepository.Delete(id);
+            _repo.Delete(id);
 
             return Ok();
         }
 
         private bool FrontPageExists(int id, string language)
         {
-            return frontPageRepository.Read(id, language) != null;
+            return _repo.Read(id, language) != null;
         }
 
 

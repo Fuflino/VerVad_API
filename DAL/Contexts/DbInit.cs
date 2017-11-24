@@ -69,6 +69,7 @@ namespace DAL.Contexts
 
             var Artwork = new Artwork()
             {
+                Artist = "Bart 4c",
                 Translation = TranslatedTexts,
                 ImageUrl = "http://res.cloudinary.com/bjoernebanden/image/upload/v1509645764/1920-x-1080-nationalpark-vadehavet-kort_arxf8u.jpg"
 
@@ -78,6 +79,7 @@ namespace DAL.Contexts
 
             var Sculptures = new Sculpture()
             {
+                Artist = "Lisa 5c",
                 Translation = TranslatedTexts,
                 ImageUrl = "http://res.cloudinary.com/bjoernebanden/image/upload/v1509645764/1920-x-1080-nationalpark-vadehavet-kort_arxf8u.jpg"
 
@@ -96,6 +98,7 @@ namespace DAL.Contexts
 
             var ChildrensTexts = new ChildrensText()
             {
+                Author = "Lisa 8c",
                 Translation = TranslatedTexts,
 
             };
@@ -104,16 +107,22 @@ namespace DAL.Contexts
 
             var GG = new GlobalGoal()
             {
-                ImgURL = "http://res.cloudinary.com/bjoernebanden/image/upload/v1509645764/1920-x-1080-nationalpark-vadehavet-kort_arxf8u.jpg",
-                LandArts = new List<LandArt> { Landart },
-                Artworks = new List<Artwork> { Artwork },
-                Sculptures = new List<Sculpture> { Sculptures },
-                AudioURL = "http://res.cloudinary.com/bjoernebanden/image/upload/v1509645764/1920-x-1080-nationalpark-vadehavet-kort_arxf8u.jpg",
                 Latitude = "12.3045",
                 Longitude = "34.5566",
                 Translation = TranslatedTexts,
+                ImgURL = "http://res.cloudinary.com/bjoernebanden/image/upload/v1509645764/1920-x-1080-nationalpark-vadehavet-kort_arxf8u.jpg",
+
+                ChildrensTexts = new List<ChildrensText> { ChildrensTexts },
+                Artworks = new List<Artwork> { Artwork },
+                Sculptures = new List<Sculpture> { Sculptures },
+                LandArts = new List<LandArt> { Landart },
+               
+                AudioURL = "http://res.cloudinary.com/bjoernebanden/image/upload/v1509645764/1920-x-1080-nationalpark-vadehavet-kort_arxf8u.jpg",
                 VideoURL = "http://res.cloudinary.com/bjoernebanden/image/upload/v1509645764/1920-x-1080-nationalpark-vadehavet-kort_arxf8u.jpg",
-                ChildrensTexts = new List<ChildrensText> { ChildrensTexts }
+                SongTitle = "Bum Bum Bla Bla..",
+                SongArtist = "Shakira",
+                AudioDescription = "Audio Description",
+                AudioTitle = "Audio Title",
 
             };
             context.Global_Goals.Add(GG);

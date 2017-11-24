@@ -26,6 +26,9 @@ namespace DAL.Contexts
         public virtual DbSet<Translation> Texts { get; set; }
         public virtual DbSet<ChildrensText> ChildrensTexts { get; set; }
         public virtual DbSet<TranslationLanguage> Translations { get; set; }
+        public virtual DbSet<Artwork> Artworks { get; set; }
+        public virtual DbSet<Sculpture> Sculptures { get; set; }
+        public virtual DbSet<LandArt> LandArts { get; set; }    
 
 
         //All properties are required in order to create a Global Goal       
