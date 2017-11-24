@@ -64,7 +64,7 @@ namespace DAL.Migrations
             var Artwork = new Artwork()
             {
                 Translation = TranslatedTexts,
-                ImageUrl = "http://res.cloudinary.com/bjoernebanden/image/upload/v1509645764/1920-x-1080-nationalpark-vadehavet-kort_arxf8u.jpg"
+                ImgUrl = "http://res.cloudinary.com/bjoernebanden/image/upload/v1509645764/1920-x-1080-nationalpark-vadehavet-kort_arxf8u.jpg"
 
             };
 
@@ -73,7 +73,7 @@ namespace DAL.Migrations
             var Sculptures = new Sculpture()
             {
                 Translation = TranslatedTexts,
-                ImageUrl = "http://res.cloudinary.com/bjoernebanden/image/upload/v1509645764/1920-x-1080-nationalpark-vadehavet-kort_arxf8u.jpg"
+                ImgUrl = "http://res.cloudinary.com/bjoernebanden/image/upload/v1509645764/1920-x-1080-nationalpark-vadehavet-kort_arxf8u.jpg"
 
             };
 
@@ -82,7 +82,7 @@ namespace DAL.Migrations
             var Landart = new LandArt()
             {
                 Translation = TranslatedTexts,
-                ImageUrl = "http://res.cloudinary.com/bjoernebanden/image/upload/v1509645764/1920-x-1080-nationalpark-vadehavet-kort_arxf8u.jpg"
+                ImgUrl = "http://res.cloudinary.com/bjoernebanden/image/upload/v1509645764/1920-x-1080-nationalpark-vadehavet-kort_arxf8u.jpg"
 
             };
 

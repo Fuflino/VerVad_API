@@ -5,7 +5,7 @@ using System.Web;
 
 namespace VerVad_API.Models
 {
-    public class DTOAudio
+    public class DTOAudioVideo
     {
         public int Id { get; set; }
         public string Title { get; set; }

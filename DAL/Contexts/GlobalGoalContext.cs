@@ -56,9 +56,9 @@ namespace DAL.Contexts
             modelBuilder.Entity<ChildrensText>().HasRequired(x => x.Translation).WithMany().WillCascadeOnDelete(false);
 
             //Global Goal Image
-            modelBuilder.Entity<Sculpture>().Property(x => x.ImageUrl).IsRequired();
-            modelBuilder.Entity<Artwork>().Property(x => x.ImageUrl).IsRequired();
-            modelBuilder.Entity<LandArt>().Property(x => x.ImageUrl).IsRequired();
+            modelBuilder.Entity<Sculpture>().Property(x => x.ImgUrl).IsRequired();
+            modelBuilder.Entity<Artwork>().Property(x => x.ImgUrl).IsRequired();
+            modelBuilder.Entity<LandArt>().Property(x => x.ImgUrl).IsRequired();
 
             modelBuilder.Entity<Language>().HasKey(l => l.ISO);
 

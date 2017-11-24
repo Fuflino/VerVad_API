@@ -35,7 +35,7 @@ namespace VerVad_API.Controllers
                 ImgUrl = globalGoal.ImgURL,
                 Latitude = globalGoal.Latitude,
                 Longitude = globalGoal.Longitude,
-                Audio = new DTOAudio()
+                AudioVideo = new DTOAudioVideo()
                 {
                     Title = globalGoal.AudioTitle,
                     Description = globalGoal.AudioDescription,
@@ -65,7 +65,7 @@ namespace VerVad_API.Controllers
             {
                 var drawings = new DTOChildrensArtwork();
                 drawings.Artist = item.Artist;
-                drawings.ImgUrl = item.ImageUrl;
+                drawings.ImgUrl = item.ImgUrl;
                 foreach (var item2 in item.Translation.TranslatedTexts)
                 {
                     drawings.Title = item2.Title;
@@ -78,7 +78,7 @@ namespace VerVad_API.Controllers
             {
                 var sculptures = new DTOChildrensArtwork();
                 sculptures.Artist = item.Artist;
-                sculptures.ImgUrl = item.ImageUrl;
+                sculptures.ImgUrl = item.ImgUrl;
                 foreach (var item2 in item.Translation.TranslatedTexts)
                 {
                     sculptures.Title = item2.Title;
