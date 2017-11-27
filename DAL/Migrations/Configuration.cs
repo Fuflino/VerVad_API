@@ -103,8 +103,8 @@ namespace DAL.Migrations
                 Artworks = new List<Artwork> { Artwork },
                 Sculptures = new List<Sculpture> { Sculptures },
                 AudioURL = "http://res.cloudinary.com/bjoernebanden/image/upload/v1509645764/1920-x-1080-nationalpark-vadehavet-kort_arxf8u.jpg",
-                Latitude = "12.3045",
-                Longitude = "34.5566",
+                Latitude = 12.3045,
+                Longitude = 34.5566,
                 Translation = TranslatedTexts,
                 VideoURL = "http://res.cloudinary.com/bjoernebanden/image/upload/v1509645764/1920-x-1080-nationalpark-vadehavet-kort_arxf8u.jpg",
                 ChildrensTexts = new List<ChildrensText> { ChildrensTexts }

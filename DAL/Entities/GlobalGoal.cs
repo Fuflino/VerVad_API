@@ -10,8 +10,8 @@ namespace DAL.Entities
     public class GlobalGoal
     {
         public int Id { get; set; }
-        public string Latitude { get; set; }
-        public string Longitude { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
         public string ImgURL { get; set; }
 
         public string AudioURL { get; set; }

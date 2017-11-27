@@ -16,8 +16,8 @@ namespace VerVad_API.Models
         public List<DTOChildrensArtwork> ChildrensSculptures { get; set; }
         public List<DTOLandArt> LandArt { get; set; }
         public DTOAudioVideo AudioVideo { get; set; }
-        public string Longitude { get; set; }
-        public string Latitude { get; set; }       
+        public double Longitude { get; set; }
+        public double Latitude { get; set; }       
 
     }
 }

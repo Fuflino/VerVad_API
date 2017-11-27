@@ -100,8 +100,8 @@ namespace DAL.Contexts
             //Global Goal
             var GG = new GlobalGoal()
             {
-                Latitude = "12.3045",
-                Longitude = "34.5566",
+                Latitude =  12.3045,
+                Longitude = 34.5566,
                 Translation = TranslatedTexts,
                 ImgURL = "https://placeimg.com/600/400/nature",
 
