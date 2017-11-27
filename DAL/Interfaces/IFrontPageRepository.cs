@@ -9,7 +9,7 @@ namespace DAL.Interfaces
     public interface IFrontPageRepository<T,K,F>
     {
         T Create(T t);
-        T Read(K id, F language);
+        T Read(K id);
         T Update(T t);
         bool Delete(K id);
     }

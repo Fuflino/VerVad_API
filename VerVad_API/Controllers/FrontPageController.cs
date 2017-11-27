@@ -21,28 +21,24 @@ namespace VerVad_API.Controllers
         private IFrontPageRepository<FrontPage, int, string> _repo = new Facade().GetFrontPageRepository();
         private FrontPageHelper _helper = new FrontPageHelper();
 
+        private bool FrontPageExists(int id, string language)
+        {
+            return _repo.Read(id) != null;
+        }
+
         [HttpGet]
         [ResponseType(typeof(FrontPage))]
         public IHttpActionResult GetFrontPage(int id, string language)
         {
-            var frontPage = _repo.Read(id, language);
+            var frontPage = _repo.Read(id);           
 
             if (!FrontPageExists(id, language))
             {
                 return NotFound();
             }
 
-            var DTO = new DTOFrontPage()
-            {
-                Id = frontPage.Id,
-                ImgUrl = frontPage.ImgURL
-            };
-            foreach (var item in frontPage.Translation.TranslatedTexts)
-            {
-                DTO.Title = item.Title;
-                DTO.Description = item.Description;
-            }
-
+            var DTO = _helper.GetFrontPageDTO(language, frontPage);
+         
             return Ok(DTO);
         }
 
@@ -87,12 +83,6 @@ namespace VerVad_API.Controllers
 
             return Ok();
         }
-
-        private bool FrontPageExists(int id, string language)
-        {
-            return _repo.Read(id, language) != null;
-        }
-
 
     }
 }

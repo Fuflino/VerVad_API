@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using VerVad_API.Models;
 
 namespace VerVad_API.Helpers
 {
@@ -15,8 +16,8 @@ namespace VerVad_API.Helpers
         {
             string title = "";
             var translations = fp.Translation.TranslatedTexts.Where(x => x.LanguageISO == language).ToList();
-            
-            foreach(var element in translations)
+
+            foreach (var element in translations)
             {
                 title = element.Title;
             }
@@ -37,6 +38,22 @@ namespace VerVad_API.Helpers
             return descr;
         }
 
+        public DTOFrontPage GetFrontPageDTO(string language, FrontPage fp)
+        {
+            var texts = fp.Translation.TranslatedTexts.Where(x => x.LanguageISO == language);
 
+            var DTO = new DTOFrontPage()
+            {
+                Id = fp.Id,
+                ImgUrl = fp.ImgURL
+            };
+
+            foreach (var item in texts)
+            {
+                DTO.Title = item.Title;
+                DTO.Description = item.Description;
+            }
+            return DTO;
+        }
     }
 }

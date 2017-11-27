@@ -15,7 +15,6 @@ namespace DAL.Repositories
         private GlobalGoalContext context;
         public FrontPageRepository(GlobalGoalContext context)
         {
-
             this.context = context;
         }
 
@@ -44,16 +43,13 @@ namespace DAL.Repositories
             }
         }
 
-        public FrontPage Read(int id, string language)
+        public FrontPage Read(int id)
         {
             using (var db = GetContext())
             {
                 try
                 {
-                    var frontPage = db.FrontPage.Include("Translation").FirstOrDefault(x => x.Id == id);
-
-                    frontPage.Translation.TranslatedTexts = db.Translations.Include("Language")
-                        .Where(x => x.TranslationId == frontPage.TranslationId && x.LanguageISO == language).ToList();
+                    var frontPage = db.FrontPage.Include("Translation.TranslatedTexts.Language").FirstOrDefault(x => x.Id == id);                  
 
                     return frontPage;
                 }
@@ -61,9 +57,7 @@ namespace DAL.Repositories
                 {
                     throw;
                 }
-
             }
-
         }
 
 
@@ -95,9 +89,6 @@ namespace DAL.Repositories
                 //}
                 db.SaveChanges();
 
-
-
-
                 return t;
             }
         }
@@ -107,7 +98,6 @@ namespace DAL.Repositories
             if (context.GetType().FullName.Equals("DAL.Contexts.GlobalGoalContext"))
             {
                 return new GlobalGoalContext();
-
             }
             return context;
         }
