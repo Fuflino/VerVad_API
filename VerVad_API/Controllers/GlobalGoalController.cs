@@ -20,14 +20,14 @@ namespace VerVad_API.Controllers
 
         private bool GlobalGoalExists(int id, string language)
         {
-            return _repo.Read(id, language) != null;
+            return _repo.Read(id) != null;
         }
 
         [HttpGet]
-        [ResponseType(typeof(GlobalGoal))]
+        [ResponseType(typeof(DTOGlobalGoal))]
         public IHttpActionResult GetGlobalGoal(int id, string language)
         {
-            var globalGoal = _repo.Read(id, language);
+            var globalGoal = _repo.Read(id);
 
             if (!GlobalGoalExists(id, language))
             {
@@ -37,6 +37,22 @@ namespace VerVad_API.Controllers
             var DTO = _helper.GetGlobalGoalDTO(language, globalGoal);
 
             return Ok(DTO);
+        }
+
+        [HttpGet]
+        [ResponseType(typeof(List<DTOGlobalGoal>))]
+        public IHttpActionResult GetGlobalGoals(string language)
+        {            
+            var globalGoals = _repo.ReadAll();
+            var DTOList = new List<DTOGlobalGoal>();
+
+            foreach (var item in globalGoals)
+            {
+                var DTO = _helper.GetGlobalGoalDTO(language, item);
+                DTOList.Add(DTO);
+            }
+
+            return Ok(DTOList);
         }
 
     }

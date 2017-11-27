@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Interfaces
 {
-    public interface IFrontPageRepository<T,K,F>
+    public interface IFrontPageRepository<T,K>
     {
         T Create(T t);
         T Read(K id);

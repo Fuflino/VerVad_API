@@ -17,7 +17,6 @@ namespace DAL.Contexts
             {
                 Country = "Danmark",
                 ISO = "da",
-
             };
             var LanguageEN = new Language()
             {
@@ -93,14 +92,20 @@ namespace DAL.Contexts
             //Childrens Texts
             var ChildrensTexts = new ChildrensText()
             {
-                Author = "Lisa 8c",
+                Author = "Pippi 8c",
+                Translation = TranslatedTexts
+            };
+
+            var ChildrensTexts2 = new ChildrensText()
+            {
+                Author = "Pippi 8c",
                 Translation = TranslatedTexts
             };
 
             //Global Goal
             var GG = new GlobalGoal()
             {
-                Latitude =  12.3045,
+                Latitude = 12.3045,
                 Longitude = 34.5566,
                 Translation = TranslatedTexts,
                 ImgURL = "https://placeimg.com/600/400/nature",
@@ -109,16 +114,37 @@ namespace DAL.Contexts
                 Artworks = new List<Artwork> { Artwork },
                 Sculptures = new List<Sculpture> { Sculptures },
                 LandArts = new List<LandArt> { Landart },
-               
+
                 AudioURL = "https://www.dropbox.com/s/ewkmod3sbhw71ia/listener%20-%20Wooden%20Heart%20-%2001%20You%20have%20never%20lived%20because%20you%20have%20never%20died.mp3?dl=1",
                 VideoURL = "https://www.youtube.com/embed/RpqVmvMCmp0",
                 SongTitle = "Bum Bum Bla Bla..",
                 SongArtist = "Shakira",
-                AudioDescription = "Audio Description",
-                AudioTitle = "Audio Title"
+                AudioDescription = "This is an Audio Description",
+                AudioTitle = "This is an Audio Title"
+
+            };
+            var GG2 = new GlobalGoal()
+            {
+                Latitude = 20.3045,
+                Longitude = 11.5566,
+                Translation = TranslatedTexts,
+                ImgURL = "https://placeimg.com/600/400/nature",
+
+                ChildrensTexts = new List<ChildrensText> { ChildrensTexts2 },
+                Artworks = new List<Artwork> { Artwork },
+                Sculptures = new List<Sculpture> { Sculptures },
+                LandArts = new List<LandArt> { Landart },
+
+                AudioURL = "https://www.dropbox.com/s/ewkmod3sbhw71ia/listener%20-%20Wooden%20Heart%20-%2001%20You%20have%20never%20lived%20because%20you%20have%20never%20died.mp3?dl=1",
+                VideoURL = "https://www.youtube.com/embed/RpqVmvMCmp0",
+                SongTitle = "Lonely Boy",
+                SongArtist = "The Black Keys",
+                AudioDescription = "This is an Audio Description",
+                AudioTitle = "This is an Audio Title"
 
             };
             context.Global_Goals.Add(GG);
+            context.Global_Goals.Add(GG2);
 
             base.Seed(context);
         }

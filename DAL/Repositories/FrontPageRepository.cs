@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Repositories
 {
-    public class FrontPageRepository : IFrontPageRepository<FrontPage, int, string>
+    public class FrontPageRepository : IFrontPageRepository<FrontPage, int>
     {
         private GlobalGoalContext context;
         public FrontPageRepository(GlobalGoalContext context)

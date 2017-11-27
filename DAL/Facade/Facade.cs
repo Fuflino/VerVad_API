@@ -12,10 +12,10 @@ namespace DAL.Facade
 {
     public class Facade
     {
-        private IFrontPageRepository<FrontPage, int, string> frontPageRepository;
+        private IFrontPageRepository<FrontPage, int> frontPageRepository;
         private IRepository<GlobalGoal, int, string> globalGoalRepository;
 
-        public IFrontPageRepository<FrontPage, int, string> GetFrontPageRepository()
+        public IFrontPageRepository<FrontPage, int> GetFrontPageRepository()
         {
             return frontPageRepository ?? (frontPageRepository = new FrontPageRepository(new GlobalGoalContext()));
         }

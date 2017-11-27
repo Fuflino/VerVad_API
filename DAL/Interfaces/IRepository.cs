@@ -8,8 +8,8 @@ namespace DAL.Interfaces
 {
     public interface IRepository<T, I, L>
     {
-        T Create(T t, L lang);
-        T Read(I id, L language);
+        T Create(T t, L language);
+        T Read(I id);
         List<T> ReadAll();
         T Update(T t);
         bool Delete(I id);

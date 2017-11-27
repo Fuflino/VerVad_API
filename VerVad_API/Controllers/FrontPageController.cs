@@ -18,7 +18,7 @@ namespace VerVad_API.Controllers
     //[EnableCors(origins: "http://localhost:59535", headers: "*", methods: "*")]
     public class FrontPageController : ApiController
     {
-        private IFrontPageRepository<FrontPage, int, string> _repo = new Facade().GetFrontPageRepository();
+        private IFrontPageRepository<FrontPage, int> _repo = new Facade().GetFrontPageRepository();
         private FrontPageHelper _helper = new FrontPageHelper();
 
         private bool FrontPageExists(int id, string language)

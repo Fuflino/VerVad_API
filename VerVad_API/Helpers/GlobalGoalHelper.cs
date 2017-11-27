@@ -15,13 +15,13 @@ namespace VerVad_API.Helpers
         {
             var texts = gg.Translation.TranslatedTexts.Where(x => x.LanguageISO == language);
 
-
             var DTO = new DTOGlobalGoal()
             {
                 Id = gg.Id,
                 ImgUrl = gg.ImgURL,
                 Latitude = gg.Latitude,
                 Longitude = gg.Longitude,
+
 
                 AudioVideo = new DTOAudioVideo
                 {
@@ -42,11 +42,9 @@ namespace VerVad_API.Helpers
             {
                 var text = new DTOChildrensText();
                 text.Author = item.Author;
-                foreach (var item2 in item.Translation.TranslatedTexts)
-                {
-                    text.Title = item2.Title;
-                    text.Description = item2.Description;
-                }
+
+                foreach (var item2 in item.Translation.TranslatedTexts.Where(x => x.LanguageISO == language)) { text.Title = item2.Title; text.Description = item2.Description; }
+
                 DTO.ChildrensTexts.Add(text);
             }
 
@@ -55,11 +53,9 @@ namespace VerVad_API.Helpers
                 var drawings = new DTOChildrensArtwork();
                 drawings.Artist = item.Artist;
                 drawings.ImgUrl = item.ImgUrl;
-                foreach (var item2 in item.Translation.TranslatedTexts)
-                {
-                    drawings.Title = item2.Title;
-                    drawings.Description = item2.Description;
-                }
+
+                foreach (var item2 in item.Translation.TranslatedTexts.Where(x => x.LanguageISO == language)) { drawings.Title = item2.Title; drawings.Description = item2.Description; }
+
                 DTO.ChildrensDrawings.Add(drawings);
             }
 
@@ -68,11 +64,9 @@ namespace VerVad_API.Helpers
                 var sculptures = new DTOChildrensArtwork();
                 sculptures.Artist = item.Artist;
                 sculptures.ImgUrl = item.ImgUrl;
-                foreach (var item2 in item.Translation.TranslatedTexts)
-                {
-                    sculptures.Title = item2.Title;
-                    sculptures.Description = item2.Description;
-                }
+
+                foreach (var item2 in item.Translation.TranslatedTexts.Where(x => x.LanguageISO == language)) { sculptures.Title = item2.Title; sculptures.Description = item2.Description; }
+
                 DTO.ChildrensSculptures.Add(sculptures);
             }
 
@@ -80,19 +74,18 @@ namespace VerVad_API.Helpers
             {
                 var landArt = new DTOLandArt();
                 landArt.ImgUrl = item.ImgUrl;
-                foreach (var item2 in item.Translation.TranslatedTexts)
-                {
-                    landArt.Title = item2.Title;
-                    landArt.Description = item2.Description;
-                }
+
+                foreach (var item2 in item.Translation.TranslatedTexts.Where(x => x.LanguageISO == language)) { landArt.Title = item2.Title; landArt.Description = item2.Description; }
+
                 DTO.LandArt.Add(landArt);
             }
 
-            foreach (var item in gg.Translation.TranslatedTexts)
+            foreach (var item in texts)
             {
                 DTO.Title = item.Title;
                 DTO.Description = item.Description;
             };
+
             return DTO;
         }
 

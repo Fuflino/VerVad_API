@@ -23,7 +23,6 @@ namespace DAL.Repositories
             if (context.GetType().FullName.Equals("DAL.Contexts.GlobalGoalContext"))
             {
                 return new GlobalGoalContext();
-
             }
             return context;
         }
@@ -38,28 +37,35 @@ namespace DAL.Repositories
             throw new NotImplementedException();
         }
 
-        public GlobalGoal Read(int id, string language)
+        public GlobalGoal Read(int id)
         {
             using (var db = GetContext())
             {
                 var globalGoal = db.Global_Goals
-                .Include("Translation")
+                .Include("Translation.TranslatedTexts.Language")
                 .Include("Artworks.Translation.TranslatedTexts.Language")
                 .Include("Sculptures.Translation.TranslatedTexts.Language")
                 .Include("LandArts.Translation.TranslatedTexts.Language")
                 .Include("ChildrensTexts.Translation.TranslatedTexts.Language")
-                .FirstOrDefault(x => x.Id == id);
-
-                globalGoal.Translation.TranslatedTexts = db.Translations.Include("Language")
-                    .Where(x => x.TranslationId == globalGoal.TranslationId && x.LanguageISO == language).ToList();
-
+                .FirstOrDefault(x => x.Id == id);         
                 return globalGoal;
             }
         }
 
         public List<GlobalGoal> ReadAll()
         {
-            throw new NotImplementedException();
+            var globalGoals = new List<GlobalGoal>();
+
+            using (var db = GetContext())
+            {
+                globalGoals = db.Global_Goals
+                .Include("Translation.TranslatedTexts.Language")
+                .Include("Artworks.Translation.TranslatedTexts.Language")
+                .Include("Sculptures.Translation.TranslatedTexts.Language")
+                .Include("LandArts.Translation.TranslatedTexts.Language")
+                .Include("ChildrensTexts.Translation.TranslatedTexts.Language").ToList();
+                return globalGoals;
+            }
         }
 
         public GlobalGoal Update(GlobalGoal t)
