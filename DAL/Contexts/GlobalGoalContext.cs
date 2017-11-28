@@ -28,7 +28,7 @@ namespace DAL.Contexts
         public virtual DbSet<TranslationLanguage> Translations { get; set; }
         public virtual DbSet<Artwork> Artworks { get; set; }
         public virtual DbSet<Sculpture> Sculptures { get; set; }
-        public virtual DbSet<LandArt> LandArts { get; set; }    
+        public virtual DbSet<LandArt> LandArts { get; set; }
 
 
         //All properties are required in order to create a Global Goal       
@@ -43,14 +43,13 @@ namespace DAL.Contexts
             modelBuilder.Entity<GlobalGoal>().Property(x => x.Longitude).IsRequired();
             modelBuilder.Entity<GlobalGoal>().Property(x => x.Latitude).IsRequired();
             modelBuilder.Entity<GlobalGoal>().Property(x => x.ImgURL).IsRequired();
-            modelBuilder.Entity<GlobalGoal>().Property(x => x.VideoURL).IsRequired();
-            modelBuilder.Entity<GlobalGoal>().Property(x => x.AudioURL).IsRequired();
 
             modelBuilder.Entity<GlobalGoal>().HasMany(x => x.ChildrensTexts).WithRequired();
 
             modelBuilder.Entity<GlobalGoal>().HasMany(x => x.Sculptures).WithRequired();
             modelBuilder.Entity<GlobalGoal>().HasMany(x => x.LandArts).WithRequired();
             modelBuilder.Entity<GlobalGoal>().HasMany(x => x.Artworks).WithRequired();
+            modelBuilder.Entity<GlobalGoal>().HasOptional(x => x.AudioVideo).WithRequired();
 
             //Childrens Text
             modelBuilder.Entity<ChildrensText>().HasRequired(x => x.Translation).WithMany().WillCascadeOnDelete(false);

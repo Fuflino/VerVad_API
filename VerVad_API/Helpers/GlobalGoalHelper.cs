@@ -22,28 +22,36 @@ namespace VerVad_API.Helpers
                 Latitude = gg.Latitude,
                 Longitude = gg.Longitude,
 
-
-                AudioVideo = new DTOAudioVideo
-                {
-                    VideoUrl = gg.VideoURL,
-                    MusicUrl = gg.AudioURL,
-                    SongArtist = gg.SongArtist,
-                    SongTitle = gg.SongTitle,
-                    Description = gg.AudioDescription,
-                    Title = gg.AudioTitle
-                },
                 ChildrensDrawings = new List<DTOChildrensArtwork>(),
                 ChildrensSculptures = new List<DTOChildrensArtwork>(),
                 ChildrensTexts = new List<DTOChildrensText>(),
-                LandArt = new List<DTOLandArt>()
+                LandArt = new List<DTOLandArt>(),
+                AudioVideo = new DTOAudioVideo()
+                {
+                    SongArtist = gg.AudioVideo.SongArtist,
+                    SongTitle = gg.AudioVideo.SongTitle,
+                    MusicUrl = gg.AudioVideo.AudioURL,
+                    VideoUrl = gg.AudioVideo.VideoURL
+                }
             };
+
+            foreach (var item2 in gg.AudioVideo.Translation.TranslatedTexts.Where(x => x.LanguageISO == language))
+            {
+                DTO.AudioVideo.Title = item2.Title;
+                DTO.AudioVideo.Description = item2.Description;
+            }
+
 
             foreach (var item in gg.ChildrensTexts)
             {
                 var text = new DTOChildrensText();
                 text.Author = item.Author;
 
-                foreach (var item2 in item.Translation.TranslatedTexts.Where(x => x.LanguageISO == language)) { text.Title = item2.Title; text.Description = item2.Description; }
+                foreach (var item2 in item.Translation.TranslatedTexts.Where(x => x.LanguageISO == language))
+                {
+                    text.Title = item2.Title;
+                    text.Description = item2.Description;
+                }
 
                 DTO.ChildrensTexts.Add(text);
             }
@@ -54,7 +62,11 @@ namespace VerVad_API.Helpers
                 drawings.Artist = item.Artist;
                 drawings.ImgUrl = item.ImgUrl;
 
-                foreach (var item2 in item.Translation.TranslatedTexts.Where(x => x.LanguageISO == language)) { drawings.Title = item2.Title; drawings.Description = item2.Description; }
+                foreach (var item2 in item.Translation.TranslatedTexts.Where(x => x.LanguageISO == language))
+                {
+                    drawings.Title = item2.Title;
+                    drawings.Description = item2.Description;
+                }
 
                 DTO.ChildrensDrawings.Add(drawings);
             }
@@ -65,7 +77,11 @@ namespace VerVad_API.Helpers
                 sculptures.Artist = item.Artist;
                 sculptures.ImgUrl = item.ImgUrl;
 
-                foreach (var item2 in item.Translation.TranslatedTexts.Where(x => x.LanguageISO == language)) { sculptures.Title = item2.Title; sculptures.Description = item2.Description; }
+                foreach (var item2 in item.Translation.TranslatedTexts.Where(x => x.LanguageISO == language))
+                {
+                    sculptures.Title = item2.Title;
+                    sculptures.Description = item2.Description;
+                }
 
                 DTO.ChildrensSculptures.Add(sculptures);
             }
@@ -75,7 +91,11 @@ namespace VerVad_API.Helpers
                 var landArt = new DTOLandArt();
                 landArt.ImgUrl = item.ImgUrl;
 
-                foreach (var item2 in item.Translation.TranslatedTexts.Where(x => x.LanguageISO == language)) { landArt.Title = item2.Title; landArt.Description = item2.Description; }
+                foreach (var item2 in item.Translation.TranslatedTexts.Where(x => x.LanguageISO == language))
+                {
+                    landArt.Title = item2.Title;
+                    landArt.Description = item2.Description;
+                }
 
                 DTO.LandArt.Add(landArt);
             }

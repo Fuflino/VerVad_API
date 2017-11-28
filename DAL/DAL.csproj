@@ -71,6 +71,7 @@
   <ItemGroup>
     <Compile Include="Contexts\DbInit.cs" />
     <Compile Include="Contexts\GlobalGoalContext.cs" />
+    <Compile Include="Entities\AudioVideo.cs" />
     <Compile Include="Entities\ChildrensText.cs" />
     <Compile Include="Entities\FrontPage.cs" />
     <Compile Include="Entities\GlobalGoal.cs" />

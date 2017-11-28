@@ -47,7 +47,8 @@ namespace DAL.Repositories
                 .Include("Sculptures.Translation.TranslatedTexts.Language")
                 .Include("LandArts.Translation.TranslatedTexts.Language")
                 .Include("ChildrensTexts.Translation.TranslatedTexts.Language")
-                .FirstOrDefault(x => x.Id == id);         
+                .Include("AudioVideo.Translation.TranslatedTexts.Language")
+                .FirstOrDefault(x => x.Id == id);
                 return globalGoal;
             }
         }
@@ -63,7 +64,8 @@ namespace DAL.Repositories
                 .Include("Artworks.Translation.TranslatedTexts.Language")
                 .Include("Sculptures.Translation.TranslatedTexts.Language")
                 .Include("LandArts.Translation.TranslatedTexts.Language")
-                .Include("ChildrensTexts.Translation.TranslatedTexts.Language").ToList();
+                .Include("ChildrensTexts.Translation.TranslatedTexts.Language")
+                .Include("AudioVideo.Translation.TranslatedTexts.Language").ToList();
                 return globalGoals;
             }
         }
