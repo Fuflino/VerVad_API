@@ -43,8 +43,7 @@ namespace DAL.Repositories
             {
                 var globalGoal = db.Global_Goals
                 .Include("Translation.TranslatedTexts.Language")
-                .Include("Artworks.Translation.TranslatedTexts.Language")
-                .Include("Sculptures.Translation.TranslatedTexts.Language")
+                .Include("Artworks.Translation.TranslatedTexts.Language")                
                 .Include("LandArts.Translation.TranslatedTexts.Language")
                 .Include("ChildrensTexts.Translation.TranslatedTexts.Language")
                 .Include("AudioVideo.Translation.TranslatedTexts.Language")
@@ -61,8 +60,7 @@ namespace DAL.Repositories
             {
                 globalGoals = db.Global_Goals
                 .Include("Translation.TranslatedTexts.Language")
-                .Include("Artworks.Translation.TranslatedTexts.Language")
-                .Include("Sculptures.Translation.TranslatedTexts.Language")
+                .Include("Artworks.Translation.TranslatedTexts.Language")                
                 .Include("LandArts.Translation.TranslatedTexts.Language")
                 .Include("ChildrensTexts.Translation.TranslatedTexts.Language")
                 .Include("AudioVideo.Translation.TranslatedTexts.Language").ToList();

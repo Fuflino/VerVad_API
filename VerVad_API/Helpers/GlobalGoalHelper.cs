@@ -11,6 +11,12 @@ namespace VerVad_API.Helpers
 {
     public class GlobalGoalHelper
     {
+        /// Change parameter in url, so it becomes a direct download link.
+        public string ConvertToDDL(string audioUrl)
+        {
+            return audioUrl = audioUrl.Remove(audioUrl.Length - 1, 1) + "1";
+        }
+
         public DTOGlobalGoal GetGlobalGoalDTO(string language, GlobalGoal gg)
         {
             var texts = gg.Translation.TranslatedTexts.Where(x => x.LanguageISO == language);
@@ -22,12 +28,12 @@ namespace VerVad_API.Helpers
                 Latitude = gg.Latitude,
                 Longitude = gg.Longitude,
 
-                ChildrensDrawings = new List<DTOChildrensArtwork>(),
-                ChildrensSculptures = new List<DTOChildrensArtwork>(),
+                ChildrensArtworks = new List<DTOChildrensArtwork>(),                
                 ChildrensTexts = new List<DTOChildrensText>(),
                 LandArt = new List<DTOLandArt>(),
                 AudioVideo = new DTOAudioVideo()
                 {
+                    Id = gg.AudioVideo.Id,
                     SongArtist = gg.AudioVideo.SongArtist,
                     SongTitle = gg.AudioVideo.SongTitle,
                     MusicUrl = gg.AudioVideo.AudioURL,
@@ -46,6 +52,7 @@ namespace VerVad_API.Helpers
             {
                 var text = new DTOChildrensText();
                 text.Author = item.Author;
+                text.Id = item.Id;
 
                 foreach (var item2 in item.Translation.TranslatedTexts.Where(x => x.LanguageISO == language))
                 {
@@ -61,6 +68,7 @@ namespace VerVad_API.Helpers
                 var drawings = new DTOChildrensArtwork();
                 drawings.Artist = item.Artist;
                 drawings.ImgUrl = item.ImgUrl;
+                drawings.Id = item.Id;
 
                 foreach (var item2 in item.Translation.TranslatedTexts.Where(x => x.LanguageISO == language))
                 {
@@ -68,28 +76,14 @@ namespace VerVad_API.Helpers
                     drawings.Description = item2.Description;
                 }
 
-                DTO.ChildrensDrawings.Add(drawings);
+                DTO.ChildrensArtworks.Add(drawings);
             }
-
-            foreach (var item in gg.Sculptures)
-            {
-                var sculptures = new DTOChildrensArtwork();
-                sculptures.Artist = item.Artist;
-                sculptures.ImgUrl = item.ImgUrl;
-
-                foreach (var item2 in item.Translation.TranslatedTexts.Where(x => x.LanguageISO == language))
-                {
-                    sculptures.Title = item2.Title;
-                    sculptures.Description = item2.Description;
-                }
-
-                DTO.ChildrensSculptures.Add(sculptures);
-            }
-
+         
             foreach (var item in gg.LandArts)
             {
                 var landArt = new DTOLandArt();
                 landArt.ImgUrl = item.ImgUrl;
+                landArt.Id = item.Id;
 
                 foreach (var item2 in item.Translation.TranslatedTexts.Where(x => x.LanguageISO == language))
                 {

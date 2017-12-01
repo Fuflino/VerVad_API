@@ -71,18 +71,21 @@ namespace DAL.Contexts
                 ImgUrl = "https://placeimg.com/600/400/nature"
 
             };
-
-            //Sculptures
-            var Sculptures = new Sculpture()
+            var Artwork2 = new Artwork()
             {
-                Artist = "Lisa 5c",
+                Artist = "Bart 4c",
+                Translation = TranslatedTexts,
+                ImgUrl = "https://placeimg.com/600/400/nature"
+
+            };            
+            //Landart
+            var Landart = new LandArt()
+            {
                 Translation = TranslatedTexts,
                 ImgUrl = "https://placeimg.com/600/400/nature"
 
             };
-
-            //Landart
-            var Landart = new LandArt()
+            var Landart2 = new LandArt()
             {
                 Translation = TranslatedTexts,
                 ImgUrl = "https://placeimg.com/600/400/nature"
@@ -111,7 +114,7 @@ namespace DAL.Contexts
                 SongArtist = "Shakira",
                 Translation = TranslatedTexts
             };
-            
+
             //Global Goal
             var GG = new GlobalGoal()
             {
@@ -120,11 +123,10 @@ namespace DAL.Contexts
                 Translation = TranslatedTexts,
                 ImgURL = "https://placeimg.com/600/400/nature",
 
-                ChildrensTexts = new List<ChildrensText> { ChildrensTexts },
-                Artworks = new List<Artwork> { Artwork },
-                Sculptures = new List<Sculpture> { Sculptures },
-                LandArts = new List<LandArt> { Landart },
-                AudioVideo = audioVideo                
+                ChildrensTexts = new List<ChildrensText> { ChildrensTexts, ChildrensTexts2 },
+                Artworks = new List<Artwork> { Artwork, Artwork2 },                
+                LandArts = new List<LandArt> { Landart, Landart2 },
+                AudioVideo = audioVideo
             };
 
 

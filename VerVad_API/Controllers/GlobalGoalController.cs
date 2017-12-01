@@ -42,7 +42,7 @@ namespace VerVad_API.Controllers
         [HttpGet]
         [ResponseType(typeof(List<DTOGlobalGoal>))]
         public IHttpActionResult GetGlobalGoals(string language)
-        {            
+        {
             var globalGoals = _repo.ReadAll();
             var DTOList = new List<DTOGlobalGoal>();
 
@@ -53,6 +53,13 @@ namespace VerVad_API.Controllers
             }
 
             return Ok(DTOList);
+        }
+
+        // Test method...    
+        [HttpGet]
+        public string ReturnDDL(string audioUrl)
+        {
+            return audioUrl = _helper.ConvertToDDL(audioUrl);
         }
 
     }
