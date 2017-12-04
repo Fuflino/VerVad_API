@@ -71,18 +71,21 @@ namespace DAL.Contexts
                 ImgUrl = "https://placeimg.com/600/400/nature"
 
             };
-
-            //Sculptures
-            var Sculptures = new Sculpture()
+            var Artwork2 = new Artwork()
             {
-                Artist = "Lisa 5c",
+                Artist = "Bart 4c",
                 Translation = TranslatedTexts,
                 ImgUrl = "https://placeimg.com/600/400/nature"
 
             };
-
             //Landart
             var Landart = new LandArt()
+            {
+                Translation = TranslatedTexts,
+                ImgUrl = "https://placeimg.com/600/400/nature"
+
+            };
+            var Landart2 = new LandArt()
             {
                 Translation = TranslatedTexts,
                 ImgUrl = "https://placeimg.com/600/400/nature"
@@ -111,7 +114,15 @@ namespace DAL.Contexts
                 SongArtist = "Shakira",
                 Translation = TranslatedTexts
             };
-            
+            var audioVideo2 = new AudioVideo()
+            {
+                AudioURL = "https://www.dropbox.com/s/ewkmod3sbhw71ia/listener%20-%20Wooden%20Heart%20-%2001%20You%20have%20never%20lived%20because%20you%20have%20never%20died.mp3?dl=1",
+                VideoURL = "https://www.youtube.com/embed/RpqVmvMCmp0",
+                SongTitle = "Bum Bum Bla Bla..",
+                SongArtist = "Shakira",
+                Translation = TranslatedTexts
+            };
+
             //Global Goal
             var GG = new GlobalGoal()
             {
@@ -119,16 +130,31 @@ namespace DAL.Contexts
                 Longitude = 34.5566,
                 Translation = TranslatedTexts,
                 ImgURL = "https://placeimg.com/600/400/nature",
+                IsPublished = true,
 
-                ChildrensTexts = new List<ChildrensText> { ChildrensTexts },
-                Artworks = new List<Artwork> { Artwork },
-                Sculptures = new List<Sculpture> { Sculptures },
-                LandArts = new List<LandArt> { Landart },
-                AudioVideo = audioVideo                
+                ChildrensTexts = new List<ChildrensText> { ChildrensTexts, ChildrensTexts2 },
+                Artworks = new List<Artwork> { Artwork, Artwork2 },
+                LandArts = new List<LandArt> { Landart, Landart2 },
+                AudioVideo = audioVideo
+            };
+
+            var GG2 = new GlobalGoal()
+            {
+                Latitude = 12.3045,
+                Longitude = 34.5566,
+                Translation = TranslatedTexts,
+                ImgURL = "https://placeimg.com/600/400/nature",
+                IsPublished = false,
+
+                ChildrensTexts = new List<ChildrensText> { ChildrensTexts, ChildrensTexts2 },
+                Artworks = new List<Artwork> { },
+                LandArts = new List<LandArt> { },
+                AudioVideo = audioVideo2
             };
 
 
             context.Global_Goals.Add(GG);
+            context.Global_Goals.Add(GG2);
 
             base.Seed(context);
         }

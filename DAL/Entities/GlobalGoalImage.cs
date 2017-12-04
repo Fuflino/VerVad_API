@@ -17,12 +17,7 @@ namespace DAL.Entities
     public class LandArt : GlobalGoalImage
     {
 
-    }
-
-    public class Sculpture : GlobalGoalImage
-    {
-
-    }
+    }    
 
     public class Artwork : GlobalGoalImage
     {

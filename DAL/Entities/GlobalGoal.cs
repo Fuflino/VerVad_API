@@ -16,13 +16,12 @@ namespace DAL.Entities
 
         public AudioVideo AudioVideo { get; set; }
         public List<LandArt> LandArts { get; set; }
-        public List<Artwork> Artworks { get; set; }
-        public List<Sculpture> Sculptures { get; set; }
+        public List<Artwork> Artworks { get; set; }        
         public List<ChildrensText> ChildrensTexts { get; set; }
 
         public int TranslationId { get; set; }
         public Translation Translation { get; set; }
-
+        public bool IsPublished { get; set; }
 
     }
 }

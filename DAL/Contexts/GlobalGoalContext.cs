@@ -26,10 +26,9 @@ namespace DAL.Contexts
         public virtual DbSet<Translation> Texts { get; set; }
         public virtual DbSet<ChildrensText> ChildrensTexts { get; set; }
         public virtual DbSet<TranslationLanguage> Translations { get; set; }
-        public virtual DbSet<Artwork> Artworks { get; set; }
-        public virtual DbSet<Sculpture> Sculptures { get; set; }
+        public virtual DbSet<Artwork> Artworks { get; set; }        
         public virtual DbSet<LandArt> LandArts { get; set; }
-
+        public virtual DbSet<AudioVideo> AudioVideos { get; set; }           
 
         //All properties are required in order to create a Global Goal       
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -45,8 +44,7 @@ namespace DAL.Contexts
             modelBuilder.Entity<GlobalGoal>().Property(x => x.ImgURL).IsRequired();
 
             modelBuilder.Entity<GlobalGoal>().HasMany(x => x.ChildrensTexts).WithRequired();
-
-            modelBuilder.Entity<GlobalGoal>().HasMany(x => x.Sculptures).WithRequired();
+            
             modelBuilder.Entity<GlobalGoal>().HasMany(x => x.LandArts).WithRequired();
             modelBuilder.Entity<GlobalGoal>().HasMany(x => x.Artworks).WithRequired();
             modelBuilder.Entity<GlobalGoal>().HasOptional(x => x.AudioVideo).WithRequired();
@@ -54,25 +52,16 @@ namespace DAL.Contexts
             //Childrens Text
             modelBuilder.Entity<ChildrensText>().HasRequired(x => x.Translation).WithMany().WillCascadeOnDelete(false);
 
-            //Global Goal Image
-            modelBuilder.Entity<Sculpture>().Property(x => x.ImgUrl).IsRequired();
+            //Global Goal Image            
             modelBuilder.Entity<Artwork>().Property(x => x.ImgUrl).IsRequired();
             modelBuilder.Entity<LandArt>().Property(x => x.ImgUrl).IsRequired();
 
             modelBuilder.Entity<Language>().HasKey(l => l.ISO);
-
-            modelBuilder.Entity<Translation>()
-                .HasMany(t => t.TranslatedTexts)
-                .WithRequired(tl => tl.Translation);
-
-            modelBuilder.Entity<Language>()
-                            .HasMany(l => l.Translations)
-                            .WithRequired(tl => tl.Language);
-
-            modelBuilder.Entity<TranslationLanguage>()
-                .HasKey(tl => new { tl.LanguageISO, tl.TranslationId });
+            modelBuilder.Entity<Translation>().HasMany(t => t.TranslatedTexts).WithRequired(tl => tl.Translation);
+            modelBuilder.Entity<Language>().HasMany(l => l.Translations).WithRequired(tl => tl.Language);
+            modelBuilder.Entity<TranslationLanguage>().HasKey(tl => new { tl.LanguageISO, tl.TranslationId });
 
             base.OnModelCreating(modelBuilder);
-        }
+        }        
     }
 }
