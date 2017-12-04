@@ -15,7 +15,7 @@ namespace VerVad_API.Controllers
 {
     public class GlobalGoalController : ApiController
     {
-        private IRepository<GlobalGoal, int, string> _repo = new Facade().GetGlobalGoalRepository();
+        private IRepository<GlobalGoal, int> _repo = new Facade().GetGlobalGoalRepository();
         private GlobalGoalHelper _helper = new GlobalGoalHelper();
 
         private bool GlobalGoalExists(int id, string language)
@@ -53,6 +53,13 @@ namespace VerVad_API.Controllers
             }
 
             return Ok(DTOList);
+        }
+        [HttpPost]
+        [ResponseType(typeof(List<DTOGlobalGoal>))]
+        public IHttpActionResult PostGlobalGoal(GlobalGoal gg)
+        {
+            var globalGoal = _repo.Create(gg);
+            return Ok(globalGoal);
         }
 
     }

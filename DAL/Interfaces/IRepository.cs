@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace DAL.Interfaces
 {
-    public interface IRepository<T, I, L>
+    public interface IRepository<T, I>
     {
-        T Create(T t, L language);
+        T Create(T t);
         T Read(I id);
         List<T> ReadAll();
         T Update(T t);

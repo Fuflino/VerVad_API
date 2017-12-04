@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Repositories
 {
-    public class GlobalGoalRepository : IRepository<GlobalGoal, int, string>
+    public class GlobalGoalRepository : IRepository<GlobalGoal, int>
     {
         private GlobalGoalContext context;
 
@@ -27,9 +27,13 @@ namespace DAL.Repositories
             return context;
         }
 
-        public GlobalGoal Create(GlobalGoal t, string language)
+        public GlobalGoal Create(GlobalGoal t)
         {
-            throw new NotImplementedException();
+            using (var db = GetContext())
+            {
+                var globalGoal = db.Global_Goals.Add(t);
+                return globalGoal;
+            }
         }
 
         public bool Delete(int id)
