@@ -27,8 +27,9 @@ namespace VerVad_API.Helpers
                 ImgUrl = gg.ImgURL,
                 Latitude = gg.Latitude,
                 Longitude = gg.Longitude,
+                IsPublished = gg.IsPublished,
 
-                ChildrensArtworks = new List<DTOChildrensArtwork>(),                
+                ChildrensArtworks = new List<DTOChildrensArtwork>(),
                 ChildrensTexts = new List<DTOChildrensText>(),
                 LandArt = new List<DTOLandArt>(),
                 AudioVideo = new DTOAudioVideo()
@@ -78,7 +79,7 @@ namespace VerVad_API.Helpers
 
                 DTO.ChildrensArtworks.Add(drawings);
             }
-         
+
             foreach (var item in gg.LandArts)
             {
                 var landArt = new DTOLandArt();

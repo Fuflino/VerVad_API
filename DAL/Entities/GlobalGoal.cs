@@ -21,7 +21,7 @@ namespace DAL.Entities
 
         public int TranslationId { get; set; }
         public Translation Translation { get; set; }
-
+        public bool IsPublished { get; set; }
 
     }
 }
