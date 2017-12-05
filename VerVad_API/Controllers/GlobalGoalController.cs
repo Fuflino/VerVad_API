@@ -71,6 +71,14 @@ namespace VerVad_API.Controllers
             return Ok(globalGoal);
         }
 
+        public IHttpActionResult PutGlobalGoal(GlobalGoal gg)
+        {
+            var globalGoal = _repo.Update(gg);
+
+            return Ok(globalGoal);
+
+        }
+
         // Test method...    
         [HttpGet]
         public string ReturnDDL(string audioUrl)

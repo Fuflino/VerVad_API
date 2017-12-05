@@ -48,7 +48,7 @@ namespace DAL.Repositories
             {
                 var globalGoal = db.Global_Goals
                 .Include("Translation.TranslatedTexts.Language")
-                .Include("Artworks.Translation.TranslatedTexts.Language")                
+                .Include("Artworks.Translation.TranslatedTexts.Language")
                 .Include("LandArts.Translation.TranslatedTexts.Language")
                 .Include("ChildrensTexts.Translation.TranslatedTexts.Language")
                 .Include("AudioVideo.Translation.TranslatedTexts.Language")
@@ -65,7 +65,7 @@ namespace DAL.Repositories
             {
                 globalGoals = db.Global_Goals
                 .Include("Translation.TranslatedTexts.Language")
-                .Include("Artworks.Translation.TranslatedTexts.Language")                
+                .Include("Artworks.Translation.TranslatedTexts.Language")
                 .Include("LandArts.Translation.TranslatedTexts.Language")
                 .Include("ChildrensTexts.Translation.TranslatedTexts.Language")
                 .Include("AudioVideo.Translation.TranslatedTexts.Language").ToList();
@@ -75,7 +75,15 @@ namespace DAL.Repositories
 
         public GlobalGoal Update(GlobalGoal t)
         {
-            throw new NotImplementedException();
+            using (var db = GetContext())
+            {
+                var globalGoalToBeModified = db.Global_Goals.Include("Translation.TranslatedTexts.Language").FirstOrDefault(x => x.Id == t.Id);
+
+                db.Entry(globalGoalToBeModified).CurrentValues.SetValues(t);
+                db.SaveChanges();
+
+                return t;
+            }
         }
 
     }
