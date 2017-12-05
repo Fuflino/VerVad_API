@@ -54,8 +54,17 @@ namespace VerVad_API.Controllers
 
             return Ok(DTOList);
         }
+
+        [HttpGet]
+        [ResponseType(typeof(List<GlobalGoal>))]
+        public IHttpActionResult GetGlobalGoals()
+        {
+            var ggs = _repo.ReadAll();
+            return Ok(ggs);
+        }
+
         [HttpPost]
-        [ResponseType(typeof(List<DTOGlobalGoal>))]
+        [ResponseType(typeof(GlobalGoal))]
         public IHttpActionResult PostGlobalGoal(GlobalGoal gg)
         {
             var globalGoal = _repo.Create(gg);
