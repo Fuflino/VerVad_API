@@ -39,6 +39,18 @@ namespace VerVad_API.Controllers
             return Ok(DTO);
         }
 
+        public IHttpActionResult GetGlobalGoal(int id)
+        {
+            var globalGoal = _repo.Read(id);
+
+            if (!GlobalGoalExists(id, "da"))
+            {
+                return NotFound();
+            }
+
+            return Ok(globalGoal);
+        }
+
         [HttpGet]
         [ResponseType(typeof(List<DTOGlobalGoal>))]
         public IHttpActionResult GetGlobalGoals(string language)
