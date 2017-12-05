@@ -24,9 +24,15 @@ namespace DAL.Contexts
                 ISO = "en",
             };
 
+            var LanguageDE = new Language()
+            {
+                Country = "Tyskland",
+                ISO = "de",
+            };
+
             context.Languages.Add(LanguageDA);
             context.Languages.Add(LanguageEN);
-
+            context.Languages.Add(LanguageDE);
 
             var transEN = new TranslationLanguage()
             {

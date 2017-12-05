@@ -32,6 +32,7 @@ namespace DAL.Repositories
             using (var db = GetContext())
             {
                 var globalGoal = db.Global_Goals.Add(t);
+                db.SaveChanges();
                 return globalGoal;
             }
         }
