@@ -44,7 +44,10 @@ namespace DAL.Repositories
 
         public List<Language> ReadAll()
         {
-            throw new NotImplementedException();
+            using (var db = GetContext())
+            {
+                return db.Languages.ToList();
+            }
         }
 
         public Language Update(Language t)

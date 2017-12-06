@@ -14,6 +14,7 @@ namespace DAL.Facade
     {
         private IFrontPageRepository<FrontPage, int> frontPageRepository;
         private IRepository<GlobalGoal, int> globalGoalRepository;
+        private IRepository<Language, string> languagelRepository;
 
         public IFrontPageRepository<FrontPage, int> GetFrontPageRepository()
         {
@@ -25,6 +26,9 @@ namespace DAL.Facade
             return globalGoalRepository ?? (globalGoalRepository = new GlobalGoalRepository(new GlobalGoalContext()));
         }
 
-
+        public IRepository<Language, string> GetLanguageRepository()
+        {
+            return languagelRepository ?? (languagelRepository = new LanguageRepository(new GlobalGoalContext()));
+        }
     }
 }

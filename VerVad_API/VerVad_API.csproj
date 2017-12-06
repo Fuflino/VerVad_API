@@ -240,6 +240,7 @@
     <Compile Include="Controllers\FrontPageController.cs" />
     <Compile Include="Controllers\GlobalGoalController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LanguageController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

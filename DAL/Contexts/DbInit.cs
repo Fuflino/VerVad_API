@@ -44,6 +44,7 @@ namespace DAL.Contexts
                 Title = "The Global Goals - The Wadden Sea",
                 Language = LanguageEN,
             };
+
             var transDK = new TranslationLanguage()
             {
                 Description = "DANSK: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non scelerisque nibh. Vestibulum ante ipsum " +
@@ -98,7 +99,6 @@ namespace DAL.Contexts
 
             };
 
-
             //Childrens Texts
             var ChildrensTexts = new ChildrensText()
             {
@@ -106,8 +106,6 @@ namespace DAL.Contexts
                 Author = "Pippi 8c",
                 Translation = TranslatedTexts
             };
-
-
 
             //AudioVideo
             var audioVideo = new AudioVideo()
@@ -119,7 +117,6 @@ namespace DAL.Contexts
                 SongArtist = "Shakira",
                 Translation = TranslatedTexts
             };
-
 
             //Global Goal
             var GG = new GlobalGoal()
@@ -136,22 +133,20 @@ namespace DAL.Contexts
                 LandArts = new List<LandArt> { Landart },
                 AudioVideo = audioVideo
             };
-
             var GG2 = new GlobalGoal()
             {
                 Id = 2,
-                Latitude = 12.3045,
-                Longitude = 34.5566,
+                Latitude = 25.2145,
+                Longitude = 56.5586,
                 Translation = TranslatedTexts,
                 ImgURL = "https://placeimg.com/600/400/nature",
                 IsPublished = false,
 
-                ChildrensTexts = new List<ChildrensText> { },
-                Artworks = new List<Artwork> { },
-                LandArts = new List<LandArt> { },
+                ChildrensTexts = new List<ChildrensText> {  },
+                Artworks = new List<Artwork> {  },
+                LandArts = new List<LandArt> {  },
                 AudioVideo = audioVideo
             };
-
 
             context.Global_Goals.Add(GG);
             context.Global_Goals.Add(GG2);
