@@ -40,12 +40,6 @@ namespace DAL.Repositories
             }
         }
 
-        [HttpDelete]
-        public bool Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         [HttpGet]
         public GlobalGoal Read(int id)
         {
@@ -95,6 +89,12 @@ namespace DAL.Repositories
 
                 return t;
             }
+        }
+
+        [HttpDelete]
+        public bool Delete(int id)
+        {
+            throw new NotImplementedException();
         }
 
     }

@@ -7,6 +7,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Http;
 
 namespace DAL.Repositories
 {
@@ -18,7 +19,16 @@ namespace DAL.Repositories
             this.context = context;
         }
 
+        private GlobalGoalContext GetContext()
+        {
+            if (context.GetType().FullName.Equals("DAL.Contexts.GlobalGoalContext"))
+            {
+                return new GlobalGoalContext();
+            }
+            return context;
+        }
 
+        [HttpPost]
         public FrontPage Create(FrontPage t)
         {
             using (var db = GetContext())
@@ -29,27 +39,15 @@ namespace DAL.Repositories
             }
         }
 
-        public bool Delete(int id)
-        {
-            using (var db = GetContext())
-            {
-                var toBeDeleted = db.FrontPage.FirstOrDefault(x => x.Id == id);
-                db.FrontPage.Remove(toBeDeleted);
-                db.SaveChanges();
 
-                //Translations should be removed aswell - TODO
-
-                return true;
-            }
-        }
-
+        [HttpGet]
         public FrontPage Read(int id)
         {
             using (var db = GetContext())
             {
                 try
                 {
-                    var frontPage = db.FrontPage.Include("Translation.TranslatedTexts.Language").FirstOrDefault(x => x.Id == id);                  
+                    var frontPage = db.FrontPage.Include("Translation.TranslatedTexts.Language").FirstOrDefault(x => x.Id == id);
 
                     return frontPage;
                 }
@@ -60,13 +58,17 @@ namespace DAL.Repositories
             }
         }
 
-
+        [HttpPut]
         public FrontPage Update(FrontPage t)
         {
-
             using (var db = GetContext())
             {
-                var FrontPageToUpdate = db.FrontPage.Include("Title").Include("Title.Texts").Include("Description").Include("Description.texts").FirstOrDefault(x => x.Id == t.Id);
+                var FrontPageToUpdate = db.FrontPage
+                    .Include("Title")
+                    .Include("Title.Texts")
+                    .Include("Description")
+                    .Include("Description.texts")
+                    .FirstOrDefault(x => x.Id == t.Id);
 
                 //db.ObjectCurrentStateModified(FrontPageToUpdate, t);
                 db.SaveChanges();
@@ -93,13 +95,19 @@ namespace DAL.Repositories
             }
         }
 
-        private GlobalGoalContext GetContext()
+        [HttpDelete]
+        public bool Delete(int id)
         {
-            if (context.GetType().FullName.Equals("DAL.Contexts.GlobalGoalContext"))
+            using (var db = GetContext())
             {
-                return new GlobalGoalContext();
+                var toBeDeleted = db.FrontPage.FirstOrDefault(x => x.Id == id);
+                db.FrontPage.Remove(toBeDeleted);
+                db.SaveChanges();
+
+                //Translations should be removed aswell - TODO
+
+                return true;
             }
-            return context;
         }
     }
 }

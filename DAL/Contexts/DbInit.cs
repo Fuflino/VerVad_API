@@ -12,7 +12,7 @@ namespace DAL.Contexts
     {
         protected override void Seed(GlobalGoalContext context)
         {
-            //Frontpage
+           //Language
             var LanguageDA = new Language()
             {
                 Country = "Danmark",
@@ -34,6 +34,7 @@ namespace DAL.Contexts
             context.Languages.Add(LanguageEN);
             context.Languages.Add(LanguageDE);
 
+            //Translations
             var transEN = new TranslationLanguage()
             {
                 Description = "ENGELSK: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non scelerisque nibh. Vestibulum ante ipsum " +
@@ -73,6 +74,7 @@ namespace DAL.Contexts
             };
             context.Texts.Add(TranslatedTexts);
 
+            //Frontpage
             FrontPage fp = new FrontPage()
             {
                 ImgURL = "http://res.cloudinary.com/bjoernebanden/image/upload/v1509645764/1920-x-1080-nationalpark-vadehavet-kort_arxf8u.jpg",

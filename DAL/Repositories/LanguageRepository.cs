@@ -6,13 +6,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Http;
 
 namespace DAL.Repositories
 {
     public class LanguageRepository : IRepository<Language, string>
     {
         private GlobalGoalContext context;
-        public LanguageRepository(GlobalGoalContext context){
+
+        public LanguageRepository(GlobalGoalContext context)
+        {
             this.context = context;
         }
         private GlobalGoalContext GetContext()
@@ -29,11 +32,6 @@ namespace DAL.Repositories
             throw new NotImplementedException();
         }
 
-        public bool Delete(string id)
-        {
-            throw new NotImplementedException();
-        }
-
         public Language Read(string id)
         {
             using (var db = GetContext())
@@ -42,6 +40,7 @@ namespace DAL.Repositories
             }
         }
 
+        [HttpGet]
         public List<Language> ReadAll()
         {
             using (var db = GetContext())
@@ -51,6 +50,11 @@ namespace DAL.Repositories
         }
 
         public Language Update(Language t)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Delete(string id)
         {
             throw new NotImplementedException();
         }
