@@ -91,6 +91,11 @@ namespace VerVad_API.Controllers
 
         }
 
+        public IHttpActionResult DeleteGlobalGoal()
+        {
+            return null;
+        }
+
         // Test method...    
         [HttpGet]
         public string ReturnDDL(string audioUrl)

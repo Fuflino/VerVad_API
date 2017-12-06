@@ -41,10 +41,23 @@ namespace VerVad_API.Controllers
          
             return Ok(DTO);
         }
+        [HttpGet]
+        [ResponseType(typeof(FrontPage))]
+        public IHttpActionResult GetFrontPage(int id)
+        {
+            var frontPage = _repo.Read(id);
+
+            if (!FrontPageExists(id, "da"))
+            {
+                return NotFound();
+            }
+
+            return Ok(frontPage);
+        }
 
         [HttpPut]
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutFrontPage(int id, FrontPage frontPage)
+        public IHttpActionResult PutFrontPage(FrontPage frontPage)
         {
             if (!ModelState.IsValid)
             {
@@ -54,34 +67,6 @@ namespace VerVad_API.Controllers
             _repo.Update(frontPage);
 
             return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        [HttpPost]
-        [ResponseType(typeof(FrontPage))]
-        public IHttpActionResult PostFrontPage(FrontPage frontPage)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            _repo.Create(frontPage);
-
-            return CreatedAtRoute("DefaultApi", new { id = frontPage.Id }, frontPage);
-        }
-
-        [HttpDelete]
-        [ResponseType(typeof(FrontPage))]
-        public IHttpActionResult DeleteFrontPage(int id, string language)
-        {
-            if (!FrontPageExists(id, language))
-            {
-                return NotFound();
-            }
-
-            _repo.Delete(id);
-
-            return Ok();
         }
 
     }
