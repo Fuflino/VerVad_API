@@ -33,12 +33,12 @@ namespace DAL.Repositories
         {
             using (var db = GetContext())
             {
-                db.FrontPage.Add(t);
+                var frontPage = db.FrontPage.Add(t);
+
                 db.SaveChanges();
                 return t;
             }
         }
-
 
         [HttpGet]
         public FrontPage Read(int id)
@@ -47,8 +47,9 @@ namespace DAL.Repositories
             {
                 try
                 {
-                    var frontPage = db.FrontPage.Include("Translation.TranslatedTexts.Language").FirstOrDefault(x => x.Id == id);
-
+                    var frontPage = db.FrontPage
+                        .Include("Translation.TranslatedTexts.Language")
+                        .FirstOrDefault(x => x.Id == id);
                     return frontPage;
                 }
                 catch
@@ -63,34 +64,13 @@ namespace DAL.Repositories
         {
             using (var db = GetContext())
             {
-                var FrontPageToUpdate = db.FrontPage
-                    .Include("Title")
-                    .Include("Title.Texts")
-                    .Include("Description")
-                    .Include("Description.texts")
-                    .FirstOrDefault(x => x.Id == t.Id);
-
-                //db.ObjectCurrentStateModified(FrontPageToUpdate, t);
+                var frontPageToUpdate = db.FrontPage.Include("Translation.TranslatedTexts.Language").FirstOrDefault(x => x.Id == t.Id);
+                db.Entry(frontPageToUpdate).CurrentValues.SetValues(t);
+                foreach (var item in frontPageToUpdate.Translation.TranslatedTexts)
+                {
+                    db.Entry(item).CurrentValues.SetValues(t.Translation.TranslatedTexts.FirstOrDefault(x => x.LanguageISO == item.LanguageISO && x.TranslationId == item.TranslationId));
+                }
                 db.SaveChanges();
-
-                //db.ObjectCurrentStateModified(FrontPageToUpdate.Title, t.Title);
-                db.SaveChanges();
-
-                //db.ObjectCurrentStateModified(FrontPageToUpdate.Description, t.Description);
-                db.SaveChanges();
-
-                //for (int i = 0; i < 2; i++)
-                //{
-                //    db.ObjectCurrentStateModified(FrontPageToUpdate.Description.Texts[i], t.Description.Texts[i]);
-                //}
-                //db.SaveChanges();
-
-                //for (int i = 0; i < 2; i++)
-                //{
-                //    db.ObjectCurrentStateModified(FrontPageToUpdate.Title.Texts[i], t.Title.Texts[i]);
-                //}
-                db.SaveChanges();
-
                 return t;
             }
         }
