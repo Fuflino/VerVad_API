@@ -172,7 +172,7 @@ namespace DAL.Contexts
                 ChildrensTexts = new List<ChildrensText> { ChildrensTexts },
                 Artworks = new List<Artwork> { Artwork },
                 LandArts = new List<LandArt> { Landart },
-                AudioVideo = null
+                AudioVideo = audioVideo
             };
             var GG2 = new GlobalGoal()
             {
@@ -186,7 +186,7 @@ namespace DAL.Contexts
                 ChildrensTexts = new List<ChildrensText> { },
                 Artworks = new List<Artwork> { },
                 LandArts = new List<LandArt> { },
-                AudioVideo = audioVideo
+                AudioVideo = null
             };
 
             context.Global_Goals.Add(GG);
