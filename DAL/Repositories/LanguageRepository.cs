@@ -10,7 +10,7 @@ using System.Web.Http;
 
 namespace DAL.Repositories
 {
-    public class LanguageRepository : IRepository<Language, string>
+    public class LanguageRepository : ILanguageRepository<Language, string>
     {
         private GlobalGoalContext context;
 
@@ -25,11 +25,6 @@ namespace DAL.Repositories
                 return new GlobalGoalContext();
             }
             return context;
-        }
-
-        public Language Create(Language t)
-        {
-            throw new NotImplementedException();
         }
 
         public Language Read(string id)
@@ -47,16 +42,6 @@ namespace DAL.Repositories
             {
                 return db.Languages.ToList();
             }
-        }
-
-        public Language Update(Language t)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Delete(string id)
-        {
-            throw new NotImplementedException();
         }
     }
 }

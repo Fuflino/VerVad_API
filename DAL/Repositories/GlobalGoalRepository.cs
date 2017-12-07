@@ -94,7 +94,20 @@ namespace DAL.Repositories
         [HttpDelete]
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            using (var db = GetContext())
+            {
+                var gg = db.Global_Goals.Include("Translation.TranslatedTexts.Language").FirstOrDefault(x => x.Id == id);
+                var translations = gg.Translation.TranslatedTexts.ToList();
+                if (gg == null) return false;
+                foreach (var item in translations)
+                {
+                    db.Translations.Remove(item);
+
+                }
+                db.Global_Goals.Remove(gg);
+                db.SaveChanges();
+                return true;
+            }
         }
 
     }

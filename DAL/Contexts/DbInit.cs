@@ -12,7 +12,7 @@ namespace DAL.Contexts
     {
         protected override void Seed(GlobalGoalContext context)
         {
-           //Language
+            //Language
             var LanguageDA = new Language()
             {
                 Country = "Danmark",
@@ -68,10 +68,48 @@ namespace DAL.Contexts
                 Language = LanguageDE,
             };
 
+            var transEN1 = new TranslationLanguage()
+            {
+                Description = "ENGELSK: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non scelerisque nibh. Vestibulum ante ipsum " +
+    "primis in faucibus orci luctus et ultrices posuere cubilia Curae; Curabitur vel purus ultricies mauris fringilla rhoncus." +
+    "Duis a vehicula nunc, a sagittis leo. Etiam tempor faucibus orci ac cursus. Vestibulum ante ipsum primis in faucibus" +
+    "orci luctus et ultrices posuere cubilia Curae; Sed vestibulum neque vitae nisi blandit commodo.Maecenas varius," +
+    " dolor at commodo.",
+                Title = "The Global Goals - The Wadden Sea",
+                Language = LanguageEN,
+            };
+
+            var transDK1 = new TranslationLanguage()
+            {
+                Description = "DANSK: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non scelerisque nibh. Vestibulum ante ipsum " +
+                "primis in faucibus orci luctus et ultrices posuere cubilia Curae; Curabitur vel purus ultricies mauris fringilla rhoncus." +
+                "Duis a vehicula nunc, a sagittis leo. Etiam tempor faucibus orci ac cursus. Vestibulum ante ipsum primis in faucibus" +
+                "orci luctus et ultrices posuere cubilia Curae; Sed vestibulum neque vitae nisi blandit commodo.Maecenas varius," +
+                " dolor at commodo.",
+                Title = "Verdensmål ved Vadehavet",
+                Language = LanguageDA,
+            };
+
+            var transDE1 = new TranslationLanguage()
+            {
+                Description = "TYSK Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non scelerisque nibh. Vestibulum ante ipsum " +
+                "primis in faucibus orci luctus et ultrices posuere cubilia Curae; Curabitur vel purus ultricies mauris fringilla rhoncus." +
+                "Duis a vehicula nunc, a sagittis leo. Etiam tempor faucibus orci ac cursus. Vestibulum ante ipsum primis in faucibus" +
+                "orci luctus et ultrices posuere cubilia Curae; Sed vestibulum neque vitae nisi blandit commodo.Maecenas varius," +
+                " dolor at commodo.",
+                Title = "Welt Ziele eller noget..",
+                Language = LanguageDE,
+            };
+
             var TranslatedTexts = new Translation()
             {
                 TranslatedTexts = new List<TranslationLanguage> { transDK, transEN, transDE }
             };
+            var TranslatedTexts1 = new Translation()
+            {
+                TranslatedTexts = new List<TranslationLanguage> { transDK1, transEN1, transDE1 }
+            };
+            context.Texts.Add(TranslatedTexts1);
             context.Texts.Add(TranslatedTexts);
 
             //Frontpage
@@ -117,7 +155,7 @@ namespace DAL.Contexts
                 VideoURL = "https://www.youtube.com/embed/RpqVmvMCmp0",
                 SongTitle = "Bum Bum Bla Bla..",
                 SongArtist = "Shakira",
-                Translation = TranslatedTexts
+                Translation = TranslatedTexts1
             };
 
             //Global Goal
@@ -133,20 +171,20 @@ namespace DAL.Contexts
                 ChildrensTexts = new List<ChildrensText> { ChildrensTexts },
                 Artworks = new List<Artwork> { Artwork },
                 LandArts = new List<LandArt> { Landart },
-                AudioVideo = audioVideo
+                AudioVideo = null
             };
             var GG2 = new GlobalGoal()
             {
                 Id = 2,
                 Latitude = 25.2145,
                 Longitude = 56.5586,
-                Translation = TranslatedTexts,
+                Translation = TranslatedTexts1,
                 ImgURL = "https://placeimg.com/600/400/nature",
                 IsPublished = false,
 
-                ChildrensTexts = new List<ChildrensText> {  },
-                Artworks = new List<Artwork> {  },
-                LandArts = new List<LandArt> {  },
+                ChildrensTexts = new List<ChildrensText> { },
+                Artworks = new List<Artwork> { },
+                LandArts = new List<LandArt> { },
                 AudioVideo = audioVideo
             };
 

@@ -91,9 +91,12 @@ namespace VerVad_API.Controllers
 
         }
 
-        public IHttpActionResult DeleteGlobalGoal()
+        public IHttpActionResult DeleteGlobalGoal(int id)
         {
-            return null;
+
+            _repo.Delete(id);
+            return Ok();
+
         }
 
         // Test method...    
