@@ -10,7 +10,7 @@ using DAL.Interfaces;
 
 namespace DAL.Repositories
 {
-    class ChildrensTextRepository : IRepository<ChildrensText, int>
+    public class ChildrensTextRepository : IRepository<ChildrensText, int>
     {
         private GlobalGoalContext context;
 
@@ -88,14 +88,14 @@ namespace DAL.Repositories
         {
             using (var db = GetContext())
             {
-                var childrensText = db.ChildrensTexts.FirstOrDefault(x => x.Id == id);
+                var childrensText = db.ChildrensTexts.Include("Translation.TranslatedTexts.Language").FirstOrDefault(x => x.Id == id);
 
                 if (childrensText == null) return false;
-                foreach (var item in childrensText.Translation.TranslatedTexts)
-                {
-                    db.Translations.Remove(item);
+                //foreach (var item in childrensText.Translation.TranslatedTexts)
+                //{
+                //    db.Translations.Remove(item);
 
-                }
+                //}
                 db.ChildrensTexts.Remove(childrensText);
                 return true;
             }

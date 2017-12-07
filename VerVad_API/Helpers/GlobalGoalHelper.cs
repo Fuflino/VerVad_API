@@ -105,13 +105,5 @@ namespace VerVad_API.Helpers
             return DTO;
         }
 
-        public void DeleteLandarts(List<LandArt> laList)
-        {
-            foreach (var landArts in laList)
-            {
-                
-            }
-        }
-
     }
 }
