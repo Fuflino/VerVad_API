@@ -11,6 +11,7 @@ namespace VerVad_API.Helpers
 {
     public class GlobalGoalHelper
     {
+
         /// Change parameter in url, so it becomes a direct download link.
         public string ConvertToDDL(string audioUrl)
         {
@@ -102,6 +103,14 @@ namespace VerVad_API.Helpers
             };
 
             return DTO;
+        }
+
+        public void DeleteLandarts(List<LandArt> laList)
+        {
+            foreach (var landArts in laList)
+            {
+                
+            }
         }
 
     }

@@ -14,11 +14,11 @@ namespace VerVad_API.Controllers
 
     public class LanguageController : ApiController
     {
-        private IRepository<Language, string> _repo = new Facade().GetLanguageRepository();
+        private ILanguageRepository<Language, string> _repo = new Facade().GetLanguageRepository();
 
         [HttpGet]
         [ResponseType(typeof(List<Language>))]
-        public IHttpActionResult GetGlobalGoals()
+        public IHttpActionResult GetLanguages()
         {
             var language = _repo.ReadAll();
             return Ok(language);
