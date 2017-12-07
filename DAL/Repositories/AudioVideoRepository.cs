@@ -1,20 +1,20 @@
-﻿using System;
+﻿using DAL.Contexts;
+using DAL.Entities;
+using DAL.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
-using DAL.Contexts;
-using DAL.Entities;
-using DAL.Interfaces;
 
 namespace DAL.Repositories
 {
-    public class LandArtRepository : IRepository<LandArt, int>
+    public class AudioVideoRepository : IRepository<AudioVideo, int>
     {
         private GlobalGoalContext context;
 
-        public LandArtRepository(GlobalGoalContext context)
+        public AudioVideoRepository(GlobalGoalContext context)
         {
             this.context = context;
         }
@@ -29,51 +29,51 @@ namespace DAL.Repositories
         }
 
         [HttpPost]
-        public LandArt Create(LandArt t)
+        public AudioVideo Create(AudioVideo t)
         {
             using (var db = GetContext())
             {
-                var landArt = db.LandArts.Add(t);
+                var audioVideo = db.AudioVideos.Add(t);
 
                 db.SaveChanges();
-                return landArt;
+                return audioVideo;
             }
         }
 
         [HttpGet]
-        public LandArt Read(int id)
+        public AudioVideo Read(int id)
         {
             using (var db = GetContext())
             {
-                var landArt = db.LandArts
+                var audioVideo = db.AudioVideos
                 .Include("Translation.TranslatedTexts.Language")
                 .FirstOrDefault(x => x.Id == id);
-                return landArt;
+                return audioVideo;
             }
         }
 
         [HttpGet]
-        public List<LandArt> ReadAll()
+        public List<AudioVideo> ReadAll()
         {
-            var landArt = new List<LandArt>();
+            var audioVideo = new List<AudioVideo>();
 
             using (var db = GetContext())
             {
-                landArt = db.LandArts
+                audioVideo = db.AudioVideos
                 .Include("Translation.TranslatedTexts.Language").ToList();
-                return landArt;
+                return audioVideo;
             }
         }
 
         [HttpPut]
-        public LandArt Update(LandArt t)
+        public AudioVideo Update(AudioVideo t)
         {
             using (var db = GetContext())
             {
-                var landArtToBeModified = db.LandArts.Include("Translation.TranslatedTexts.Language").FirstOrDefault(x => x.Id == t.Id);
+                var audioVideoToBeModified = db.AudioVideos.Include("Translation.TranslatedTexts.Language").FirstOrDefault(x => x.Id == t.Id);
 
-                db.Entry(landArtToBeModified).CurrentValues.SetValues(t);
-                foreach (var item in landArtToBeModified.Translation.TranslatedTexts)
+                db.Entry(audioVideoToBeModified).CurrentValues.SetValues(t);
+                foreach (var item in audioVideoToBeModified.Translation.TranslatedTexts)
                 {
                     db.Entry(item).CurrentValues.SetValues(t.Translation.TranslatedTexts.FirstOrDefault(x => x.LanguageISO == item.LanguageISO && x.TranslationId == item.TranslationId));
                 }
@@ -88,17 +88,18 @@ namespace DAL.Repositories
         {
             using (var db = GetContext())
             {
-                var landArt = db.LandArts.Include("Translation.TranslatedTexts.Language").FirstOrDefault(x => x.Id == id);
+                var audioVideo = db.AudioVideos.Include("Translation.TranslatedTexts.Language").FirstOrDefault(x => x.Id == id);
 
-                if (landArt == null) return false;
-                //foreach (var item in landArt.Translation.TranslatedTexts)
+                if (audioVideo == null) return false;
+                //foreach (var item in AudioVideo.Translation.TranslatedTexts)
                 //{
                 //    db.Translations.Remove(item);
 
                 //}
-                db.LandArts.Remove(landArt);
+                db.AudioVideos.Remove(audioVideo);
                 return true;
             }
         }
+
     }
 }

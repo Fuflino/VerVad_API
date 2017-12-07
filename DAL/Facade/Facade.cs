@@ -15,6 +15,10 @@ namespace DAL.Facade
         private IFrontPageRepository<FrontPage, int> frontPageRepository;
         private IRepository<GlobalGoal, int> globalGoalRepository;
         private ILanguageRepository<Language, string> languagelRepository;
+        private IRepository<Artwork, int> artworkRepository;
+        private IRepository<ChildrensText, int> childrensTextRepository;
+        private IRepository<LandArt, int> landArtRepository;
+        private IRepository<AudioVideo, int> audioVideoRepository;
 
         public IFrontPageRepository<FrontPage, int> GetFrontPageRepository()
         {
@@ -29,6 +33,26 @@ namespace DAL.Facade
         public ILanguageRepository<Language, string> GetLanguageRepository()
         {
             return languagelRepository ?? (languagelRepository = new LanguageRepository(new GlobalGoalContext()));
+        }
+
+        public IRepository<Artwork, int> GetArtworkRepository()
+        {
+            return artworkRepository ?? (artworkRepository = new ArtworkRepository(new GlobalGoalContext()));
+        }
+
+        public IRepository<ChildrensText, int> GetChildrensTextRepository()
+        {
+            return childrensTextRepository ?? (childrensTextRepository = new ChildrensTextRepository(new GlobalGoalContext()));
+        }
+
+        public IRepository<LandArt, int> GetLandArtRepository()
+        {
+            return landArtRepository ?? (landArtRepository = new LandArtRepository(new GlobalGoalContext()));
+        }
+
+        public IRepository<AudioVideo, int> GetAudioVideoRepository()
+        {
+            return audioVideoRepository ?? (audioVideoRepository = new AudioVideoRepository(new GlobalGoalContext()));
         }
     }
 }

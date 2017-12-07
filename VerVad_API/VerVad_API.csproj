@@ -240,12 +240,14 @@
     <Compile Include="Controllers\FrontPageController.cs" />
     <Compile Include="Controllers\GlobalGoalController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LandArtController.cs" />
     <Compile Include="Controllers\LanguageController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\FrontPageHelper.cs" />
+    <Compile Include="Helpers\GlobalGoalChildrensHelper.cs" />
     <Compile Include="Helpers\GlobalGoalHelper.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />

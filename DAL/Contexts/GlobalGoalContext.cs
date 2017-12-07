@@ -45,7 +45,6 @@ namespace DAL.Contexts
             modelBuilder.Entity<GlobalGoal>().Property(x => x.ImgURL).IsRequired();
 
             modelBuilder.Entity<GlobalGoal>().HasMany(x => x.ChildrensTexts).WithRequired().WillCascadeOnDelete(true);
-            //modelBuilder.Entity<GlobalGoal>().HasRequired(x => x.Translation).WithMany().WillCascadeOnDelete(true);
             modelBuilder.Entity<GlobalGoal>().HasMany(x => x.LandArts).WithRequired().WillCascadeOnDelete(true);
             modelBuilder.Entity<GlobalGoal>().HasMany(x => x.Artworks).WithRequired().WillCascadeOnDelete(true);
             modelBuilder.Entity<GlobalGoal>().HasOptional(x => x.AudioVideo).WithRequired().WillCascadeOnDelete(true);
@@ -63,9 +62,12 @@ namespace DAL.Contexts
             modelBuilder.Entity<AudioVideo>().HasRequired(x => x.Translation).WithMany().WillCascadeOnDelete(true);
 
             modelBuilder.Entity<Language>().HasKey(l => l.ISO);
-            modelBuilder.Entity<Translation>().HasMany(t => t.TranslatedTexts).WithRequired(tl => tl.Translation);
+
             modelBuilder.Entity<Language>().HasMany(l => l.Translations).WithRequired(tl => tl.Language);
             modelBuilder.Entity<TranslationLanguage>().HasKey(tl => new { tl.LanguageISO, tl.TranslationId });
+
+            //Translations
+            modelBuilder.Entity<Translation>().HasMany(t => t.TranslatedTexts).WithRequired(tl => tl.Translation).WillCascadeOnDelete(true);
 
             base.OnModelCreating(modelBuilder);
         }        

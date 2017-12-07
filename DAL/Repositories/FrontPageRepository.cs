@@ -28,18 +28,6 @@ namespace DAL.Repositories
             return context;
         }
 
-        [HttpPost]
-        public FrontPage Create(FrontPage t)
-        {
-            using (var db = GetContext())
-            {
-                var frontPage = db.FrontPage.Add(t);
-
-                db.SaveChanges();
-                return t;
-            }
-        }
-
         [HttpGet]
         public FrontPage Read(int id)
         {
@@ -72,21 +60,6 @@ namespace DAL.Repositories
                 }
                 db.SaveChanges();
                 return t;
-            }
-        }
-
-        [HttpDelete]
-        public bool Delete(int id)
-        {
-            using (var db = GetContext())
-            {
-                var toBeDeleted = db.FrontPage.FirstOrDefault(x => x.Id == id);
-                db.FrontPage.Remove(toBeDeleted);
-                db.SaveChanges();
-
-                //Translations should be removed aswell - TODO
-
-                return true;
             }
         }
     }

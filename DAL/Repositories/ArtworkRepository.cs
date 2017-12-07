@@ -1,20 +1,20 @@
-﻿using System;
+﻿using DAL.Contexts;
+using DAL.Entities;
+using DAL.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
-using DAL.Contexts;
-using DAL.Entities;
-using DAL.Interfaces;
 
 namespace DAL.Repositories
 {
-    public class LandArtRepository : IRepository<LandArt, int>
+    public class ArtworkRepository : IRepository<Artwork, int>
     {
         private GlobalGoalContext context;
 
-        public LandArtRepository(GlobalGoalContext context)
+        public ArtworkRepository(GlobalGoalContext context)
         {
             this.context = context;
         }
@@ -29,51 +29,51 @@ namespace DAL.Repositories
         }
 
         [HttpPost]
-        public LandArt Create(LandArt t)
+        public Artwork Create(Artwork t)
         {
             using (var db = GetContext())
             {
-                var landArt = db.LandArts.Add(t);
+                var Artworks = db.Artworks.Add(t);
 
                 db.SaveChanges();
-                return landArt;
+                return Artworks;
             }
         }
 
         [HttpGet]
-        public LandArt Read(int id)
+        public Artwork Read(int id)
         {
             using (var db = GetContext())
             {
-                var landArt = db.LandArts
+                var Artworks = db.Artworks
                 .Include("Translation.TranslatedTexts.Language")
                 .FirstOrDefault(x => x.Id == id);
-                return landArt;
+                return Artworks;
             }
         }
 
         [HttpGet]
-        public List<LandArt> ReadAll()
+        public List<Artwork> ReadAll()
         {
-            var landArt = new List<LandArt>();
+            var Artworks = new List<Artwork>();
 
             using (var db = GetContext())
             {
-                landArt = db.LandArts
+                Artworks = db.Artworks
                 .Include("Translation.TranslatedTexts.Language").ToList();
-                return landArt;
+                return Artworks;
             }
         }
 
         [HttpPut]
-        public LandArt Update(LandArt t)
+        public Artwork Update(Artwork t)
         {
             using (var db = GetContext())
             {
-                var landArtToBeModified = db.LandArts.Include("Translation.TranslatedTexts.Language").FirstOrDefault(x => x.Id == t.Id);
+                var artworkToBeModified = db.Artworks.Include("Translation.TranslatedTexts.Language").FirstOrDefault(x => x.Id == t.Id);
 
-                db.Entry(landArtToBeModified).CurrentValues.SetValues(t);
-                foreach (var item in landArtToBeModified.Translation.TranslatedTexts)
+                db.Entry(artworkToBeModified).CurrentValues.SetValues(t);
+                foreach (var item in artworkToBeModified.Translation.TranslatedTexts)
                 {
                     db.Entry(item).CurrentValues.SetValues(t.Translation.TranslatedTexts.FirstOrDefault(x => x.LanguageISO == item.LanguageISO && x.TranslationId == item.TranslationId));
                 }
@@ -88,15 +88,15 @@ namespace DAL.Repositories
         {
             using (var db = GetContext())
             {
-                var landArt = db.LandArts.Include("Translation.TranslatedTexts.Language").FirstOrDefault(x => x.Id == id);
+                var artwork = db.Artworks.Include("Translation.TranslatedTexts.Language").FirstOrDefault(x => x.Id == id);
 
-                if (landArt == null) return false;
-                //foreach (var item in landArt.Translation.TranslatedTexts)
+                if (artwork == null) return false;
+                //foreach (var item in artwork.Translation.TranslatedTexts)
                 //{
                 //    db.Translations.Remove(item);
 
                 //}
-                db.LandArts.Remove(landArt);
+                db.Artworks.Remove(artwork);
                 return true;
             }
         }
