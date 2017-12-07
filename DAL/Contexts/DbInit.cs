@@ -15,18 +15,18 @@ namespace DAL.Contexts
             //Language
             var LanguageDA = new Language()
             {
-                Country = "Danmark",
+                Country = "Dansk",
                 ISO = "da",
             };
             var LanguageEN = new Language()
             {
-                Country = "England",
+                Country = "Engelsk",
                 ISO = "en",
             };
 
             var LanguageDE = new Language()
             {
-                Country = "Tyskland",
+                Country = "Tysk",
                 ISO = "de",
             };
 
@@ -71,10 +71,10 @@ namespace DAL.Contexts
             var transEN1 = new TranslationLanguage()
             {
                 Description = "ENGELSK: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non scelerisque nibh. Vestibulum ante ipsum " +
-    "primis in faucibus orci luctus et ultrices posuere cubilia Curae; Curabitur vel purus ultricies mauris fringilla rhoncus." +
-    "Duis a vehicula nunc, a sagittis leo. Etiam tempor faucibus orci ac cursus. Vestibulum ante ipsum primis in faucibus" +
-    "orci luctus et ultrices posuere cubilia Curae; Sed vestibulum neque vitae nisi blandit commodo.Maecenas varius," +
-    " dolor at commodo.",
+                "primis in faucibus orci luctus et ultrices posuere cubilia Curae; Curabitur vel purus ultricies mauris fringilla rhoncus." +
+                "Duis a vehicula nunc, a sagittis leo. Etiam tempor faucibus orci ac cursus. Vestibulum ante ipsum primis in faucibus" +
+                "orci luctus et ultrices posuere cubilia Curae; Sed vestibulum neque vitae nisi blandit commodo.Maecenas varius," +
+                " dolor at commodo.",
                 Title = "The Global Goals - The Wadden Sea",
                 Language = LanguageEN,
             };
@@ -115,6 +115,7 @@ namespace DAL.Contexts
             //Frontpage
             FrontPage fp = new FrontPage()
             {
+                Id = 1,
                 ImgURL = "http://res.cloudinary.com/bjoernebanden/image/upload/v1509645764/1920-x-1080-nationalpark-vadehavet-kort_arxf8u.jpg",
                 Translation = TranslatedTexts
             };
