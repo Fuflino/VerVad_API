@@ -41,6 +41,7 @@ namespace VerVad_API.Controllers
          
             return Ok(DTO);
         }
+
         [HttpGet]
         [ResponseType(typeof(FrontPage))]
         public IHttpActionResult GetFrontPage(int id)

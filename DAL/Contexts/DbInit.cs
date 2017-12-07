@@ -12,21 +12,21 @@ namespace DAL.Contexts
     {
         protected override void Seed(GlobalGoalContext context)
         {
-           //Language
+            //Language
             var LanguageDA = new Language()
             {
-                Country = "Danmark",
+                Country = "Dansk",
                 ISO = "da",
             };
             var LanguageEN = new Language()
             {
-                Country = "England",
+                Country = "Engelsk",
                 ISO = "en",
             };
 
             var LanguageDE = new Language()
             {
-                Country = "Tyskland",
+                Country = "Tysk",
                 ISO = "de",
             };
 
@@ -77,6 +77,7 @@ namespace DAL.Contexts
             //Frontpage
             FrontPage fp = new FrontPage()
             {
+                Id = 1,
                 ImgURL = "http://res.cloudinary.com/bjoernebanden/image/upload/v1509645764/1920-x-1080-nationalpark-vadehavet-kort_arxf8u.jpg",
                 Translation = TranslatedTexts
             };
@@ -144,10 +145,10 @@ namespace DAL.Contexts
                 ImgURL = "https://placeimg.com/600/400/nature",
                 IsPublished = false,
 
-                ChildrensTexts = new List<ChildrensText> {  },
-                Artworks = new List<Artwork> {  },
-                LandArts = new List<LandArt> {  },
-                AudioVideo = audioVideo
+                ChildrensTexts = new List<ChildrensText> { },
+                Artworks = new List<Artwork> { },
+                LandArts = new List<LandArt> { },
+                AudioVideo = null
             };
 
             context.Global_Goals.Add(GG);
