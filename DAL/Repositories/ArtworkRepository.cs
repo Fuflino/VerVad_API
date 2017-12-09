@@ -28,7 +28,7 @@ namespace DAL.Repositories
             return context;
         }
 
-        [HttpPost]
+        //Create
         public Artwork Create(Artwork t)
         {
             using (var db = GetContext())
@@ -40,7 +40,7 @@ namespace DAL.Repositories
             }
         }
 
-        [HttpGet]
+        //Read
         public Artwork Read(int id)
         {
             using (var db = GetContext())
@@ -52,7 +52,7 @@ namespace DAL.Repositories
             }
         }
 
-        [HttpGet]
+        //ReadAll
         public List<Artwork> ReadAll()
         {
             var Artworks = new List<Artwork>();
@@ -65,7 +65,7 @@ namespace DAL.Repositories
             }
         }
 
-        [HttpPut]
+        //Update
         public Artwork Update(Artwork t)
         {
             using (var db = GetContext())
@@ -83,7 +83,7 @@ namespace DAL.Repositories
             }
         }
 
-        [HttpDelete]
+        //Delete
         public bool Delete(int id)
         {
             using (var db = GetContext())

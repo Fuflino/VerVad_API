@@ -68,11 +68,12 @@
   <ItemGroup>
     <Compile Include="Contexts\DbInit.cs" />
     <Compile Include="Contexts\GlobalGoalContext.cs" />
+    <Compile Include="Entities\Artwork.cs" />
     <Compile Include="Entities\AudioVideo.cs" />
     <Compile Include="Entities\ChildrensText.cs" />
     <Compile Include="Entities\FrontPage.cs" />
     <Compile Include="Entities\GlobalGoal.cs" />
-    <Compile Include="Entities\GlobalGoalImage.cs" />
+    <Compile Include="Entities\LandArt.cs" />
     <Compile Include="Entities\Language.cs" />
     <Compile Include="Entities\Translation.cs" />
     <Compile Include="Entities\TranslationLanguage.cs" />
@@ -92,7 +93,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

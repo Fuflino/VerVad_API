@@ -28,7 +28,7 @@ namespace DAL.Repositories
             return context;
         }
 
-        [HttpGet]
+       //Read
         public FrontPage Read(int id)
         {
             using (var db = GetContext())
@@ -47,7 +47,7 @@ namespace DAL.Repositories
             }
         }
 
-        [HttpPut]
+        //Update
         public FrontPage Update(FrontPage t)
         {
             using (var db = GetContext())

@@ -23,7 +23,7 @@ namespace VerVad_API.Controllers
             return _repo.Read(id) != null;
         }
 
-        [HttpGet]
+        [HttpGet] //DTO
         [ResponseType(typeof(DTOLandArt))]
         public IHttpActionResult GetLandArt(int id, string language)
         {
@@ -39,6 +39,7 @@ namespace VerVad_API.Controllers
             return Ok(DTO);
         }
 
+        [HttpGet]
         public IHttpActionResult GetLandArt(int id)
         {
             var landArt = _repo.Read(id);
@@ -51,7 +52,7 @@ namespace VerVad_API.Controllers
             return Ok(landArt);
         }
 
-        [HttpGet]
+        [HttpGet] //DTO
         [ResponseType(typeof(List<DTOLandArt>))]
         public IHttpActionResult GetLandArts(string language)
         {
@@ -83,20 +84,19 @@ namespace VerVad_API.Controllers
             return Ok(landArt);
         }
 
+        [HttpPut]
         public IHttpActionResult PutLandArt(LandArt la)
         {
             var landArt = _repo.Update(la);
-
             return Ok(landArt);
-
         }
 
+        [HttpDelete]
         public IHttpActionResult DeleteLandArt(int id)
         {
 
             _repo.Delete(id);
             return Ok();
-
         }
     }
 }

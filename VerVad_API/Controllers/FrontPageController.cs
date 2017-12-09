@@ -14,8 +14,7 @@ using VerVad_API.Helpers;
 using System.Web.Http.Cors;
 
 namespace VerVad_API.Controllers
-{
-    //[EnableCors(origins: "http://localhost:59535", headers: "*", methods: "*")]
+{    
     public class FrontPageController : ApiController
     {
         private IFrontPageRepository<FrontPage, int> _repo = new Facade().GetFrontPageRepository();

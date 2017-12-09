@@ -27,6 +27,7 @@ namespace DAL.Repositories
             return context;
         }
 
+        //Read
         public Language Read(string id)
         {
             using (var db = GetContext())
@@ -35,7 +36,7 @@ namespace DAL.Repositories
             }
         }
 
-        [HttpGet]
+        //ReadAll
         public List<Language> ReadAll()
         {
             using (var db = GetContext())

@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 namespace DAL.Entities
 {
-    public class ChildrensText
+    public class LandArt
     {
         public int Id { get; set; }
-        public int TranslationId { get; set; }
-        public string Author { get; set; }
+        public string ImgUrl { get; set; }
+        public string Artist { get; set; }
         public virtual Translation Translation { get; set; }
-
         public virtual GlobalGoal GlobalGoal { get; set; }
         public int GlobalGoalId { get; set; }
     }

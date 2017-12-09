@@ -23,7 +23,7 @@ namespace VerVad_API.Controllers
             return _repo.Read(id) != null;
         }
 
-        [HttpGet]
+        [HttpGet] //DTO
         [ResponseType(typeof(DTOGlobalGoal))]
         public IHttpActionResult GetGlobalGoal(int id, string language)
         {
@@ -39,19 +39,7 @@ namespace VerVad_API.Controllers
             return Ok(DTO);
         }
 
-        public IHttpActionResult GetGlobalGoal(int id)
-        {
-            var globalGoal = _repo.Read(id);
-
-            if (!GlobalGoalExists(id, "da"))
-            {
-                return NotFound();
-            }
-
-            return Ok(globalGoal);
-        }
-
-        [HttpGet]
+        [HttpGet] //DTO
         [ResponseType(typeof(List<DTOGlobalGoal>))]
         public IHttpActionResult GetGlobalGoals(string language)
         {
@@ -65,6 +53,20 @@ namespace VerVad_API.Controllers
             }
 
             return Ok(DTOList);
+        }
+
+        [HttpGet]
+        [ResponseType(typeof(GlobalGoal))]
+        public IHttpActionResult GetGlobalGoal(int id)
+        {
+            var globalGoal = _repo.Read(id);
+
+            if (!GlobalGoalExists(id, "da"))
+            {
+                return NotFound();
+            }
+
+            return Ok(globalGoal);
         }
 
         [HttpGet]
@@ -83,23 +85,23 @@ namespace VerVad_API.Controllers
             return Ok(globalGoal);
         }
 
+        [HttpPut]
+        [ResponseType(typeof(GlobalGoal))]
         public IHttpActionResult PutGlobalGoal(GlobalGoal gg)
         {
             var globalGoal = _repo.Update(gg);
-
             return Ok(globalGoal);
-
         }
 
+        [HttpDelete]
+        [ResponseType(typeof(GlobalGoal))]
         public IHttpActionResult DeleteGlobalGoal(int id)
         {
-
             _repo.Delete(id);
             return Ok();
-
         }
 
-        // Test method...    
+        // Test method... - ConvertToDDL() can be found in the globalgGoal helper class
         [HttpGet]
         public string ReturnDDL(string audioUrl)
         {

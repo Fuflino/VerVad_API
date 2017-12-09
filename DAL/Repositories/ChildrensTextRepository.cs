@@ -28,7 +28,21 @@ namespace DAL.Repositories
             return context;
         }
 
-        [HttpPost]
+      //Read by GlobaGoal id
+        public List<ChildrensText> GetTextsFromGlobalGoal(int gg_id)
+        {
+            var texts = new List<ChildrensText>();
+            using (var db = GetContext())
+            {
+                texts = db.Global_Goals
+                    .Include("ChildrensTexts.Translation.TranslatedTexts.Language")
+                    .FirstOrDefault(x => x.Id == gg_id)
+                    .ChildrensTexts.ToList();
+                return texts;
+            }
+        }
+       
+        //Create
         public ChildrensText Create(ChildrensText t)
         {
             using (var db = GetContext())
@@ -39,8 +53,8 @@ namespace DAL.Repositories
                 return childrensText;
             }
         }
-
-        [HttpGet]
+       
+        //Read
         public ChildrensText Read(int id)
         {
             using (var db = GetContext())
@@ -51,8 +65,8 @@ namespace DAL.Repositories
                 return childrensText;
             }
         }
-
-        [HttpGet]
+       
+        //ReadAll
         public List<ChildrensText> ReadAll()
         {
             var childrensText = new List<ChildrensText>();
@@ -64,8 +78,8 @@ namespace DAL.Repositories
                 return childrensText;
             }
         }
-
-        [HttpPut]
+       
+        //Update
         public ChildrensText Update(ChildrensText t)
         {
             using (var db = GetContext())
@@ -82,8 +96,8 @@ namespace DAL.Repositories
                 return t;
             }
         }
-
-        [HttpDelete]
+        
+        //Delete
         public bool Delete(int id)
         {
             using (var db = GetContext())
@@ -91,11 +105,11 @@ namespace DAL.Repositories
                 var childrensText = db.ChildrensTexts.Include("Translation.TranslatedTexts.Language").FirstOrDefault(x => x.Id == id);
 
                 if (childrensText == null) return false;
-                //foreach (var item in childrensText.Translation.TranslatedTexts)
-                //{
-                //    db.Translations.Remove(item);
+                foreach (var item in childrensText.Translation.TranslatedTexts)
+                {
+                    db.Translations.Remove(item);
 
-                //}
+                }
                 db.ChildrensTexts.Remove(childrensText);
                 return true;
             }

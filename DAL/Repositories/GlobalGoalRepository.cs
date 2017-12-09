@@ -27,8 +27,8 @@ namespace DAL.Repositories
             }
             return context;
         }
-
-        [HttpPost]
+        
+        //Create
         public GlobalGoal Create(GlobalGoal t)
         {
             using (var db = GetContext())
@@ -39,8 +39,8 @@ namespace DAL.Repositories
                 return globalGoal;
             }
         }
-
-        [HttpGet]
+        
+        // Read
         public GlobalGoal Read(int id)
         {
             using (var db = GetContext())
@@ -56,7 +56,7 @@ namespace DAL.Repositories
             }
         }
 
-        [HttpGet]
+        //ReadAll
         public List<GlobalGoal> ReadAll()
         {
             var globalGoals = new List<GlobalGoal>();
@@ -73,7 +73,7 @@ namespace DAL.Repositories
             }
         }
 
-        [HttpPut]
+        //Update
         public GlobalGoal Update(GlobalGoal t)
         {
             using (var db = GetContext())
@@ -91,7 +91,7 @@ namespace DAL.Repositories
             }
         }
 
-        [HttpDelete]
+        //Delete
         public bool Delete(int id)
         {
             using (var db = GetContext())

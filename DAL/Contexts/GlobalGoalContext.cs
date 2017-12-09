@@ -26,9 +26,9 @@ namespace DAL.Contexts
         public virtual DbSet<Translation> Texts { get; set; }
         public virtual DbSet<ChildrensText> ChildrensTexts { get; set; }
         public virtual DbSet<TranslationLanguage> Translations { get; set; }
-        public virtual DbSet<Artwork> Artworks { get; set; }        
+        public virtual DbSet<Artwork> Artworks { get; set; }
         public virtual DbSet<LandArt> LandArts { get; set; }
-        public virtual DbSet<AudioVideo> AudioVideos { get; set; }           
+        public virtual DbSet<AudioVideo> AudioVideos { get; set; }
 
         //All properties are required in order to create a Global Goal       
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -44,10 +44,28 @@ namespace DAL.Contexts
             modelBuilder.Entity<GlobalGoal>().Property(x => x.Latitude).IsRequired();
             modelBuilder.Entity<GlobalGoal>().Property(x => x.ImgURL).IsRequired();
 
-            modelBuilder.Entity<GlobalGoal>().HasMany(x => x.ChildrensTexts).WithRequired().WillCascadeOnDelete(true);
-            modelBuilder.Entity<GlobalGoal>().HasMany(x => x.LandArts).WithRequired().WillCascadeOnDelete(true);
-            modelBuilder.Entity<GlobalGoal>().HasMany(x => x.Artworks).WithRequired().WillCascadeOnDelete(true);
-            modelBuilder.Entity<GlobalGoal>().HasOptional(x => x.AudioVideo).WithRequired().WillCascadeOnDelete(true);
+            //Childrens Texts
+            modelBuilder.Entity<GlobalGoal>().HasMany(x => x.ChildrensTexts)
+                .WithRequired(x => x.GlobalGoal)
+                .HasForeignKey(x => x.GlobalGoalId)
+                .WillCascadeOnDelete(true);
+
+            //Land Art
+            modelBuilder.Entity<GlobalGoal>().HasMany(x => x.LandArts)
+                .WithRequired(x => x.GlobalGoal)
+                .HasForeignKey(x => x.GlobalGoalId)
+                .WillCascadeOnDelete(true);
+
+            //Artwork
+            modelBuilder.Entity<GlobalGoal>().HasMany(x => x.Artworks)
+                .WithRequired(x => x.GlobalGoal)
+                .HasForeignKey(x => x.GlobalGoalId)
+                .WillCascadeOnDelete(true);
+
+            //Audio Video
+            modelBuilder.Entity<GlobalGoal>().HasOptional(x => x.AudioVideo)
+                .WithRequired(x => x.GlobalGoal)
+                .WillCascadeOnDelete(true);
 
             //Childrens Text
             modelBuilder.Entity<ChildrensText>().HasRequired(x => x.Translation).WithMany().WillCascadeOnDelete(true);
@@ -70,6 +88,6 @@ namespace DAL.Contexts
             modelBuilder.Entity<Translation>().HasMany(t => t.TranslatedTexts).WithRequired(tl => tl.Translation).WillCascadeOnDelete(true);
 
             base.OnModelCreating(modelBuilder);
-        }        
+        }
     }
 }

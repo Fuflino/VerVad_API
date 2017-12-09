@@ -12,6 +12,6 @@ namespace DAL.Entities
         public int Id { get; set; }
         public string ImgURL { get; set; }
         public int TranslationId { get; set; }
-        public Translation Translation { get; set; }
+        public virtual Translation Translation { get; set; }
     }
 }
