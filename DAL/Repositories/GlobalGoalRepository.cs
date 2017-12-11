@@ -96,13 +96,66 @@ namespace DAL.Repositories
         {
             using (var db = GetContext())
             {
-                var gg = db.Global_Goals.Include("Translation.TranslatedTexts.Language").FirstOrDefault(x => x.Id == id);
+                var gg = db.Global_Goals
+                .Include("Translation.TranslatedTexts.Language")
+                .Include("Artworks.Translation.TranslatedTexts.Language")
+                .Include("LandArts.Translation.TranslatedTexts.Language")
+                .Include("ChildrensTexts.Translation.TranslatedTexts.Language")
+                .Include("AudioVideo.Translation.TranslatedTexts.Language")
+                .FirstOrDefault(x => x.Id == id);
+
                 var translations = gg.Translation.TranslatedTexts.ToList();
                 if (gg == null) return false;
+
                 foreach (var item in translations)
                 {
                     db.Translations.Remove(item);
 
+                }
+
+                if (gg.LandArts != null)
+                {
+                    foreach (var item in gg.LandArts.ToList())
+                    {
+                        foreach (var item2 in item.Translation.TranslatedTexts.ToList())
+                        {
+                            db.Translations.Remove(item2);
+                        }
+                        db.LandArts.Remove(item);
+                    }
+                }
+
+                if (gg.Artworks != null)
+                {
+                    foreach (var item in gg.Artworks.ToList())
+                    {
+                        foreach (var item2 in item.Translation.TranslatedTexts.ToList())
+                        {
+                            db.Translations.Remove(item2);
+                        }
+                        db.Artworks.Remove(item);
+                    }
+                }
+
+                if (gg.ChildrensTexts != null)
+                {
+                    foreach (var item in gg.ChildrensTexts.ToList())
+                    {
+                        foreach (var item2 in item.Translation.TranslatedTexts.ToList())
+                        {
+                            db.Translations.Remove(item2);
+                        }
+                        db.ChildrensTexts.Remove(item);
+                    }
+                }
+
+                if (gg.AudioVideo != null)
+                {
+                    foreach (var item2 in gg.AudioVideo.Translation.TranslatedTexts.ToList())
+                    {
+                        db.Translations.Remove(item2);
+                    }
+                    db.AudioVideos.Remove(gg.AudioVideo);
                 }
                 db.Global_Goals.Remove(gg);
                 db.SaveChanges();
