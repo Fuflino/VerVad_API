@@ -37,7 +37,9 @@ namespace DAL.Contexts
             //Front Page
             modelBuilder.Entity<FrontPage>().ToTable("FrontPage");
             modelBuilder.Entity<FrontPage>().Property(x => x.ImgURL).IsRequired();
-            modelBuilder.Entity<FrontPage>().HasRequired(x => x.Translation).WithMany().WillCascadeOnDelete(true);
+            modelBuilder.Entity<FrontPage>().HasRequired(x => x.Translation)
+                .WithMany()
+                .WillCascadeOnDelete(true);
 
             //Global Goal            
             modelBuilder.Entity<GlobalGoal>().Property(x => x.Longitude).IsRequired();
@@ -68,7 +70,9 @@ namespace DAL.Contexts
                 .WillCascadeOnDelete(true);
 
             //Childrens Text
-            modelBuilder.Entity<ChildrensText>().HasRequired(x => x.Translation).WithMany().WillCascadeOnDelete(true);
+            modelBuilder.Entity<ChildrensText>().HasRequired(x => x.Translation)
+                .WithMany()
+                .WillCascadeOnDelete(true);
 
             //Global Goal Image
             modelBuilder.Entity<Artwork>().HasRequired(x => x.Translation).WithMany().WillCascadeOnDelete(true);

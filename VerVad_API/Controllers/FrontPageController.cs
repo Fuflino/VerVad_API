@@ -14,7 +14,7 @@ using VerVad_API.Helpers;
 using System.Web.Http.Cors;
 
 namespace VerVad_API.Controllers
-{    
+{
     public class FrontPageController : ApiController
     {
         private IFrontPageRepository<FrontPage, int> _repo = new Facade().GetFrontPageRepository();
@@ -25,11 +25,11 @@ namespace VerVad_API.Controllers
             return _repo.Read(id) != null;
         }
 
-        [HttpGet]
-        [ResponseType(typeof(FrontPage))]
+        [HttpGet] //DTO
+        [ResponseType(typeof(DTOFrontPage))]
         public IHttpActionResult GetFrontPage(int id, string language)
         {
-            var frontPage = _repo.Read(id);           
+            var frontPage = _repo.Read(id);
 
             if (!FrontPageExists(id, language))
             {
@@ -37,7 +37,7 @@ namespace VerVad_API.Controllers
             }
 
             var DTO = _helper.GetFrontPageDTO(language, frontPage);
-         
+
             return Ok(DTO);
         }
 
@@ -55,7 +55,7 @@ namespace VerVad_API.Controllers
             return Ok(frontPage);
         }
 
-        [HttpPut]
+        [HttpPost]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutFrontPage(FrontPage frontPage)
         {

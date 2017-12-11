@@ -111,6 +111,7 @@ namespace DAL.Repositories
 
                 }
                 db.ChildrensTexts.Remove(childrensText);
+                db.SaveChanges();
                 return true;
             }
         }
