@@ -28,7 +28,7 @@ namespace VerVad_API.Helpers
                 ImgUrl = gg.ImgURL,
                 Latitude = gg.Latitude,
                 Longitude = gg.Longitude,
-                IsPublished = gg.IsPublished,
+                //IsPublished = gg.IsPublished,
 
                 ChildrensArtworks = new List<DTOChildrensArtwork>(),
                 ChildrensTexts = new List<DTOChildrensText>(),
