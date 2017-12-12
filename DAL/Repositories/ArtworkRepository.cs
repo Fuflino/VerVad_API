@@ -52,6 +52,20 @@ namespace DAL.Repositories
             }
         }
 
+        //Read by GlobaGoal id
+        public List<Artwork> GetArtworksFromGlobalGoal(int gg_id)
+        {
+            var artworks = new List<Artwork>();
+            using (var db = GetContext())
+            {
+                artworks = db.Global_Goals
+                    .Include("ChildrensTexts.Translation.TranslatedTexts.Language")
+                    .FirstOrDefault(x => x.Id == gg_id)
+                    .Artworks.ToList();
+                return artworks;
+            }
+        }
+
         //ReadAll
         public List<Artwork> ReadAll()
         {
@@ -91,11 +105,11 @@ namespace DAL.Repositories
                 var artwork = db.Artworks.Include("Translation.TranslatedTexts.Language").FirstOrDefault(x => x.Id == id);
 
                 if (artwork == null) return false;
-                //foreach (var item in artwork.Translation.TranslatedTexts)
-                //{
-                //    db.Translations.Remove(item);
+                foreach (var item in artwork.Translation.TranslatedTexts)
+                {
+                    db.Translations.Remove(item);
 
-                //}
+                }
                 db.Artworks.Remove(artwork);
                 return true;
             }

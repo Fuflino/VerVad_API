@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Contexts
 {
-    public class DbInit : CreateDatabaseIfNotExists<GlobalGoalContext>
+    public class DbInit : DropCreateDatabaseAlways<GlobalGoalContext>
     {
         protected override void Seed(GlobalGoalContext context)
         {

@@ -105,7 +105,7 @@ namespace DAL.Repositories
                 var childrensText = db.ChildrensTexts.Include("Translation.TranslatedTexts.Language").FirstOrDefault(x => x.Id == id);
 
                 if (childrensText == null) return false;
-                foreach (var item in childrensText.Translation.TranslatedTexts)
+                foreach (var item in childrensText.Translation.TranslatedTexts.ToList())
                 {
                     db.Translations.Remove(item);
 
