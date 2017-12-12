@@ -28,6 +28,21 @@ namespace DAL.Repositories
             return context;
         }
 
+
+        //Read by GlobaGoal id
+        public List<LandArt> GetAllInstances(int gg_id)
+        {
+            var landArts = new List<LandArt>();
+            using (var db = GetContext())
+            {
+                landArts = db.Global_Goals
+                    .Include("LandArt.Translation.TranslatedTexts.Language")
+                    .FirstOrDefault(x => x.Id == gg_id)
+                    .LandArts.ToList();
+                return landArts;
+            }
+        }
+
         //Create
         public LandArt Create(LandArt t)
         {
