@@ -12,7 +12,6 @@ namespace DAL.Entities
         public int TranslationId { get; set; }
         public string Author { get; set; }
         public virtual Translation Translation { get; set; }
-
         public virtual GlobalGoal GlobalGoal { get; set; }
         public int GlobalGoalId { get; set; }
     }

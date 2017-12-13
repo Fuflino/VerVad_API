@@ -33,7 +33,6 @@ namespace VerVad_API.Controllers
         public IHttpActionResult GetChildrensTexts(int id)
         {
             var text = _repo.Read(id);
-
             return Ok(text);
         }
 

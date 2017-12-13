@@ -36,7 +36,7 @@ namespace DAL.Repositories
             using (var db = GetContext())
             {
                 landArts = db.Global_Goals
-                    .Include("LandArt.Translation.TranslatedTexts.Language")
+                    .Include("LandArts.Translation.TranslatedTexts.Language")
                     .FirstOrDefault(x => x.Id == gg_id)
                     .LandArts.ToList();
                 return landArts;

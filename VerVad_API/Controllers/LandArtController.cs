@@ -28,11 +28,17 @@ namespace VerVad_API.Controllers
         [ResponseType(typeof(List<LandArt>))]
         [Route("GetLandartFromGlobalGoal/{id:int}")]
         public IHttpActionResult GetLandartFromGlobalGoal(int id)
-        {
-            {
+        {            
                 var landArt = _repo.GetAllInstances(id);
-                return Ok(landArt);
-            }
+                return Ok(landArt);          
+        }       
+
+        [HttpGet]
+        [ResponseType(typeof(LandArt))]
+        public IHttpActionResult GetLandArt(int id)
+        {
+            var landArt = _repo.Read(id);          
+            return Ok(landArt);
         }
 
         [HttpGet] //DTO
@@ -51,19 +57,6 @@ namespace VerVad_API.Controllers
             return Ok(DTO);
         }
 
-        [HttpGet]
-        public IHttpActionResult GetLandArt(int id)
-        {
-            var landArt = _repo.Read(id);
-
-            if (!LandArtExists(id, "da"))
-            {
-                return NotFound();
-            }
-
-            return Ok(landArt);
-        }
-
         [HttpGet] //DTO
         [ResponseType(typeof(List<DTOLandArt>))]
         public IHttpActionResult GetLandArts(string language)
@@ -79,15 +72,7 @@ namespace VerVad_API.Controllers
 
             return Ok(DTOList);
         }
-
-        [HttpGet]
-        [ResponseType(typeof(List<LandArt>))]
-        public IHttpActionResult GetLandArts()
-        {
-            var ggs = _repo.ReadAll();
-            return Ok(ggs);
-        }
-
+     
         [HttpPost]
         [ResponseType(typeof(LandArt))]
         public IHttpActionResult PostLandart(LandArt la)

@@ -15,7 +15,6 @@ namespace DAL.Entities
         public string SongArtist { get; set; }
         public string SongTitle { get; set; }
         public virtual Translation Translation { get; set; }
-
         public virtual GlobalGoal GlobalGoal { get; set; }
         public int GlobalGoalId { get; set; }
     }
