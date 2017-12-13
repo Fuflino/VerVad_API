@@ -26,7 +26,7 @@ namespace VerVad_API.Controllers
 
         [HttpGet]
         [ResponseType(typeof(List<LandArt>))]
-        [Route("GetLandartsFromGlobalGoal/{id:int}")]
+        [Route("GetLandartFromGlobalGoal/{id:int}")]
         public IHttpActionResult GetLandartFromGlobalGoal(int id)
         {
             {
