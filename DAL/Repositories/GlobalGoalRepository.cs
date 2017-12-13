@@ -10,7 +10,7 @@ using System.Web.Http;
 
 namespace DAL.Repositories
 {
-    public class GlobalGoalRepository : IRepository<GlobalGoal, int>
+    public class GlobalGoalRepository : IGGAndAVRepository<GlobalGoal, int>
     {
         private GlobalGoalContext context;
 

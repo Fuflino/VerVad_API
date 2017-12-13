@@ -10,7 +10,7 @@ using System.Web.Http;
 
 namespace DAL.Repositories
 {
-    public class AudioVideoRepository : IRepository<AudioVideo, int>
+    public class AudioVideoRepository : IGGAndAVRepository<AudioVideo, int>
     {
         private GlobalGoalContext context;
 
@@ -91,11 +91,11 @@ namespace DAL.Repositories
                 var audioVideo = db.AudioVideos.Include("Translation.TranslatedTexts.Language").FirstOrDefault(x => x.Id == id);
 
                 if (audioVideo == null) return false;
-                //foreach (var item in AudioVideo.Translation.TranslatedTexts)
-                //{
-                //    db.Translations.Remove(item);
+                foreach (var item in audioVideo.Translation.TranslatedTexts)
+                {
+                    db.Translations.Remove(item);
 
-                //}
+                }
                 db.AudioVideos.Remove(audioVideo);
                 return true;
             }

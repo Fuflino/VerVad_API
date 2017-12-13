@@ -13,6 +13,7 @@ using VerVad_API.Models;
 
 namespace VerVad_API.Controllers
 {
+    [RoutePrefix("api/Landart")]
     public class LandArtController : ApiController
     {
         private GlobalGoalChildrensHelper _helper = new GlobalGoalChildrensHelper();
@@ -21,6 +22,16 @@ namespace VerVad_API.Controllers
         private bool LandArtExists(int id, string language)
         {
             return _repo.Read(id) != null;
+        }
+
+        [HttpGet]
+        [ResponseType(typeof(List<DTOLandArt>))]
+        [Route("GetLandartsFromGlobalGoal/{id:int}")]
+        public IHttpActionResult GetLandartFromGlobalGoal(int id, string language)
+        {
+            var Landarts = _repo.GetAllInstances(id);
+            var dtoList = Landarts.Select(item => _helper.GetLandArtDTO(language, item)).ToList();
+            return Ok(dtoList);
         }
 
         [HttpGet] //DTO

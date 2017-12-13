@@ -4,8 +4,11 @@ using DAL.Interfaces;
 using DAL.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Description;
+using VerVad_API.Helpers;
+using VerVad_API.Models;
 
 namespace VerVad_API.Controllers
 {
@@ -13,15 +16,17 @@ namespace VerVad_API.Controllers
 
     public class ChildrensTextController : ApiController
     {
-        private ChildrensTextRepository _repo = (ChildrensTextRepository)new Facade().GetChildrensTextRepository();
+        private GlobalGoalChildrensHelper _helper = new GlobalGoalChildrensHelper();
+        private IRepository<ChildrensText, int> _repo = new Facade().GetChildrensTextRepository();
 
         [HttpGet]
         [ResponseType(typeof(List<ChildrensText>))]
         [Route("GetTextsFromGlobalGoal/{id:int}")]
-        public IHttpActionResult GetTextsFromGlobalGoal(int id)
+        public IHttpActionResult GetTextsFromGlobalGoal(int id, string language)
         {
-            var texts = _repo.GetTextsFromGlobalGoal(id);
-            return Ok(texts);
+            var texts = _repo.GetAllInstances(id);
+            var dtoList = texts.Select(item => _helper.GetChildrensTextDTO(language, item)).ToList();
+            return Ok(dtoList);
         }
 
         [HttpGet]
@@ -37,7 +42,7 @@ namespace VerVad_API.Controllers
         public IHttpActionResult PostChildrensText(ChildrensText ct)
         {
             var text = _repo.Create(ct);
-            return Ok(ct);
+            return Ok(text);
         }
 
         [HttpPut]

@@ -79,6 +79,7 @@
     <Compile Include="Entities\TranslationLanguage.cs" />
     <Compile Include="Facade\Facade.cs" />
     <Compile Include="Interfaces\IFrontPageRepository.cs" />
+    <Compile Include="Interfaces\IGGAndAVRepository.cs" />
     <Compile Include="Interfaces\ILanguageRepository.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Migrations\Configuration.cs" />

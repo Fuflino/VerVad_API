@@ -28,6 +28,20 @@ namespace DAL.Repositories
             return context;
         }
 
+        //Read by GlobaGoal id
+        public List<Artwork> GetAllInstances(int gg_id)
+        {
+            var artworks = new List<Artwork>();
+            using (var db = GetContext())
+            {
+                artworks = db.Global_Goals
+                    .Include("Artworks.Translation.TranslatedTexts.Language")
+                    .FirstOrDefault(x => x.Id == gg_id)
+                    .Artworks.ToList();
+                return artworks;
+            }
+        }
+
         //Create
         public Artwork Create(Artwork t)
         {
@@ -49,20 +63,6 @@ namespace DAL.Repositories
                 .Include("Translation.TranslatedTexts.Language")
                 .FirstOrDefault(x => x.Id == id);
                 return Artworks;
-            }
-        }
-
-        //Read by GlobaGoal id
-        public List<Artwork> GetArtworksFromGlobalGoal(int gg_id)
-        {
-            var artworks = new List<Artwork>();
-            using (var db = GetContext())
-            {
-                artworks = db.Global_Goals
-                    .Include("ChildrensTexts.Translation.TranslatedTexts.Language")
-                    .FirstOrDefault(x => x.Id == gg_id)
-                    .Artworks.ToList();
-                return artworks;
             }
         }
 

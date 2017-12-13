@@ -27,7 +27,7 @@ namespace VerVad_API.Helpers
             return DTO;
         }
 
-        public DTOChildrensArtwork GetArtworktDTO(string language, Artwork aw)
+        public DTOChildrensArtwork GetArtworkDTO(string language, Artwork aw)
         {
             var texts = aw.Translation.TranslatedTexts.Where(x => x.LanguageISO == language);
 

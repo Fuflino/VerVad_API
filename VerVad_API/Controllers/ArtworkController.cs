@@ -7,21 +7,27 @@ using System.Linq;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
+using DAL.Interfaces;
+using VerVad_API.Helpers;
+using VerVad_API.Models;
 
 namespace VerVad_API.Controllers
 {
+    [RoutePrefix("api/ChildrensText")]
     public class ArtworkController : ApiController
     {
         // GET: Artwork
-        private ArtworkRepository _repo = (ArtworkRepository)new Facade().GetArtworkRepository();
+        private GlobalGoalChildrensHelper _helper = new GlobalGoalChildrensHelper();
+        private IRepository<Artwork, int> _repo = new Facade().GetArtworkRepository();
 
         [HttpGet]
-        [ResponseType(typeof(List<Artwork>))]
-        [Route("GetTextsFromGlobalGoal/{id:int}")]
-        public IHttpActionResult GetTextsFromGlobalGoal(int id)
+        [ResponseType(typeof(List<DTOChildrensArtwork>))]
+        [Route("GetArtworksFromGlobalGoal/{id:int}")]
+        public IHttpActionResult GetArtworksFromGlobalGoal(int id, string language)
         {
-            var artworks = _repo.GetArtworksFromGlobalGoal(id);
-            return Ok(artworks);
+            var artworks = _repo.GetAllInstances(id);
+            var dtoList = artworks.Select(item => _helper.GetArtworkDTO(language, item)).ToList();
+            return Ok(dtoList);
         }
 
         [HttpGet]

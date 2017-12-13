@@ -11,6 +11,7 @@ namespace DAL.Interfaces
         T Create(T t);
         T Read(I id);
         List<T> ReadAll();
+        List<T> GetAllInstances(I gg_id);
         T Update(T t);
         bool Delete(I id);
     }

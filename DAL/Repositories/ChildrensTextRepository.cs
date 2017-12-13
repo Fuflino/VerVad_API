@@ -29,7 +29,7 @@ namespace DAL.Repositories
         }
 
       //Read by GlobaGoal id
-        public List<ChildrensText> GetTextsFromGlobalGoal(int gg_id)
+        public List<ChildrensText> GetAllInstances(int gg_id)
         {
             var texts = new List<ChildrensText>();
             using (var db = GetContext())
