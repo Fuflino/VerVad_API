@@ -25,13 +25,14 @@ namespace VerVad_API.Controllers
         }
 
         [HttpGet]
-        [ResponseType(typeof(List<DTOLandArt>))]
+        [ResponseType(typeof(List<LandArt>))]
         [Route("GetLandartsFromGlobalGoal/{id:int}")]
-        public IHttpActionResult GetLandartFromGlobalGoal(int id, string language)
+        public IHttpActionResult GetLandartFromGlobalGoal(int id)
         {
-            var Landarts = _repo.GetAllInstances(id);
-            var dtoList = Landarts.Select(item => _helper.GetLandArtDTO(language, item)).ToList();
-            return Ok(dtoList);
+            {
+                var landArt = _repo.GetAllInstances(id);
+                return Ok(landArt);
+            }
         }
 
         [HttpGet] //DTO

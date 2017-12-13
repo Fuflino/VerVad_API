@@ -13,21 +13,19 @@ using VerVad_API.Models;
 
 namespace VerVad_API.Controllers
 {
-    [RoutePrefix("api/ChildrensText")]
+    [RoutePrefix("api/Artwork")]
     public class ArtworkController : ApiController
-    {
-        // GET: Artwork
+    {        
         private GlobalGoalChildrensHelper _helper = new GlobalGoalChildrensHelper();
         private IRepository<Artwork, int> _repo = new Facade().GetArtworkRepository();
 
         [HttpGet]
-        [ResponseType(typeof(List<DTOChildrensArtwork>))]
+        [ResponseType(typeof(List<Artwork>))]
         [Route("GetArtworksFromGlobalGoal/{id:int}")]
-        public IHttpActionResult GetArtworksFromGlobalGoal(int id, string language)
+        public IHttpActionResult GetArtworksFromGlobalGoal(int id)
         {
-            var artworks = _repo.GetAllInstances(id);
-            var dtoList = artworks.Select(item => _helper.GetArtworkDTO(language, item)).ToList();
-            return Ok(dtoList);
+            var aw = _repo.GetAllInstances(id);
+            return Ok(aw);
         }
 
         [HttpGet]

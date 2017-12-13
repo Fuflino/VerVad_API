@@ -22,11 +22,10 @@ namespace VerVad_API.Controllers
         [HttpGet]
         [ResponseType(typeof(List<ChildrensText>))]
         [Route("GetTextsFromGlobalGoal/{id:int}")]
-        public IHttpActionResult GetTextsFromGlobalGoal(int id, string language)
+        public IHttpActionResult GetTextsFromGlobalGoal(int id)
         {
             var texts = _repo.GetAllInstances(id);
-            var dtoList = texts.Select(item => _helper.GetChildrensTextDTO(language, item)).ToList();
-            return Ok(dtoList);
+            return Ok(texts);
         }
 
         [HttpGet]
