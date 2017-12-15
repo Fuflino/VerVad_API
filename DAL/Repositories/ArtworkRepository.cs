@@ -105,7 +105,7 @@ namespace DAL.Repositories
                 var artwork = db.Artworks.Include("Translation.TranslatedTexts.Language").FirstOrDefault(x => x.Id == id);
 
                 if (artwork == null) return false;
-                foreach (var item in artwork.Translation.TranslatedTexts)
+                foreach (var item in artwork.Translation.TranslatedTexts.ToList())
                 {
                     db.Translations.Remove(item);
 

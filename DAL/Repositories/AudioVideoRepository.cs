@@ -91,7 +91,7 @@ namespace DAL.Repositories
                 var audioVideo = db.AudioVideos.Include("Translation.TranslatedTexts.Language").FirstOrDefault(x => x.Id == id);
 
                 if (audioVideo == null) return false;
-                foreach (var item in audioVideo.Translation.TranslatedTexts)
+                foreach (var item in audioVideo.Translation.TranslatedTexts.ToList())
                 {
                     db.Translations.Remove(item);
 
@@ -101,6 +101,5 @@ namespace DAL.Repositories
                 return true;
             }
         }
-
     }
 }

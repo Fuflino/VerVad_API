@@ -10,13 +10,16 @@ using DAL.Facade;
 using DAL.Interfaces;
 using VerVad_API.Helpers;
 using VerVad_API.Models;
+using DAL.Repositories;
 
 namespace VerVad_API.Controllers
 {
+    [RoutePrefix("api/AudioVideo")]
+
     public class AudioVideoController : ApiController
     {
         private GlobalGoalChildrensHelper _helper = new GlobalGoalChildrensHelper();
-        private IGGAndAVRepository<AudioVideo, int> _repo = new Facade().GetAudioVideoRepository();
+        private AudioVideoRepository _repo = (AudioVideoRepository)new Facade().GetAudioVideoRepository();
 
         private bool AudioVideoExists(int id, string language)
         {
