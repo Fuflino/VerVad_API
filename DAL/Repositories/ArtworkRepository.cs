@@ -111,6 +111,7 @@ namespace DAL.Repositories
 
                 }
                 db.Artworks.Remove(artwork);
+                db.SaveChanges();
                 return true;
             }
         }

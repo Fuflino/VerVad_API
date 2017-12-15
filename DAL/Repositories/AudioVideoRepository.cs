@@ -97,6 +97,7 @@ namespace DAL.Repositories
 
                 }
                 db.AudioVideos.Remove(audioVideo);
+                db.SaveChanges();
                 return true;
             }
         }
