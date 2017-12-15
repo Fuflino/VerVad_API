@@ -106,12 +106,13 @@ namespace DAL.Repositories
                 var landArt = db.LandArts.Include("Translation.TranslatedTexts.Language").FirstOrDefault(x => x.Id == id);
 
                 if (landArt == null) return false;
-                foreach (var item in landArt.Translation.TranslatedTexts)
+                foreach (var item in landArt.Translation.TranslatedTexts.ToList())
                 {
                     db.Translations.Remove(item);
 
                 }
                 db.LandArts.Remove(landArt);
+                db.SaveChanges();
                 return true;
             }
         }
