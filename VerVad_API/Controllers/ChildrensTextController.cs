@@ -19,18 +19,13 @@ namespace VerVad_API.Controllers
         private GlobalGoalChildrensHelper _helper = new GlobalGoalChildrensHelper();
         private IRepository<ChildrensText, int> _repo = new Facade().GetChildrensTextRepository();
 
-        private bool ChildrensTextExists(int id, string language)
-        {
-            return _repo.Read(id) != null;
-        }
-
         [HttpGet] //DTO
         [ResponseType(typeof(DTOChildrensText))]
         public IHttpActionResult GetChildrensText(int id, string language) 
         {
             var ct = _repo.Read(id);
 
-            if (!ChildrensTextExists(id, language))
+            if (ct == null)
             {
                 return NotFound();
             }
@@ -45,6 +40,10 @@ namespace VerVad_API.Controllers
         public IHttpActionResult GetChildrensText(string language) 
         {
             var ct = _repo.ReadAll();
+            if (ct == null)
+            {
+                return NotFound();
+            }
             var DTOList = new List<DTOChildrensText>();
 
             foreach (var item in ct)
@@ -63,6 +62,10 @@ namespace VerVad_API.Controllers
         public IHttpActionResult GetTextsFromGlobalGoal(int id)
         {
             var texts = _repo.GetAllInstances(id);
+            if (texts == null)
+            {
+                return NotFound();
+            }
             return Ok(texts);
         }
 
@@ -72,6 +75,10 @@ namespace VerVad_API.Controllers
         public IHttpActionResult GetChildrensTexts(int id)
         {
             var text = _repo.Read(id);
+            if (text == null)
+            {
+                return NotFound();
+            }
             return Ok(text);
         }
 
@@ -79,6 +86,10 @@ namespace VerVad_API.Controllers
         [Authorize(Roles = "Admin")]
         public IHttpActionResult PostChildrensText(ChildrensText ct)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var text = _repo.Create(ct);
             return Ok(text);
         }
@@ -87,7 +98,17 @@ namespace VerVad_API.Controllers
         [Authorize(Roles = "Admin")]
         public IHttpActionResult PutChildrensText(ChildrensText ct)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var toUpdate = _repo.Update(ct);
+            if (toUpdate == null)
+            {
+                return NotFound();
+            }
+
             return Ok(toUpdate);
         }
 
@@ -95,7 +116,11 @@ namespace VerVad_API.Controllers
         [Authorize(Roles = "Admin")]
         public IHttpActionResult DeleteChildrensText(int id)
         {
-            _repo.Delete(id);
+            var text = _repo.Delete(id);
+            if (text == false)
+            {
+                return NotFound();
+            }
             return Ok();
         }
 

@@ -19,18 +19,13 @@ namespace VerVad_API.Controllers
         private GlobalGoalChildrensHelper _helper = new GlobalGoalChildrensHelper();
         private IRepository<Artwork, int> _repo = new Facade().GetArtworkRepository();
 
-        private bool ArtworkExists(int id, string language)
-        {
-            return _repo.Read(id) != null;
-        }
-
         [HttpGet] //DTO
         [ResponseType(typeof(DTOChildrensArtwork))]
         public IHttpActionResult GetArtwork(int id, string language)
         {
             var aw = _repo.Read(id);
 
-            if (!ArtworkExists(id, language))
+            if (aw == null)
             {
                 return NotFound();
             }
@@ -62,6 +57,10 @@ namespace VerVad_API.Controllers
         public IHttpActionResult GetArtworksFromGlobalGoal(int id)
         {
             var aw = _repo.GetAllInstances(id);
+            if (aw == null)
+            {
+                return NotFound();
+            }
             return Ok(aw);
         }
 
@@ -69,23 +68,37 @@ namespace VerVad_API.Controllers
         [ResponseType(typeof(Artwork))]
         public IHttpActionResult GetArtworks(int id)
         {
-            var text = _repo.Read(id);
-
-            return Ok(text);
+            var aw = _repo.Read(id);
+            if (aw == null)
+            {
+                return NotFound();
+            }
+            return Ok(aw);
         }
 
         [HttpPost]
         [Authorize(Roles ="Admin")]
         public IHttpActionResult PostArtwork(Artwork aw)
         {
-            var text = _repo.Create(aw);
-            return Ok(aw);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var artwork = _repo.Create(aw);
+
+            return Ok(artwork);
         }
 
         [HttpPut]
         [Authorize(Roles = "Admin")]
         public IHttpActionResult PutArtwork(Artwork aw)
         {
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var toUpdate = _repo.Update(aw);
             return Ok(toUpdate);
         }
@@ -93,7 +106,11 @@ namespace VerVad_API.Controllers
         [HttpDelete]
         public IHttpActionResult DeleteArtwork(int id)
         {
-            _repo.Delete(id);
+            var aw = _repo.Delete(id);
+            if (aw == false)
+            {
+                return NotFound();
+            }
             return Ok();
         }
     }

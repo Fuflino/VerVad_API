@@ -61,23 +61,35 @@ namespace VerVad_API.Controllers
         [ResponseType(typeof(List<LandArt>))]
         [Route("GetLandartFromGlobalGoal/{id:int}")]
         public IHttpActionResult GetLandartFromGlobalGoal(int id)
-        {            
-                var landArt = _repo.GetAllInstances(id);
-                return Ok(landArt);          
-        }       
+        {
+            var landArt = _repo.GetAllInstances(id);
+            if (landArt == null)
+            {
+                return NotFound();
+            }
+            return Ok(landArt);
+        }
 
         [HttpGet]
         [ResponseType(typeof(LandArt))]
         public IHttpActionResult GetLandArt(int id)
         {
-            var landArt = _repo.Read(id);          
+            var landArt = _repo.Read(id);
+            if (landArt == null)
+            {
+                return NotFound();
+            }
             return Ok(landArt);
-        }   
-     
+        }
+
         [HttpPost]
         [ResponseType(typeof(LandArt))]
         public IHttpActionResult PostLandart(LandArt la)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var landArt = _repo.Create(la);
             return Ok(landArt);
         }
@@ -85,7 +97,15 @@ namespace VerVad_API.Controllers
         [HttpPut]
         public IHttpActionResult PutLandArt(LandArt la)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var landArt = _repo.Update(la);
+            if (landArt == null)
+            {
+                return NotFound();
+            }
             return Ok(landArt);
         }
 
@@ -93,7 +113,11 @@ namespace VerVad_API.Controllers
         public IHttpActionResult DeleteLandArt(int id)
         {
 
-            _repo.Delete(id);
+            var la =_repo.Delete(id);
+            if (la == false)
+            {
+                return NotFound();
+            }
             return Ok();
         }
     }

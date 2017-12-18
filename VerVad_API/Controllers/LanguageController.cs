@@ -21,6 +21,10 @@ namespace VerVad_API.Controllers
         public IHttpActionResult GetLanguages()
         {
             var language = _repo.ReadAll();
+            if (language == null)
+            {
+                return NotFound();
+            }
             return Ok(language);
         }
     }
