@@ -1,4 +1,6 @@
 ﻿using DAL.Entities;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -8,10 +10,24 @@ using System.Threading.Tasks;
 
 namespace DAL.Contexts
 {
-    public class DbInit : DropCreateDatabaseAlways<GlobalGoalContext>
+    public class DbInit : CreateDatabaseIfNotExists<GlobalGoalContext>
     {
         protected override void Seed(GlobalGoalContext context)
         {
+            var userStore = new UserStore<ApplicationUser>(context);
+            var userManager = new ApplicationUserManager(userStore);
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+
+            roleManager.Create(new IdentityRole("Admin"));
+
+            var admin1 = new ApplicationUser
+            {
+                UserName = "VervadAdmin",
+                Email = "Admin@VerVad.dk"
+            };
+            userManager.Create(admin1, "Admin1234!");
+            userManager.AddToRole(admin1.Id, "Admin");
+
             //Language
             var LanguageDA = new Language()
             {

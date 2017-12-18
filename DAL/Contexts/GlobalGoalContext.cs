@@ -1,23 +1,34 @@
 ﻿using DAL.Entities;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure.Annotations;
 using System.Data.Entity.ModelConfiguration.Conventions;
-using System.Linq;
-using System.Text;
+using System.Security.Claims;
 using System.Threading.Tasks;
-
 
 namespace DAL.Contexts
 {
-    public class GlobalGoalContext : DbContext
+    public class ApplicationUser : IdentityUser
     {
-        public GlobalGoalContext() : base("DefaultConnection")
+        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager, string authenticationType)
+        {
+            // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
+            var userIdentity = await manager.CreateIdentityAsync(this, authenticationType);
+            // Add custom user claims here
+            return userIdentity;
+        }
+    }
+    public class GlobalGoalContext : IdentityDbContext<ApplicationUser>
+    {
+        public GlobalGoalContext() : base("DefaultConnection", false)
         {
             Configuration.ProxyCreationEnabled = false;
             Database.SetInitializer(new DbInit());
+        }
+
+        public static GlobalGoalContext Create()
+        {
+            return new GlobalGoalContext();
         }
 
         public virtual DbSet<GlobalGoal> Global_Goals { get; set; }

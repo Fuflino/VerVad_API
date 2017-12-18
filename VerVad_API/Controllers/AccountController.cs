@@ -16,6 +16,7 @@ using Microsoft.Owin.Security.OAuth;
 using VerVad_API.Models;
 using VerVad_API.Providers;
 using VerVad_API.Results;
+using DAL.Contexts;
 
 namespace VerVad_API.Controllers
 {

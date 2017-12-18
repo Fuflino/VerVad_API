@@ -43,6 +43,7 @@ namespace VerVad_API.Controllers
 
         [HttpGet]
         [ResponseType(typeof(FrontPage))]
+        [Authorize(Roles = "Admin")]
         public IHttpActionResult GetFrontPage(int id)
         {
             var frontPage = _repo.Read(id);
@@ -57,6 +58,7 @@ namespace VerVad_API.Controllers
 
         [HttpPost]
         [ResponseType(typeof(void))]
+        [Authorize(Roles = "Admin")]
         public IHttpActionResult PutFrontPage(FrontPage frontPage)
         {
             if (!ModelState.IsValid)

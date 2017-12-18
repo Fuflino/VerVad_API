@@ -22,6 +22,7 @@ namespace VerVad_API.Controllers
         [HttpGet]
         [ResponseType(typeof(List<ChildrensText>))]
         [Route("GetTextsFromGlobalGoal/{id:int}")]
+        [Authorize(Roles = "Admin")]
         public IHttpActionResult GetTextsFromGlobalGoal(int id)
         {
             var texts = _repo.GetAllInstances(id);
@@ -30,6 +31,7 @@ namespace VerVad_API.Controllers
 
         [HttpGet]
         [ResponseType(typeof(ChildrensText))]
+        [Authorize(Roles = "Admin")]
         public IHttpActionResult GetChildrensTexts(int id)
         {
             var text = _repo.Read(id);
@@ -37,6 +39,7 @@ namespace VerVad_API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IHttpActionResult PostChildrensText(ChildrensText ct)
         {
             var text = _repo.Create(ct);
@@ -44,6 +47,7 @@ namespace VerVad_API.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = "Admin")]
         public IHttpActionResult PutChildrensText(ChildrensText ct)
         {
             var toUpdate = _repo.Update(ct);
@@ -51,6 +55,7 @@ namespace VerVad_API.Controllers
         }
 
         [HttpDelete]
+        [Authorize(Roles = "Admin")]
         public IHttpActionResult DeleteChildrensText(int id)
         {
             _repo.Delete(id);

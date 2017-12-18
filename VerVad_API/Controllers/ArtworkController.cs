@@ -38,6 +38,7 @@ namespace VerVad_API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles ="Admin")]
         public IHttpActionResult PostArtwork(Artwork aw)
         {
             var text = _repo.Create(aw);
@@ -45,6 +46,7 @@ namespace VerVad_API.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = "Admin")]
         public IHttpActionResult PutArtwork(Artwork aw)
         {
             var toUpdate = _repo.Update(aw);

@@ -10,6 +10,7 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using VerVad_API.Models;
+using DAL.Contexts;
 
 namespace VerVad_API.Providers
 {
@@ -31,7 +32,7 @@ namespace VerVad_API.Providers
         {
             var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
 
-            ApplicationUser user = await userManager.FindAsync(context.UserName, context.Password);
+            ApplicationUser user = await userManager.FindAsync("VervadAdmin", context.Password);
 
             if (user == null)
             {

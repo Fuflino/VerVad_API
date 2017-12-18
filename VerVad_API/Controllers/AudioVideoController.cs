@@ -81,6 +81,7 @@ namespace VerVad_API.Controllers
 
         [HttpPost]
         [ResponseType(typeof(AudioVideo))]
+        [Authorize(Roles = "Admin")]
         public IHttpActionResult PostAudioVideo(AudioVideo la)
         {
             var audioVideo = _repo.Create(la);
@@ -88,6 +89,7 @@ namespace VerVad_API.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = "Admin")]
         public IHttpActionResult PutAudioVideo(AudioVideo la)
         {
             var audioVideo = _repo.Update(la);
@@ -95,6 +97,7 @@ namespace VerVad_API.Controllers
         }
 
         [HttpDelete]
+        [Authorize(Roles = "Admin")]
         public IHttpActionResult DeleteAudioVideo(int id)
         {
 
