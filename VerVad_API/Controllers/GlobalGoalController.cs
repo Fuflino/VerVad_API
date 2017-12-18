@@ -59,6 +59,7 @@ namespace VerVad_API.Controllers
 
         [HttpGet]
         [ResponseType(typeof(GlobalGoal))]
+        [Authorize(Roles ="Admin")]
         public IHttpActionResult GetGlobalGoal(int id)
         {
             var globalGoal = _repo.Read(id);
@@ -73,33 +74,61 @@ namespace VerVad_API.Controllers
 
         [HttpGet]
         [ResponseType(typeof(List<GlobalGoal>))]
+        [Authorize(Roles = "Admin")]
         public IHttpActionResult GetGlobalGoals()
         {
             var ggs = _repo.ReadAll();
+            if(ggs == null)
+            {
+                return NotFound();
+            }
             return Ok(ggs);
         }
 
         [HttpPost]
         [ResponseType(typeof(GlobalGoal))]
+        [Authorize(Roles = "Admin")]
         public IHttpActionResult PostGlobalGoal(GlobalGoal gg)
         {
             var globalGoal = _repo.Create(gg);
+            if (globalGoal == null)
+            {
+                return NotFound();
+            }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             return Ok(globalGoal);
         }
 
         [HttpPut]
         [ResponseType(typeof(GlobalGoal))]
+        [Authorize(Roles = "Admin")]
         public IHttpActionResult PutGlobalGoal(GlobalGoal gg)
         {
             var globalGoal = _repo.Update(gg);
+            if (globalGoal == null)
+            {
+                return NotFound();
+            }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             return Ok(globalGoal);
         }
 
         [HttpDelete]
         [ResponseType(typeof(GlobalGoal))]
+        [Authorize(Roles = "Admin")]
         public IHttpActionResult DeleteGlobalGoal(int id)
         {
-            _repo.Delete(id);
+            var gg =_repo.Delete(id);
+            if (gg == false)
+            {
+                return NotFound();
+            }
             return Ok();
         }
 
