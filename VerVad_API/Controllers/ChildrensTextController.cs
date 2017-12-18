@@ -19,6 +19,43 @@ namespace VerVad_API.Controllers
         private GlobalGoalChildrensHelper _helper = new GlobalGoalChildrensHelper();
         private IRepository<ChildrensText, int> _repo = new Facade().GetChildrensTextRepository();
 
+        private bool ChildrensTextExists(int id, string language)
+        {
+            return _repo.Read(id) != null;
+        }
+
+        [HttpGet] //DTO
+        [ResponseType(typeof(DTOChildrensText))]
+        public IHttpActionResult GetChildrensText(int id, string language) 
+        {
+            var ct = _repo.Read(id);
+
+            if (!ChildrensTextExists(id, language))
+            {
+                return NotFound();
+            }
+
+            var DTO = _helper.GetChildrensTextDTO(language, ct);
+
+            return Ok(DTO);
+        }
+
+        [HttpGet] //DTO
+        [ResponseType(typeof(List<DTOChildrensText>))]
+        public IHttpActionResult GetChildrensText(string language) 
+        {
+            var ct = _repo.ReadAll();
+            var DTOList = new List<DTOChildrensText>();
+
+            foreach (var item in ct)
+            {
+                var DTO = _helper.GetChildrensTextDTO(language, item);
+                DTOList.Add(DTO);
+            }
+
+            return Ok(DTOList);
+        }
+
         [HttpGet]
         [ResponseType(typeof(List<ChildrensText>))]
         [Route("GetTextsFromGlobalGoal/{id:int}")]

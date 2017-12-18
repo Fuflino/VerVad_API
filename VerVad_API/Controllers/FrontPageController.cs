@@ -15,6 +15,8 @@ using System.Web.Http.Cors;
 
 namespace VerVad_API.Controllers
 {
+    [RoutePrefix("api/FrontPage")]
+
     public class FrontPageController : ApiController
     {
         private IFrontPageRepository<FrontPage, int> _repo = new Facade().GetFrontPageRepository();

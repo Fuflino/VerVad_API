@@ -17,7 +17,6 @@ namespace VerVad_API.Models
         public List<DTOChildrensText> ChildrensTexts { get; set; }
         public List<DTOChildrensArtwork> ChildrensArtworks { get; set; }
         public List<DTOLandArt> LandArt { get; set; }
-        public DTOAudioVideo AudioVideo { get; set; }
-        //public bool IsPublished { get; set; }
+        public DTOAudioVideo AudioVideo { get; set; }        
     }
 }
