@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
+using System.Data.Entity;
 
 namespace VerVad_API.Models
 {
@@ -23,11 +24,35 @@ namespace VerVad_API.Models
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
+            Database.SetInitializer<ApplicationDbContext>(new ApplicationDBinitializer());
+            Database.Initialize(true);
         }
         
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
+        }
+    }
+
+    public class ApplicationDBinitializer: DropCreateDatabaseAlways<ApplicationDbContext>
+    {
+        protected override void Seed(ApplicationDbContext context)
+        {
+            base.Seed(context);
+
+            var userStore = new UserStore<ApplicationUser>(context);
+            var userManager = new ApplicationUserManager(userStore);
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+
+            roleManager.Create(new IdentityRole("Admin"));
+
+            var admin1 = new ApplicationUser
+            {
+                UserName = "VervadAdmin",
+                Email = "Admin@VerVad.dk"
+            };
+            userManager.Create(admin1, "Admin1234!");
+            userManager.AddToRole(admin1.Id, "Admin");
         }
     }
 }
