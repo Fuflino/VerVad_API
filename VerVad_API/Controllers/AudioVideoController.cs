@@ -42,19 +42,6 @@ namespace VerVad_API.Controllers
             return Ok(DTO);
         }
 
-        [HttpGet]
-        public IHttpActionResult GetAudioVideo(int id)
-        {
-            var audioVideo = _repo.Read(id);
-
-            if (!AudioVideoExists(id, "da"))
-            {
-                return NotFound();
-            }
-
-            return Ok(audioVideo);
-        }
-
         [HttpGet] //DTO
         [ResponseType(typeof(List<DTOAudioVideo>))]
         public IHttpActionResult GetAudioVideos(string language)
@@ -69,6 +56,19 @@ namespace VerVad_API.Controllers
             }
 
             return Ok(DTOList);
+        }
+
+        [HttpGet]
+        public IHttpActionResult GetAudioVideo(int id)
+        {
+            var audioVideo = _repo.Read(id);
+
+            if (!AudioVideoExists(id, "da"))
+            {
+                return NotFound();
+            }
+
+            return Ok(audioVideo);
         }
 
         [HttpGet]

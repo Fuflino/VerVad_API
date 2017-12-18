@@ -13,6 +13,8 @@ using VerVad_API.Models;
 
 namespace VerVad_API.Controllers
 {
+    [RoutePrefix("api/GlobalGoal")]
+
     public class GlobalGoalController : ApiController
     {
         private IGGAndAVRepository<GlobalGoal, int> _repo = new Facade().GetGlobalGoalRepository();
