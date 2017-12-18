@@ -45,7 +45,7 @@ namespace VerVad_API.Controllers
         [ResponseType(typeof(List<DTOGlobalGoal>))]
         public IHttpActionResult GetGlobalGoals(string language)
         {
-            var globalGoals = _repo.ReadAll();
+            var globalGoals = _repo.ReadAll().Where(x => x.IsPublished == true);            
             var DTOList = new List<DTOGlobalGoal>();
 
             foreach (var item in globalGoals)

@@ -27,29 +27,30 @@ namespace VerVad_API.Helpers
                 Id = gg.Id,
                 ImgUrl = gg.ImgURL,
                 Latitude = gg.Latitude,
-                Longitude = gg.Longitude,
-                //IsPublished = gg.IsPublished,
+                Longitude = gg.Longitude,                
 
                 ChildrensArtworks = new List<DTOChildrensArtwork>(),
                 ChildrensTexts = new List<DTOChildrensText>(),
-                LandArt = new List<DTOLandArt>(),
-                AudioVideo = new DTOAudioVideo()
+                LandArt = new List<DTOLandArt>()
+              
+            };
+            if (gg.AudioVideo != null)
+            {
+                DTO.AudioVideo = new DTOAudioVideo()
                 {
                     Id = gg.AudioVideo.Id,
                     SongArtist = gg.AudioVideo.SongArtist,
                     SongTitle = gg.AudioVideo.SongTitle,
                     MusicUrl = gg.AudioVideo.AudioURL,
                     VideoUrl = gg.AudioVideo.VideoURL
+                };
+                foreach (var item2 in gg.AudioVideo.Translation.TranslatedTexts.Where(x => x.LanguageISO == language))
+                {
+                    DTO.AudioVideo.Title = item2.Title;
+                    DTO.AudioVideo.Description = item2.Description;
                 }
-            };
-
-            foreach (var item2 in gg.AudioVideo.Translation.TranslatedTexts.Where(x => x.LanguageISO == language))
-            {
-                DTO.AudioVideo.Title = item2.Title;
-                DTO.AudioVideo.Description = item2.Description;
             }
-
-
+           
             foreach (var item in gg.ChildrensTexts)
             {
                 var text = new DTOChildrensText();
