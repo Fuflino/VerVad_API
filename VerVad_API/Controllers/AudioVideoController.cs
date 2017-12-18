@@ -21,18 +21,13 @@ namespace VerVad_API.Controllers
         private GlobalGoalChildrensHelper _helper = new GlobalGoalChildrensHelper();
         private AudioVideoRepository _repo = (AudioVideoRepository)new Facade().GetAudioVideoRepository();
 
-        private bool AudioVideoExists(int id, string language)
-        {
-            return _repo.Read(id) != null;
-        }
-
         [HttpGet] //DTO
         [ResponseType(typeof(DTOAudioVideo))]
         public IHttpActionResult GetAudioVideo(int id, string language)
         {
             var audioVideo = _repo.Read(id);
 
-            if (!AudioVideoExists(id, language))
+            if (audioVideo == null)
             {
                 return NotFound();
             }
@@ -47,6 +42,11 @@ namespace VerVad_API.Controllers
         public IHttpActionResult GetAudioVideos(string language)
         {
             var audioVideo = _repo.ReadAll();
+            if (audioVideo == null)
+            {
+                return NotFound();
+            }
+
             var DTOList = new List<DTOAudioVideo>();
 
             foreach (var item in audioVideo)
@@ -63,7 +63,7 @@ namespace VerVad_API.Controllers
         {
             var audioVideo = _repo.Read(id);
 
-            if (!AudioVideoExists(id, "da"))
+            if (audioVideo == null)
             {
                 return NotFound();
             }
@@ -75,8 +75,12 @@ namespace VerVad_API.Controllers
         [ResponseType(typeof(List<AudioVideo>))]
         public IHttpActionResult GetAudioVideos()
         {
-            var ggs = _repo.ReadAll();
-            return Ok(ggs);
+            var audioVideos = _repo.ReadAll();
+            if (audioVideos == null)
+            {
+                return NotFound();
+            }
+            return Ok(audioVideos);
         }
 
         [HttpPost]
@@ -84,6 +88,10 @@ namespace VerVad_API.Controllers
         [Authorize(Roles = "Admin")]
         public IHttpActionResult PostAudioVideo(AudioVideo la)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var audioVideo = _repo.Create(la);
             return Ok(audioVideo);
         }
@@ -92,6 +100,10 @@ namespace VerVad_API.Controllers
         [Authorize(Roles = "Admin")]
         public IHttpActionResult PutAudioVideo(AudioVideo la)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var audioVideo = _repo.Update(la);
             return Ok(audioVideo);
         }
@@ -100,8 +112,13 @@ namespace VerVad_API.Controllers
         [Authorize(Roles = "Admin")]
         public IHttpActionResult DeleteAudioVideo(int id)
         {
+            var audioVideo = _repo.Delete(id);
 
-            _repo.Delete(id);
+            if (audioVideo == false)
+            {
+                return NotFound();
+            }
+            
             return Ok();
         }
     }
