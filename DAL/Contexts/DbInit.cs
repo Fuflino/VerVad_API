@@ -113,7 +113,7 @@ namespace DAL.Contexts
                 "Duis a vehicula nunc, a sagittis leo. Etiam tempor faucibus orci ac cursus. Vestibulum ante ipsum primis in faucibus" +
                 "orci luctus et ultrices posuere cubilia Curae; Sed vestibulum neque vitae nisi blandit commodo.Maecenas varius," +
                 " dolor at commodo.",
-                Title = "Welt Ziele eller noget..",
+                Title = "Welt Ziele",
                 Language = LanguageDE,
             };
 
@@ -179,8 +179,8 @@ namespace DAL.Contexts
             var GG = new GlobalGoal()
             {
                 Id = 1,
-                Latitude = 12.3045,
-                Longitude = 34.5566,
+                Latitude = 55.572044,
+                Longitude = 8.309237,
                 Translation = TranslatedTexts,
                 ImgURL = "https://placeimg.com/600/400/nature",
                 IsPublished = true,
@@ -193,8 +193,8 @@ namespace DAL.Contexts
             var GG2 = new GlobalGoal()
             {
                 Id = 2,
-                Latitude = 25.2145,
-                Longitude = 56.5586,
+                Latitude = 55.572044,
+                Longitude = 8.309237,
                 Translation = TranslatedTexts1,
                 ImgURL = "https://placeimg.com/600/400/nature",
                 IsPublished = false,

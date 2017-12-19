@@ -22,6 +22,7 @@ namespace DAL.Contexts
     {
         public GlobalGoalContext() : base("DefaultConnection", false)
         {
+            
             Configuration.ProxyCreationEnabled = false;
             Database.SetInitializer(new DbInit());
         }

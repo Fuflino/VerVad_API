@@ -26,6 +26,7 @@ namespace VerVad_API.Controllers
         }
 
         [HttpGet] //DTO
+        [AllowAnonymous]
         [ResponseType(typeof(DTOGlobalGoal))]
         public IHttpActionResult GetGlobalGoal(int id, string language)
         {
@@ -42,6 +43,7 @@ namespace VerVad_API.Controllers
         }
 
         [HttpGet] //DTO
+        [AllowAnonymous]
         [ResponseType(typeof(List<DTOGlobalGoal>))]
         public IHttpActionResult GetGlobalGoals(string language)
         {
@@ -59,7 +61,7 @@ namespace VerVad_API.Controllers
 
         [HttpGet]
         [ResponseType(typeof(GlobalGoal))]
-        [Authorize(Roles ="Admin")]
+       [Authorize(Roles ="Admin")]
         public IHttpActionResult GetGlobalGoal(int id)
         {
             var globalGoal = _repo.Read(id);
@@ -74,7 +76,7 @@ namespace VerVad_API.Controllers
 
         [HttpGet]
         [ResponseType(typeof(List<GlobalGoal>))]
-        [Authorize(Roles = "Admin")]
+       [Authorize(Roles = "Admin")]
         public IHttpActionResult GetGlobalGoals()
         {
             var ggs = _repo.ReadAll();
@@ -121,7 +123,7 @@ namespace VerVad_API.Controllers
 
         [HttpDelete]
         [ResponseType(typeof(GlobalGoal))]
-        [Authorize(Roles = "Admin")]
+      [Authorize(Roles = "Admin")]
         public IHttpActionResult DeleteGlobalGoal(int id)
         {
             var gg =_repo.Delete(id);
