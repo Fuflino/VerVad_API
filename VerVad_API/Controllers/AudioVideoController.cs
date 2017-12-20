@@ -18,8 +18,8 @@ namespace VerVad_API.Controllers
 
     public class AudioVideoController : ApiController
     {
-        private GlobalGoalChildrensHelper _helper = new GlobalGoalChildrensHelper();
-        private AudioVideoRepository _repo = (AudioVideoRepository)new Facade().GetAudioVideoRepository();
+        private readonly GlobalGoalChildrensHelper _helper = new GlobalGoalChildrensHelper();
+        private readonly AudioVideoRepository _repo = (AudioVideoRepository)new Facade().GetAudioVideoRepository();
 
         [HttpGet] //DTO
         [ResponseType(typeof(DTOAudioVideo))]

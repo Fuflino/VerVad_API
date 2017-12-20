@@ -14,7 +14,7 @@ namespace VerVad_API.Controllers
 
     public class LanguageController : ApiController
     {
-        private ILanguageRepository<Language, string> _repo = new Facade().GetLanguageRepository();
+        private readonly ILanguageRepository<Language, string> _repo = new Facade().GetLanguageRepository();
 
         [HttpGet]
         [ResponseType(typeof(List<Language>))]

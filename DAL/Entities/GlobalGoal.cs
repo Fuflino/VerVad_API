@@ -13,7 +13,7 @@ namespace DAL.Entities
         {
             ChildrensTexts = new List<ChildrensText>();
             Artworks = new List<Artwork>();
-            LandArts = new List<LandArt>();
+            LandArts = new List<LandArt>();            
         }
 
         public int Id { get; set; }
@@ -30,5 +30,6 @@ namespace DAL.Entities
         public virtual Translation Translation { get; set; }
         public bool IsPublished { get; set; }
 
+        public string CloudinaryFolderPath { get; set; }
     }
 }

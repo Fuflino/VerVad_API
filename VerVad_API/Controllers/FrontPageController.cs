@@ -19,8 +19,8 @@ namespace VerVad_API.Controllers
 
     public class FrontPageController : ApiController
     {
-        private IFrontPageRepository<FrontPage, int> _repo = new Facade().GetFrontPageRepository();
-        private FrontPageHelper _helper = new FrontPageHelper();
+        private readonly IFrontPageRepository<FrontPage, int> _repo = new Facade().GetFrontPageRepository();
+        private readonly FrontPageHelper _helper = new FrontPageHelper();
 
         private bool FrontPageExists(int id, string language)
         {

@@ -17,8 +17,8 @@ namespace VerVad_API.Controllers
 
     public class LandArtController : ApiController
     {
-        private GlobalGoalChildrensHelper _helper = new GlobalGoalChildrensHelper();
-        private IRepository<LandArt, int> _repo = new Facade().GetLandArtRepository();
+        private readonly GlobalGoalChildrensHelper _helper = new GlobalGoalChildrensHelper();
+        private readonly IRepository<LandArt, int> _repo = new Facade().GetLandArtRepository();
 
         private bool LandArtExists(int id, string language)
         {

@@ -21,8 +21,7 @@ namespace DAL.Contexts
     public class GlobalGoalContext : IdentityDbContext<ApplicationUser>
     {
         public GlobalGoalContext() : base("DefaultConnection", false)
-        {
-            
+        {            
             Configuration.ProxyCreationEnabled = false;
             Database.SetInitializer(new DbInit());
         }
@@ -41,8 +40,7 @@ namespace DAL.Contexts
         public virtual DbSet<Artwork> Artworks { get; set; }
         public virtual DbSet<LandArt> LandArts { get; set; }
         public virtual DbSet<AudioVideo> AudioVideos { get; set; }
-
-        //All properties are required in order to create a Global Goal       
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
@@ -54,6 +52,13 @@ namespace DAL.Contexts
             modelBuilder.Entity<GlobalGoal>().Property(x => x.Longitude).IsRequired();
             modelBuilder.Entity<GlobalGoal>().Property(x => x.Latitude).IsRequired();
             modelBuilder.Entity<GlobalGoal>().Property(x => x.ImgURL).IsRequired();
+            modelBuilder.Entity<GlobalGoal>().Property(x => x.CloudinaryFolderPath);
+            
+            //Global Goal Image
+            modelBuilder.Entity<Artwork>().HasRequired(x => x.Translation).WithMany();
+            modelBuilder.Entity<Artwork>().Property(x => x.ImgUrl).IsRequired();
+            modelBuilder.Entity<LandArt>().HasRequired(x => x.Translation).WithMany();
+            modelBuilder.Entity<LandArt>().Property(x => x.ImgUrl).IsRequired();
 
             //Childrens Texts
             modelBuilder.Entity<GlobalGoal>().HasMany(x => x.ChildrensTexts)
@@ -75,21 +80,12 @@ namespace DAL.Contexts
                 .WithRequired(x => x.GlobalGoal);
 
             //Childrens Text
-            modelBuilder.Entity<ChildrensText>().HasRequired(x => x.Translation).WithMany();
-
-            //Global Goal Image
-            modelBuilder.Entity<Artwork>().HasRequired(x => x.Translation).WithMany();
-            modelBuilder.Entity<Artwork>().Property(x => x.ImgUrl).IsRequired();
-            modelBuilder.Entity<LandArt>().HasRequired(x => x.Translation).WithMany();
-            modelBuilder.Entity<LandArt>().Property(x => x.ImgUrl).IsRequired();
+            modelBuilder.Entity<ChildrensText>().HasRequired(x => x.Translation).WithMany();      
 
             //AudioVideo
             modelBuilder.Entity<AudioVideo>().HasRequired(x => x.Translation).WithMany();
-
-            modelBuilder.Entity<TranslationLanguage>().HasRequired(x => x.Translation).WithMany();
-
+            modelBuilder.Entity<TranslationLanguage>().HasRequired(x => x.Translation).WithMany();        
             modelBuilder.Entity<Language>().HasKey(l => l.ISO);
-
             modelBuilder.Entity<Language>().HasMany(l => l.Translations).WithRequired(tl => tl.Language);
             modelBuilder.Entity<TranslationLanguage>().HasKey(tl => new { tl.LanguageISO, tl.TranslationId });
 

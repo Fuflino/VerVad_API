@@ -17,8 +17,8 @@ namespace VerVad_API.Controllers
 
     public class GlobalGoalController : ApiController
     {
-        private IGGAndAVRepository<GlobalGoal, int> _repo = new Facade().GetGlobalGoalRepository();
-        private GlobalGoalHelper _helper = new GlobalGoalHelper();
+        private readonly IGGAndAVRepository<GlobalGoal, int> _repo = new Facade().GetGlobalGoalRepository();
+        private readonly GlobalGoalHelper _helper = new GlobalGoalHelper();
 
         private bool GlobalGoalExists(int id, string language)
         {

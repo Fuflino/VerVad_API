@@ -16,8 +16,8 @@ namespace VerVad_API.Controllers
 
     public class ChildrensTextController : ApiController
     {
-        private GlobalGoalChildrensHelper _helper = new GlobalGoalChildrensHelper();
-        private IRepository<ChildrensText, int> _repo = new Facade().GetChildrensTextRepository();
+        private readonly GlobalGoalChildrensHelper _helper = new GlobalGoalChildrensHelper();
+        private readonly IRepository<ChildrensText, int> _repo = new Facade().GetChildrensTextRepository();
 
         [HttpGet] //DTO
         [ResponseType(typeof(DTOChildrensText))]

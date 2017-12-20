@@ -16,8 +16,8 @@ namespace VerVad_API.Controllers
     [RoutePrefix("api/Artwork")]
     public class ArtworkController : ApiController
     {
-        private GlobalGoalChildrensHelper _helper = new GlobalGoalChildrensHelper();
-        private IRepository<Artwork, int> _repo = new Facade().GetArtworkRepository();
+        private readonly GlobalGoalChildrensHelper _helper = new GlobalGoalChildrensHelper();
+        private readonly IRepository<Artwork, int> _repo = new Facade().GetArtworkRepository();
 
         [HttpGet] //DTO
         [ResponseType(typeof(DTOChildrensArtwork))]
