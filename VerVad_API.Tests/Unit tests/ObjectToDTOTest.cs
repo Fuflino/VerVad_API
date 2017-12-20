@@ -64,6 +64,8 @@ namespace VerVad_API.Tests.Unit_tests
             var danishGlobalGoalDTOWithChildren = _globalGoalHelper.GetGlobalGoalDTO("da", _globalGoalwithChildren);
             var englishGlobalGoalDTOWithChildren = _globalGoalHelper.GetGlobalGoalDTO("en", _globalGoalwithChildren);
 
+            var frontPageDTO = _frontPageHelper.GetFrontPageDTO("en", _frontPage);
+
             Assert.IsNotNull(danishGlobalGoalDTOWithChildren);
             Assert.IsNotNull(englishGlobalGoalDTONoChildren);
 
@@ -71,20 +73,11 @@ namespace VerVad_API.Tests.Unit_tests
             Assert.AreNotEqual(danishGlobalGoalDTONoChildren, englishGlobalGoalDTONoChildren);
 
             Assert.AreEqual(danishGlobalGoalDTONoChildren.AudioVideo, null);
-            Console.WriteLine(englishGlobalGoalDTOWithChildren);
-            //Assert.AreSame(englishGlobalGoalDTOWithChildren.AudioVideo, new DTOAudioVideo()
-            //{
-            //    Id = 1,
-            //    MusicUrl = "https://www.dropbox.com/s/ewkmod3sbhw71ia/listener%20-%20Wooden%20Heart%20-%2001%20You%20have%20never%20lived%20because%20you%20have%20never%20died.mp3?dl=1",
-            //    SongArtist = "Shakira",
-            //    SongTitle = "Bum Bum Bla Bla..",
-            //    VideoUrl = "https://www.youtube.com/embed/RpqVmvMCmp0",
-            //    Title = transEN1.Title,
-            //    Description = transEN1.Description
-            //});
 
+            Assert.IsInstanceOfType(englishGlobalGoalDTOWithChildren, typeof(DTOGlobalGoal));
+            Assert.IsTrue(frontPageDTO.ImgUrl != null);
 
-
+            Assert.AreEqual(frontPageDTO.ImgUrl, "http://res.cloudinary.com/bjoernebanden/image/upload/v1509645764/1920-x-1080-nationalpark-vadehavet-kort_arxf8u.jpg");
 
         }
         [TestInitialize]

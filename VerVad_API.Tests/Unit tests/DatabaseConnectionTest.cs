@@ -30,6 +30,7 @@ namespace VerVad_API.Tests.DTO_Unit_tests
             Assert.IsNotNull(globalGoalDbList);
             Assert.IsNotNull(globalGoalDbList[0].Translation.TranslatedTexts);
             Assert.IsTrue(globalGoalDbList[0].Translation.TranslatedTexts.Count > 0);
+            CollectionAssert.AllItemsAreUnique(globalGoalDbList);
         }
 
         [TestInitialize]
