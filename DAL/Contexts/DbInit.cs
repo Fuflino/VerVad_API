@@ -29,139 +29,165 @@ namespace DAL.Contexts
             userManager.AddToRole(admin1.Id, "Admin");
 
             //Language
-            var LanguageDA = new Language()
+            var languageDa = new Language()
             {
                 Country = "Dansk",
                 ISO = "da",
             };
-            var LanguageEN = new Language()
+            var languageEn = new Language()
             {
                 Country = "Engelsk",
                 ISO = "en",
             };
-
-            var LanguageDE = new Language()
+            var languageDe = new Language()
             {
                 Country = "Tysk",
                 ISO = "de",
-            };
-
-            context.Languages.Add(LanguageDA);
-            context.Languages.Add(LanguageEN);
-            context.Languages.Add(LanguageDE);
+            };         
 
             //Translations
-            var transEN = new TranslationLanguage()
+            var transEn = new TranslationLanguage()
             {
                 Description = "ENGELSK: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non scelerisque nibh. Vestibulum ante ipsum " +
                 "primis in faucibus orci luctus et ultrices posuere cubilia Curae; Curabitur vel purus ultricies mauris fringilla rhoncus." +
                 "Duis a vehicula nunc, a sagittis leo. Etiam tempor faucibus orci ac cursus. Vestibulum ante ipsum primis in faucibus" +
                 "orci luctus et ultrices posuere cubilia Curae; Sed vestibulum neque vitae nisi blandit commodo.Maecenas varius," +
                 " dolor at commodo.",
-                Title = "The Global Goals - The Wadden Sea",
-                Language = LanguageEN,
+                Title = "1# No Poverty",
+                Language = languageEn,
             };
-
-            var transDK = new TranslationLanguage()
+            var transDk = new TranslationLanguage()
             {
                 Description = "DANSK: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non scelerisque nibh. Vestibulum ante ipsum " +
                 "primis in faucibus orci luctus et ultrices posuere cubilia Curae; Curabitur vel purus ultricies mauris fringilla rhoncus." +
                 "Duis a vehicula nunc, a sagittis leo. Etiam tempor faucibus orci ac cursus. Vestibulum ante ipsum primis in faucibus" +
                 "orci luctus et ultrices posuere cubilia Curae; Sed vestibulum neque vitae nisi blandit commodo.Maecenas varius," +
                 " dolor at commodo.",
-                Title = "Verdensmål ved Vadehavet",
-                Language = LanguageDA,
+                Title = "1# Afskaf Fattigdom",
+                Language = languageDa,
             };
-
-            var transDE = new TranslationLanguage()
+            var transDe = new TranslationLanguage()
             {
-                Description = "TYSK Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non scelerisque nibh. Vestibulum ante ipsum " +
+                Description = "TYSK: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non scelerisque nibh. Vestibulum ante ipsum " +
                 "primis in faucibus orci luctus et ultrices posuere cubilia Curae; Curabitur vel purus ultricies mauris fringilla rhoncus." +
                 "Duis a vehicula nunc, a sagittis leo. Etiam tempor faucibus orci ac cursus. Vestibulum ante ipsum primis in faucibus" +
                 "orci luctus et ultrices posuere cubilia Curae; Sed vestibulum neque vitae nisi blandit commodo.Maecenas varius," +
                 " dolor at commodo.",
-                Title = "Welt Ziele eller noget..",
-                Language = LanguageDE,
+                Title = "1# Keine Armut",
+                Language = languageDe,
             };
-
-            var transEN1 = new TranslationLanguage()
+            var transEn1 = new TranslationLanguage()
             {
                 Description = "ENGELSK: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non scelerisque nibh. Vestibulum ante ipsum " +
                 "primis in faucibus orci luctus et ultrices posuere cubilia Curae; Curabitur vel purus ultricies mauris fringilla rhoncus." +
                 "Duis a vehicula nunc, a sagittis leo. Etiam tempor faucibus orci ac cursus. Vestibulum ante ipsum primis in faucibus" +
                 "orci luctus et ultrices posuere cubilia Curae; Sed vestibulum neque vitae nisi blandit commodo.Maecenas varius," +
                 " dolor at commodo.",
-                Title = "The Global Goals - The Wadden Sea",
-                Language = LanguageEN,
+                Title = "2# Zero Hunger",
+                Language = languageEn,
             };
-
-            var transDK1 = new TranslationLanguage()
+            var transDk1 = new TranslationLanguage()
             {
                 Description = "DANSK: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non scelerisque nibh. Vestibulum ante ipsum " +
                 "primis in faucibus orci luctus et ultrices posuere cubilia Curae; Curabitur vel purus ultricies mauris fringilla rhoncus." +
                 "Duis a vehicula nunc, a sagittis leo. Etiam tempor faucibus orci ac cursus. Vestibulum ante ipsum primis in faucibus" +
                 "orci luctus et ultrices posuere cubilia Curae; Sed vestibulum neque vitae nisi blandit commodo.Maecenas varius," +
                 " dolor at commodo.",
-                Title = "Verdensmål ved Vadehavet",
-                Language = LanguageDA,
+                Title = "2# Stop Sult",
+                Language = languageDa,
             };
-
-            var transDE1 = new TranslationLanguage()
+            var transDe1 = new TranslationLanguage()
             {
-                Description = "TYSK Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non scelerisque nibh. Vestibulum ante ipsum " +
+                Description = "TYSK: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non scelerisque nibh. Vestibulum ante ipsum " +
                 "primis in faucibus orci luctus et ultrices posuere cubilia Curae; Curabitur vel purus ultricies mauris fringilla rhoncus." +
                 "Duis a vehicula nunc, a sagittis leo. Etiam tempor faucibus orci ac cursus. Vestibulum ante ipsum primis in faucibus" +
                 "orci luctus et ultrices posuere cubilia Curae; Sed vestibulum neque vitae nisi blandit commodo.Maecenas varius," +
                 " dolor at commodo.",
-                Title = "Welt Ziele",
-                Language = LanguageDE,
+                Title = "2# Kein Hunger",
+                Language = languageDe,
             };
 
-            var TranslatedTexts = new Translation()
+            var fpEn = new TranslationLanguage()
             {
-                TranslatedTexts = new List<TranslationLanguage> { transDK, transEN, transDE }
+                Description = "ENGELSK - forside beskrivelse: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non scelerisque nibh. Vestibulum ante ipsum " +
+                              "primis in faucibus orci luctus et ultrices posuere cubilia Curae; Curabitur vel purus ultricies mauris fringilla rhoncus." +
+                              "Duis a vehicula nunc, a sagittis leo. Etiam tempor faucibus orci ac cursus. Vestibulum ante ipsum primis in faucibus" +
+                              "orci luctus et ultrices posuere cubilia Curae; Sed vestibulum neque vitae nisi blandit commodo.Maecenas varius," +
+                              " dolor at commodo.",
+                Title = "The Global Goals - for sustainable development",
+                Language = languageEn
             };
-            var TranslatedTexts1 = new Translation()
+            var fpDa = new TranslationLanguage()
             {
-                TranslatedTexts = new List<TranslationLanguage> { transDK1, transEN1, transDE1 }
+                Description = "DANSK - forside beskrivelse: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non scelerisque nibh. Vestibulum ante ipsum " +
+                              "primis in faucibus orci luctus et ultrices posuere cubilia Curae; Curabitur vel purus ultricies mauris fringilla rhoncus." +
+                              "Duis a vehicula nunc, a sagittis leo. Etiam tempor faucibus orci ac cursus. Vestibulum ante ipsum primis in faucibus" +
+                              "orci luctus et ultrices posuere cubilia Curae; Sed vestibulum neque vitae nisi blandit commodo.Maecenas varius," +
+                              " dolor at commodo.",
+                Title = "FN's Verdensmål - for bæredygtig udvikling",
+                Language = languageDa,
             };
-            context.Texts.Add(TranslatedTexts1);
-            context.Texts.Add(TranslatedTexts);
+            var fpDe = new TranslationLanguage()
+            {
+                Description = "TYSK - forside beskrivelse: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non scelerisque nibh. Vestibulum ante ipsum " +
+                              "primis in faucibus orci luctus et ultrices posuere cubilia Curae; Curabitur vel purus ultricies mauris fringilla rhoncus." +
+                              "Duis a vehicula nunc, a sagittis leo. Etiam tempor faucibus orci ac cursus. Vestibulum ante ipsum primis in faucibus" +
+                              "orci luctus et ultrices posuere cubilia Curae; Sed vestibulum neque vitae nisi blandit commodo.Maecenas varius," +
+                              " dolor at commodo.",
+                Title = "Die Globalen Ziele - für nachhaltige entwicklung",
+                Language = languageDe,
+            };
+
+            var translatedTexts = new Translation()
+            {
+                TranslatedTexts = new List<TranslationLanguage> { transDk, transEn, transDe }
+            };
+            var translatedTexts1 = new Translation()
+            {
+                TranslatedTexts = new List<TranslationLanguage> { transDk1, transEn1, transDe1 }
+            };
+            var fpTranslatedTexts = new Translation()
+            {
+                TranslatedTexts = new List<TranslationLanguage> { fpEn, fpDa, fpDe }
+            };
+
+            context.Texts.Add(translatedTexts1);
+            context.Texts.Add(translatedTexts);
+            context.Texts.Add(fpTranslatedTexts);
 
             //Frontpage
-            FrontPage fp = new FrontPage()
+            var fp = new FrontPage()
             {
                 Id = 1,
                 ImgURL = "http://res.cloudinary.com/bjoernebanden/image/upload/v1509645764/1920-x-1080-nationalpark-vadehavet-kort_arxf8u.jpg",
-                Translation = TranslatedTexts
+                Translation = fpTranslatedTexts
             };
-            context.FrontPage.Add(fp);
 
             //Artwork
-            var Artwork = new Artwork()
+            var artwork = new Artwork()
             {
                 Id = 1,
                 Artist = "Bart 4c",
-                Translation = TranslatedTexts,
+                Translation = translatedTexts,
                 ImgUrl = "https://placeimg.com/600/400/nature"
 
             };
 
             //Landart
-            var Landart = new LandArt()
+            var landart = new LandArt()
             {
                 Id = 1,
-                Translation = TranslatedTexts,
+                Translation = translatedTexts,
                 ImgUrl = "https://placeimg.com/600/400/nature"
 
             };
 
             //Childrens Texts
-            var ChildrensTexts = new ChildrensText()
+            var childrensTexts = new ChildrensText()
             {
                 Id = 1,
                 Author = "Pippi 8c",
-                Translation = TranslatedTexts
+                Translation = translatedTexts
             };
 
             //AudioVideo
@@ -172,30 +198,30 @@ namespace DAL.Contexts
                 VideoURL = "https://www.youtube.com/embed/RpqVmvMCmp0",
                 SongTitle = "Bum Bum Bla Bla..",
                 SongArtist = "Shakira",
-                Translation = TranslatedTexts1
+                Translation = translatedTexts1
             };
 
             //Global Goal
-            var GG = new GlobalGoal()
+            var gg = new GlobalGoal()
             {
                 Id = 1,
                 Latitude = 55.572044,
                 Longitude = 8.309237,
-                Translation = TranslatedTexts,
+                Translation = translatedTexts,
                 ImgURL = "https://placeimg.com/600/400/nature",
                 IsPublished = true,
 
-                ChildrensTexts = new List<ChildrensText> { ChildrensTexts },
-                Artworks = new List<Artwork> { Artwork },
-                LandArts = new List<LandArt> { Landart },
+                ChildrensTexts = new List<ChildrensText> { childrensTexts },
+                Artworks = new List<Artwork> { artwork },
+                LandArts = new List<LandArt> { landart },
                 AudioVideo = audioVideo
             };
-            var GG2 = new GlobalGoal()
+            var gg2 = new GlobalGoal()
             {
                 Id = 2,
                 Latitude = 55.572044,
                 Longitude = 8.309237,
-                Translation = TranslatedTexts1,
+                Translation = translatedTexts1,
                 ImgURL = "https://placeimg.com/600/400/nature",
                 IsPublished = false,
 
@@ -205,8 +231,12 @@ namespace DAL.Contexts
                 AudioVideo = null
             };
 
-            context.Global_Goals.Add(GG);
-            context.Global_Goals.Add(GG2);
+            context.Languages.Add(languageDa);
+            context.Languages.Add(languageEn);
+            context.Languages.Add(languageDe);
+            context.FrontPage.Add(fp);
+            context.Global_Goals.Add(gg);
+            context.Global_Goals.Add(gg2);
 
             base.Seed(context);
         }

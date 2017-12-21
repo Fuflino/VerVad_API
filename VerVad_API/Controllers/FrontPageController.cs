@@ -58,7 +58,7 @@ namespace VerVad_API.Controllers
             return Ok(frontPage);
         }
 
-        [HttpPost]
+        [HttpPut]
         [ResponseType(typeof(void))]
         [Authorize(Roles = "Admin")]
         public IHttpActionResult PutFrontPage(FrontPage frontPage)
